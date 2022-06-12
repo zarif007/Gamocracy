@@ -21,7 +21,7 @@ a {
 
 @layer components {
   .hoverAnimation {
-      @apply hover:bg-[#DC143C] hover:bg-opacity-75 rounded-md
+      @apply hover:bg-[#DC143C] hover:bg-opacity-100 rounded-md
       cursor-pointer w-[52px] xl:w-auto xl:h-auto xl:py-3
       xl:px-4 transition duration-200 ease-out;
   }

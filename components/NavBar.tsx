@@ -1,0 +1,101 @@
+import Image from "next/image";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+import logo from "../public/logo2.png";
+import { CgMenuCheese } from "react-icons/cg";
+import { GiBiceps } from "react-icons/gi";
+
+
+const NavBar = () => {
+  const isDark = 1;
+
+  const router = useRouter();
+
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
+
+  const styles = {
+    nav: `pt-3 shadow-sm ${
+      isDark ? "bg-[#121212] shadow-black" : "bg-[#FFFAFA] shadow-gray-200"
+    }  sticky top-0 z-50 pb-2 px-2`,
+    wrapper: `flex justify-between max-w-7xl mx-5 lg:mx-auto`,
+    logo: `relative h-12 w-12 md:h-12 md:w-24 cursor-pointer pt-1`,
+    searchWrapper: `relative text-gray-600 focus-within:text-gray-400`,
+    searchIcon: `absolute inset-y-0 left-0 flex items-center pl-2`,
+    searchInput: `py-2 w-32 sm:w-72 xl:w-100 text-large font-semibold ${
+      isDark
+        ? "text-white bg-[#0c1012] focus:bg-gray-900 border-[#2b3c53]"
+        : "text-black bg-[#FAF9F6] focus:bg-gray-100 border-[#a1a1aa]"
+    } border-2  rounded-md pl-10 focus:outline-none`,
+    iconsWrapper: `text-white flex flex-row space-x-2 md:space-x-4`,
+    icon: `h-10 w-6 sm:h-12 sm:w-8  ${
+      isDark ? "text-gray-200" : "text-gray-700"
+    } iconAnimation`,
+    notificationWrapper: `bg-blue-700 text-xs p-1 animate-pulse rounded-md absolute m-4 ml-3 mt-5`,
+    userImage: `h-8 sm:h-10 rounded-full cursor-pointer pt-2`,
+    buttons: `border border-[#DC143C] hover:bg-[#DC143C] text-white rounded-sm font-bold px-3 items-center`,
+  };
+
+
+  return (
+    <div className={styles.nav}>
+      <div className={styles.wrapper} >
+
+        {/* Logo  */}
+        <div className={styles.logo} onClick={() => {
+          router.push('/');
+        }}>
+          <div className="">
+            <Image src={logo} objectFit="contain" />
+          </div>
+        </div>
+
+        {/* Search Field  */}
+        <div className="flex space-x-2">
+            <div className="">
+            <div className={styles.searchWrapper}>
+                <span className={styles.searchIcon}>
+                <svg
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                    className="w-6 h-6"
+                >
+                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                </span>
+                <input
+                type="search"
+                className={styles.searchInput}
+                placeholder="Search..."
+                autoComplete="off"
+                />
+            </div>
+            </div>
+
+            {/* Icons  */}
+            <div className={styles.iconsWrapper}>
+                <div className="border border-gray-800 rounded-sm px-1 md:hidden"
+                    onClick={() => setOpenMenu(!openMenu)}>
+                    <CgMenuCheese className={styles.icon} />
+                </div>
+                <button className={`${styles.buttons} hidden md:flex`}>
+                    Create
+                    <GiBiceps 
+                        className="h-10 w-6 sm:h-12 sm:w-8 pl-2" 
+                    />
+                </button>
+                <div className="border border-[#DC143C] rounded-sm px-1 md:hidden">
+                    <GiBiceps className={styles.icon} />
+                </div>
+            </div>
+        </div>
+        
+      </div>
+    </div>
+  )
+};
+
+export default NavBar;
