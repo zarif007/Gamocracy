@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import logo from "../public/logo2.png";
 import { CgMenuCheese } from "react-icons/cg";
 import { GiBiceps } from "react-icons/gi";
+import { BiListPlus } from "react-icons/bi";
 
 
 const NavBar = () => {
@@ -14,11 +15,11 @@ const NavBar = () => {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
 
   const styles = {
-    nav: `pt-3 shadow-sm ${
-      isDark ? "bg-[#121212] shadow-black" : "bg-[#FFFAFA] shadow-gray-200"
-    }  sticky top-0 z-50 pb-2 px-2`,
+    nav: `pt-3 shadow-xs ${
+      isDark ? "bg-black shadow-[#DC143C]" : "bg-[#FFFAFA] shadow-gray-200"
+    }  sticky top-0 z-50 pb-2 px-2 bg-opacity-50`,
     wrapper: `flex justify-between max-w-full mx-5 lg:mx-auto xl:mx-32`,
-    logo: `relative h-12 w-12 md:h-12 md:w-24 cursor-pointer pt-1`,
+    logo: `relative h-12 w-12 md:h-12 md:w-24 cursor-pointer pt-1 md:pt-4`,
     searchWrapper: `relative text-gray-600 focus-within:text-gray-400`,
     searchIcon: `absolute inset-y-0 left-0 flex items-center pl-2`,
     searchInput: `py-2 w-32 sm:w-72 xl:w-100 text-large font-semibold ${
@@ -79,12 +80,12 @@ const NavBar = () => {
             <div className={styles.iconsWrapper}>
                 <button className={`${styles.buttons} hidden md:flex`}>
                     Create
-                    <GiBiceps 
+                    <BiListPlus 
                         className="h-10 w-6 sm:h-12 sm:w-8 pl-2" 
                     />
                 </button>
                 <div className="border-2 border-[#DC143C] rounded-sm px-1 md:hidden">
-                    <GiBiceps className={styles.icon} />
+                    <BiListPlus className={styles.icon} />
                 </div>
                 <div className="border-2 border-gray-800 rounded-sm px-1 md:hidden"
                     onClick={() => setOpenMenu(!openMenu)}>
