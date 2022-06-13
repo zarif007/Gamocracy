@@ -17,22 +17,22 @@ const NavBar = () => {
     nav: `pt-3 shadow-sm ${
       isDark ? "bg-[#121212] shadow-black" : "bg-[#FFFAFA] shadow-gray-200"
     }  sticky top-0 z-50 pb-2 px-2`,
-    wrapper: `flex justify-between max-w-7xl mx-5 lg:mx-auto`,
+    wrapper: `flex justify-between max-w-full mx-5 lg:mx-auto xl:mx-32`,
     logo: `relative h-12 w-12 md:h-12 md:w-24 cursor-pointer pt-1`,
     searchWrapper: `relative text-gray-600 focus-within:text-gray-400`,
     searchIcon: `absolute inset-y-0 left-0 flex items-center pl-2`,
     searchInput: `py-2 w-32 sm:w-72 xl:w-100 text-large font-semibold ${
       isDark
-        ? "text-white bg-[#0c1012] focus:bg-gray-900 border-[#2b3c53]"
+        ? "text-white bg-[#0c1012] focus:bg-gray-900 border-[#DC143C]"
         : "text-black bg-[#FAF9F6] focus:bg-gray-100 border-[#a1a1aa]"
-    } border-2  rounded-md pl-10 focus:outline-none`,
+    } border-2 rounded-sm  pl-10 focus:outline-none py-4`,
     iconsWrapper: `text-white flex flex-row space-x-2 md:space-x-4`,
-    icon: `h-10 w-6 sm:h-12 sm:w-8  ${
+    icon: `h-14 w-6 sm:h-12 sm:w-8  ${
       isDark ? "text-gray-200" : "text-gray-700"
     } iconAnimation`,
     notificationWrapper: `bg-blue-700 text-xs p-1 animate-pulse rounded-md absolute m-4 ml-3 mt-5`,
     userImage: `h-8 sm:h-10 rounded-full cursor-pointer pt-2`,
-    buttons: `border border-[#DC143C] hover:bg-[#DC143C] text-white rounded-sm font-bold px-3 items-center`,
+    buttons: `border-2 border-[#DC143C] hover:bg-[#DC143C] text-white rounded-sm font-bold px-3 items-center`,
   };
 
 
@@ -77,18 +77,18 @@ const NavBar = () => {
 
             {/* Icons  */}
             <div className={styles.iconsWrapper}>
-                <div className="border border-gray-800 rounded-sm px-1 md:hidden"
-                    onClick={() => setOpenMenu(!openMenu)}>
-                    <CgMenuCheese className={styles.icon} />
-                </div>
                 <button className={`${styles.buttons} hidden md:flex`}>
                     Create
                     <GiBiceps 
                         className="h-10 w-6 sm:h-12 sm:w-8 pl-2" 
                     />
                 </button>
-                <div className="border border-[#DC143C] rounded-sm px-1 md:hidden">
+                <div className="border-2 border-[#DC143C] rounded-sm px-1 md:hidden">
                     <GiBiceps className={styles.icon} />
+                </div>
+                <div className="border-2 border-gray-800 rounded-sm px-1 md:hidden"
+                    onClick={() => setOpenMenu(!openMenu)}>
+                    <CgMenuCheese className={styles.icon} />
                 </div>
             </div>
         </div>

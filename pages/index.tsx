@@ -21,12 +21,15 @@ const Home: NextPage = () => {
       */}
 
       <NavBar />
-      <main className='min-h-screen flex max-w-7xl mx-auto'>
-          <div className='w-1/6 hidden md:flex pt-2 md:mt-12'>
+      <main className='min-h-screen flex max-w-full mx-auto xl:mx-32'>
+          <div className='w-2/12 hidden md:flex pt-2 md:mt-12 md:mr-4 lg:mr-0'>
             <SideBar />
           </div>
-          <div className='w-full md:w-5/6 mt-2'>
+          <div className='w-full md:w-7/12 mt-2'>
             <Feed />
+          </div>
+          <div className='w-3/12 hidden md:flex pt-2 md:mt-12 border border-gray-800 ml-2'>
+            <SideBar />
           </div>
       </main>
     </div>
