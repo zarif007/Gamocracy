@@ -26,6 +26,12 @@ a {
       xl:px-4 transition duration-200 ease-out;
   }
 
+  .selected {
+      @apply bg-[#DC143C] rounded-md
+      cursor-pointer w-[52px] xl:w-auto xl:h-auto xl:py-3
+      xl:px-4;
+  }
+
   .icon {
       @apply cursor-pointer w-9 h-9 hover:bg-[#DC143C] hover:bg-opacity-10
       flex items-center justify-center rounded-full transition ease-out;
