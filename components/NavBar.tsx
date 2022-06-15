@@ -5,6 +5,7 @@ import logo from "../public/logo2.png";
 import { BiListPlus } from "react-icons/bi";
 import { GiBatMask } from "react-icons/gi";
 import { IoMdNotifications } from "react-icons/io";
+import { FiMic } from "react-icons/fi";
 
 
 const NavBar = () => {
@@ -52,29 +53,32 @@ const NavBar = () => {
 
         {/* Search Field  */}
         <div className="flex space-x-2">
-            <div className="">
-            <div className={styles.searchWrapper}>
-                <span className={styles.searchIcon}>
-                <svg
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    className="w-6 h-6"
-                >
-                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
-                </span>
-                <input
-                  type="search"
-                  className={styles.searchInput}
-                  placeholder="Search..."
-                  autoComplete="off"
-                  style={{paddingTop: '10px', paddingBottom: '10px'}}
-                />
-            </div>
+            <div className="flex space-x-1 items-center justify-center">
+              <div className={styles.searchWrapper}>
+                  <span className={styles.searchIcon}>
+                  <svg
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                      className="w-6 h-6"
+                  >
+                      <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                  </svg>
+                  </span>
+                  <input
+                    type="search"
+                    className={styles.searchInput}
+                    placeholder="Search..."
+                    autoComplete="off"
+                    style={{paddingTop: '10px', paddingBottom: '10px'}}
+                  />
+              </div>
+              <div className=''>
+                <FiMic className="icon text-[#DC143C] hover:text-[#e5163f]" />
+              </div>
             </div>
 
             {/* Icons  */}
