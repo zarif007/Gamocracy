@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import '../styles/nprogress.css'
 import type { AppProps } from 'next/app'
 import { RecoilRoot } from 'recoil'
 import Router from 'next/router'
