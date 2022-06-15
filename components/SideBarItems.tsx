@@ -17,9 +17,9 @@ const SideBarItems: React.FC<{ Icon: any, text: string }> = ({ Icon, text }) => 
       onClick={() => {
         setCurrentNav(text)
         if(text === 'Home')
-          router.push(`${domain}`)
+          router.push(`/`)
         else
-          router.push(`${domain}${text.toLowerCase()}`)
+          router.push(`/${text.toLowerCase()}`)
       }}>
       <Icon className='h-7'/>
       <span className='font-bold'>{text}</span>
