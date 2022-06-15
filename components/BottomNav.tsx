@@ -1,7 +1,7 @@
 import React from 'react'
 import { BiListPlus, BiTrendingUp } from "react-icons/bi";
 import { CgMenuCheese } from 'react-icons/cg';
-import { GiEgyptianProfile, GiPlagueDoctorProfile } from "react-icons/gi";
+import { GiBatMask, GiEgyptianProfile, GiPlagueDoctorProfile } from "react-icons/gi";
 
 
 const BottomNav: React.FC = () => {
@@ -30,7 +30,7 @@ const BottomNav: React.FC = () => {
                             <span className={styles.iconText}>Create</span>
                         </div>
                         <div className={styles.iconsWrapper} onClick={() => {}}>
-                            <GiPlagueDoctorProfile className={styles.icon} />
+                            <GiBatMask className={styles.icon} />
                             <span className={styles.iconText}>Profile</span>
                         </div>
                     </div>

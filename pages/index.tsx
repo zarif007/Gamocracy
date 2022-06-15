@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import BottomNav from '../components/BottomNav'
+import ComponenetsForIndexes from '../components/componenetsForIndexes'
 import Feed from '../components/Feed'
 import NavBar from '../components/NavBar'
 import SideBar from '../components/SideBar'
@@ -34,7 +34,9 @@ const Home: NextPage = () => {
             <Widgets />
           </div>
       </main>
-      <BottomNav />
+      
+      <ComponenetsForIndexes />
+
     </div>
   )
 }

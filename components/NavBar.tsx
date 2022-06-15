@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import logo from "../public/logo2.png";
 import { CgMenuCheese } from "react-icons/cg";
 import { BiListPlus } from "react-icons/bi";
+import { GiBatMask } from "react-icons/gi";
 
 
 const NavBar = () => {
@@ -21,15 +22,15 @@ const NavBar = () => {
     logo: `relative h-12 w-12 md:h-12 md:w-24 cursor-pointer pt-1 md:pt-4`,
     searchWrapper: `relative text-gray-600 focus-within:text-gray-400`,
     searchIcon: `absolute inset-y-0 left-0 flex items-center pl-2`,
-    searchInput: `py-2 w-full sm:w-72 xl:w-100 text-large font-semibold ${
+    searchInput: `py-[10px] w-full sm:w-72 xl:w-100 text-large font-semibold ${
       isDark
         ? "text-white bg-[#0c1012] focus:bg-gray-900 border-[#DC143C]"
         : "text-black bg-[#FAF9F6] focus:bg-gray-100 border-[#a1a1aa]"
     } border-2 rounded-sm  pl-10 focus:outline-none py-4`,
-    iconsWrapper: `text-white flex flex-row space-x-2 md:space-x-4`,
-    icon: `h-14 w-6 sm:h-12 sm:w-8  ${
+    iconsWrapper: `text-white flex flex-row space-x-2 md:space-x-4 items-center justify-center`,
+    icon: `h-14 w-6 sm:h-16 sm:w-8  ${
       isDark ? "text-gray-200" : "text-gray-700"
-    } iconAnimation`,
+    } hover:text-[#e5163f]`,
     notificationWrapper: `bg-blue-700 text-xs p-1 animate-pulse rounded-md absolute m-4 ml-3 mt-5`,
     userImage: `h-8 sm:h-10 rounded-full cursor-pointer pt-2`,
     buttons: `bg-[#DC143C] hover:bg-[#e5163f] text-white rounded-sm font-bold px-3 items-center`,
@@ -83,6 +84,9 @@ const NavBar = () => {
                         className="h-10 w-6 sm:h-12 sm:w-8 pl-2" 
                     />
                 </button>
+                <div className='hidden md:flex'>
+                  <GiBatMask className="icon hover:text-[#e5163f]" />
+                </div>
             </div>
         </div>
         

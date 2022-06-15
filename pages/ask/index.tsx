@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import ComponenetsForIndexes from '../../components/componenetsForIndexes'
 import Feed from '../../components/Feed'
 import NavBar from '../../components/NavBar'
 import SideBar from '../../components/SideBar'
@@ -28,6 +29,8 @@ const Ask: NextPage = () => {
             <Widgets />
           </div>
       </main>
+
+      <ComponenetsForIndexes />
     </div>
   )
 }
