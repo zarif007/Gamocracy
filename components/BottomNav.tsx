@@ -2,6 +2,7 @@ import React from 'react'
 import { BiListPlus, BiTrendingUp } from "react-icons/bi";
 import { CgMenuCheese } from 'react-icons/cg';
 import { GiBatMask, GiEgyptianProfile, GiPlagueDoctorProfile } from "react-icons/gi";
+import { IoMdNotifications } from 'react-icons/io';
 import { useRecoilState } from 'recoil';
 import { showMenu } from '../atoms/showMenuAtom';
 
@@ -36,6 +37,10 @@ const BottomNav: React.FC = () => {
                         <div className={styles.iconsWrapper} onClick={() => {}}>
                             <GiBatMask className={styles.icon} />
                             <span className={styles.iconText}>Profile</span>
+                        </div>
+                        <div className={styles.iconsWrapper} onClick={() => {}}>
+                            <IoMdNotifications className={styles.icon} />
+                            <span className={styles.iconText}>Notification</span>
                         </div>
                     </div>
                 </section>

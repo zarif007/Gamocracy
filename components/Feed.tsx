@@ -1,7 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { showMenu } from "../atoms/showMenuAtom";
 
 const Feed: React.FC<{ name: string }> = ({ name }) => {
   const [opened, setOpened] = useState(true);
+
+  const [Menu, setMenu] = useRecoilState(showMenu);
+
+  useEffect(() => {
+    setMenu(false);
+  }, [])
+
+
   return (
     <div className="text-white flex-grow mt-2 md:m-2">
       <div className="text-white flex items-center sm:justify-between py-2 px-3 bg-[#121212] border border-gray-800">

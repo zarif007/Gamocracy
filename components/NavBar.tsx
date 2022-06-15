@@ -2,9 +2,9 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import logo from "../public/logo2.png";
-import { CgMenuCheese } from "react-icons/cg";
 import { BiListPlus } from "react-icons/bi";
 import { GiBatMask } from "react-icons/gi";
+import { IoMdNotifications } from "react-icons/io";
 
 
 const NavBar = () => {
@@ -18,16 +18,16 @@ const NavBar = () => {
     nav: `pt-3 shadow-sm ${
       isDark ? "bg-black shadow-gray-800" : "bg-[#FFFAFA] shadow-gray-200"
     }  sticky top-0 z-50 pb-2 px-2 bg-opacity-50`,
-    wrapper: `flex justify-between max-w-full mx-5 lg:mx-auto xl:mx-32`,
+    wrapper: `flex justify-between max-w-full mx-1 lg:mx-auto xl:mx-32`,
     logo: `relative h-12 w-12 md:h-12 md:w-24 cursor-pointer pt-1 md:pt-4`,
     searchWrapper: `relative text-gray-600 focus-within:text-gray-400`,
     searchIcon: `absolute inset-y-0 left-0 flex items-center pl-2`,
-    searchInput: `py-[9px] w-full sm:w-72 xl:w-100 text-large font-semibold ${
+    searchInput: `w-full sm:w-72 xl:w-100 text-large font-semibold ${
       isDark
         ? "text-white bg-[#0c1012] focus:bg-gray-900 border-[#DC143C]"
         : "text-black bg-[#FAF9F6] focus:bg-gray-100 border-[#a1a1aa]"
     } border-2 rounded-sm  pl-10 focus:outline-none py-4`,
-    iconsWrapper: `text-white flex flex-row space-x-2 md:space-x-4 items-center justify-center`,
+    iconsWrapper: `text-white flex flex-row space-x-2 md:space-x-2 items-center justify-center`,
     icon: `h-14 w-6 sm:h-16 sm:w-8  ${
       isDark ? "text-gray-200" : "text-gray-700"
     } hover:text-[#e5163f]`,
@@ -68,10 +68,11 @@ const NavBar = () => {
                 </svg>
                 </span>
                 <input
-                type="search"
-                className={styles.searchInput}
-                placeholder="Search..."
-                autoComplete="off"
+                  type="search"
+                  className={styles.searchInput}
+                  placeholder="Search..."
+                  autoComplete="off"
+                  style={{paddingTop: '10px', paddingBottom: '10px'}}
                 />
             </div>
             </div>
@@ -84,8 +85,11 @@ const NavBar = () => {
                         className="h-10 w-6 sm:h-12 sm:w-8 pl-2" 
                     />
                 </button>
-                <div className='hidden md:flex'>
+                <div className='hidden md:inline'>
                   <GiBatMask className="icon text-[#DC143C] hover:text-[#e5163f]" />
+                </div>
+                <div className='hidden md:inline'>
+                  <IoMdNotifications className="icon text-[#DC143C] hover:text-[#e5163f]" />
                 </div>
             </div>
         </div>
