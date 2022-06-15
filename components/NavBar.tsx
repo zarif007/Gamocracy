@@ -22,7 +22,7 @@ const NavBar = () => {
     logo: `relative h-12 w-12 md:h-12 md:w-24 cursor-pointer pt-1 md:pt-4`,
     searchWrapper: `relative text-gray-600 focus-within:text-gray-400`,
     searchIcon: `absolute inset-y-0 left-0 flex items-center pl-2`,
-    searchInput: `py-[10px] w-full sm:w-72 xl:w-100 text-large font-semibold ${
+    searchInput: `py-[9px] w-full sm:w-72 xl:w-100 text-large font-semibold ${
       isDark
         ? "text-white bg-[#0c1012] focus:bg-gray-900 border-[#DC143C]"
         : "text-black bg-[#FAF9F6] focus:bg-gray-100 border-[#a1a1aa]"
