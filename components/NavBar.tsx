@@ -103,6 +103,7 @@ const NavBar = () => {
                       <IoMdNotifications className="icon text-[#DC143C] hover:text-[#e5163f]" />
                     </div>
                   </> : <div
+                    className="hidden md:inline"
                     onClick={() => signIn()}>
                     <GoSignIn className="icon text-[#DC143C] hover:text-[#e5163f]" />
                   </div>
