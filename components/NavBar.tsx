@@ -1,17 +1,21 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../public/logo2.png";
 import { BiListPlus } from "react-icons/bi";
 import { GiBatMask } from "react-icons/gi";
 import { IoMdNotifications } from "react-icons/io";
 import { FiMic } from "react-icons/fi";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { GoSignIn } from "react-icons/go";
 
 
 const NavBar = () => {
   const isDark = 1;
 
   const router = useRouter();
+
+  const {data: session} = useSession();
 
   const [openMenu, setOpenMenu] = useState<boolean>(false);
 
@@ -83,18 +87,26 @@ const NavBar = () => {
 
             {/* Icons  */}
             <div className={styles.iconsWrapper}>
-                <button className={`${styles.buttons} hidden md:flex`}>
-                    Create
-                    <BiListPlus 
-                        className="h-10 w-6 sm:h-12 sm:w-8 pl-2" 
-                    />
-                </button>
-                <div className='hidden md:inline'>
-                  <GiBatMask className="icon text-[#DC143C] hover:text-[#e5163f]" />
-                </div>
-                <div className='hidden md:inline'>
-                  <IoMdNotifications className="icon text-[#DC143C] hover:text-[#e5163f]" />
-                </div>
+                {
+                  session?.user?.email ? <>
+                    <button className={`${styles.buttons} hidden md:flex`}>
+                        Create
+                        <BiListPlus 
+                            className="h-10 w-6 sm:h-12 sm:w-8 pl-2" 
+                        />
+                    </button>
+                    <div className='hidden md:inline'
+                      onClick={() => signOut()}>
+                      <GiBatMask className="icon text-[#DC143C] hover:text-[#e5163f]" />
+                    </div>
+                    <div className='hidden md:inline'>
+                      <IoMdNotifications className="icon text-[#DC143C] hover:text-[#e5163f]" />
+                    </div>
+                  </> : <div
+                    onClick={() => signIn()}>
+                    <GoSignIn className="icon text-[#DC143C] hover:text-[#e5163f]" />
+                  </div>
+                }
             </div>
         </div>
         

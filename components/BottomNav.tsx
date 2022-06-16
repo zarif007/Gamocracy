@@ -1,7 +1,9 @@
+import { signIn, signOut, useSession } from 'next-auth/react';
 import React from 'react'
 import { BiListPlus, BiTrendingUp } from "react-icons/bi";
 import { CgMenuCheese } from 'react-icons/cg';
 import { GiBatMask, GiEgyptianProfile, GiPlagueDoctorProfile } from "react-icons/gi";
+import { GoSignIn } from 'react-icons/go';
 import { IoMdNotifications } from 'react-icons/io';
 import { useRecoilState } from 'recoil';
 import { showMenu } from '../atoms/showMenuAtom';
@@ -10,6 +12,8 @@ import { showMenu } from '../atoms/showMenuAtom';
 const BottomNav: React.FC = () => {
 
     const isDark = 1;
+
+    const {data: session} = useSession();
 
     const [openMenu, setOpenMenu] = useRecoilState(showMenu);
 
@@ -30,18 +34,25 @@ const BottomNav: React.FC = () => {
                             <CgMenuCheese className={styles.icon} onClick={() => setOpenMenu(true)} />
                             <span className={styles.iconText}>Menu</span>
                         </div>
-                        <div className={styles.iconsWrapper} onClick={() => {}} >
-                            <BiListPlus className={styles.icon} />
-                            <span className={styles.iconText}>Create</span>
-                        </div>
-                        <div className={styles.iconsWrapper} onClick={() => {}}>
-                            <GiBatMask className={styles.icon} />
-                            <span className={styles.iconText}>Profile</span>
-                        </div>
-                        <div className={styles.iconsWrapper} onClick={() => {}}>
-                            <IoMdNotifications className={styles.icon} />
-                            <span className={styles.iconText}>Notification</span>
-                        </div>
+                        {
+                            session?.user?.email ? <>
+                                <div className={styles.iconsWrapper} onClick={() => {}} >
+                                    <BiListPlus className={styles.icon} />
+                                    <span className={styles.iconText}>Create</span>
+                                </div>
+                                <div className={styles.iconsWrapper} onClick={() => signOut()}>
+                                    <GiBatMask className={styles.icon} />
+                                    <span className={styles.iconText}>Profile</span>
+                                </div>
+                                <div className={styles.iconsWrapper} onClick={() => {}}>
+                                    <IoMdNotifications className={styles.icon} />
+                                    <span className={styles.iconText}>Notification</span>
+                                </div>
+                            </> : <div
+                                onClick={() => signIn()}>
+                                <GoSignIn className="icon text-[#DC143C] hover:text-[#e5163f]" />
+                            </div>
+                        }
                     </div>
                 </section>
             </div>
