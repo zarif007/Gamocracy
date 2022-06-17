@@ -8,6 +8,8 @@ import { IoMdNotifications } from "react-icons/io";
 import { FiMic } from "react-icons/fi";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { GoSignIn } from "react-icons/go";
+import { useRecoilState } from "recoil";
+import { showProfileDropdown } from "../atoms/showProfileDropDownAtom";
 
 
 const NavBar = () => {
@@ -17,7 +19,8 @@ const NavBar = () => {
 
   const {data: session} = useSession();
 
-  const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const [openDropDown, setOpenDropDown] = useRecoilState(showProfileDropdown);
+
 
   const styles = {
     nav: `pt-3 shadow-sm ${
@@ -96,7 +99,7 @@ const NavBar = () => {
                         />
                     </button>
                     <div className='hidden md:inline'
-                      onClick={() => signOut()}>
+                      onClick={() => setOpenDropDown(true)}>
                       <GiBatMask className="icon text-[#DC143C] hover:text-[#e5163f]" />
                     </div>
                     <div className='hidden md:inline'>
@@ -105,12 +108,11 @@ const NavBar = () => {
                   </> : <div
                     className="hidden md:inline"
                     onClick={() => signIn()}>
-                    <GoSignIn className="icon text-[#DC143C] hover:text-[#e5163f]" />
+                    <GoSignIn className="icon text-[#DC143C] hover:text-[#e5163f] rounded-none" />
                   </div>
                 }
             </div>
         </div>
-        
       </div>
     </div>
   )

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { showMenu } from "../atoms/showMenuAtom";
+import { Menu } from '@headlessui/react'
 
 const Feed: React.FC<{ name: string }> = ({ name }) => {
   const [opened, setOpened] = useState(true);

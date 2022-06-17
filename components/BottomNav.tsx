@@ -7,6 +7,7 @@ import { GoSignIn } from 'react-icons/go';
 import { IoMdNotifications } from 'react-icons/io';
 import { useRecoilState } from 'recoil';
 import { showMenu } from '../atoms/showMenuAtom';
+import { showProfileDropdown } from '../atoms/showProfileDropDownAtom';
 
 
 const BottomNav: React.FC = () => {
@@ -16,6 +17,9 @@ const BottomNav: React.FC = () => {
     const {data: session} = useSession();
 
     const [openMenu, setOpenMenu] = useRecoilState(showMenu);
+
+    const [openDropDown, setOpenDropDown] = useRecoilState(showProfileDropdown);
+
 
     const styles = {
         wrapper: `w-full h-24 inline md:hidden`,
@@ -40,7 +44,7 @@ const BottomNav: React.FC = () => {
                                     <BiListPlus className={styles.icon} />
                                     <span className={styles.iconText}>Create</span>
                                 </div>
-                                <div className={styles.iconsWrapper} onClick={() => signOut()}>
+                                <div className={styles.iconsWrapper} onClick={() => setOpenDropDown(true)}>
                                     <GiBatMask className={styles.icon} />
                                     <span className={styles.iconText}>Profile</span>
                                 </div>

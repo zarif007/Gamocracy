@@ -5,7 +5,7 @@ import { useRecoilState } from 'recoil';
 import { currentNavItem } from '../atoms/currentNavItemAtom';
 import { domain } from '../domain';
 
-const SideBarItems: React.FC<{ Icon: any, text: string }> = ({ Icon, text }) => {
+const SideBarItems: React.FC<{ Icon: any, text: string, location: string }> = ({ Icon, text, location }) => {
 
   const [currentNav, setCurrentNav] = useRecoilState<string>(currentNavItem);
 
@@ -16,10 +16,7 @@ const SideBarItems: React.FC<{ Icon: any, text: string }> = ({ Icon, text }) => 
       className={`text-white flex items-center justify-start text-xl space-x-2 hoverAnimation w-full p-1 md:p-2 ${currentNav === text && 'selected'} `}
       onClick={() => {
         setCurrentNav(text)
-        if(text === 'Home')
-          router.push(`/`)
-        else
-          router.push(`/${text.toLowerCase()}`)
+        router.push(`/${location}`)
       }}>
       <Icon className='h-7'/>
       <span className='font-bold'>{text}</span>
