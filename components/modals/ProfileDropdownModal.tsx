@@ -4,6 +4,9 @@ import { useRecoilState } from 'recoil';
 import SideBarItems from '../SideBarItems';
 import { UserIcon, LogoutIcon } from '@heroicons/react/outline'
 import { showProfileDropdown } from '../../atoms/showProfileDropDownAtom';
+import { signOut, useSession } from 'next-auth/react';
+import { GoCircuitBoard, GoSignOut } from 'react-icons/go';
+import { FcSettings } from 'react-icons/fc';
 
 
 const ProfileDropDownModal = () => {
@@ -12,10 +15,15 @@ const ProfileDropDownModal = () => {
 
   const [open, setOpen] = useRecoilState(showProfileDropdown);
 
+  const { data: session } = useSession();
+
   const styles = {
-    wrapper: `flex items-center justify-center min-h-screen max-w-xl mx-auto my-auto pt-4 px-4 pb-20 text-center sm:block sm:p-0`,
+    wrapper: `flex items-center justify-center min-h-screen max-w-2xl mx-auto pt-4 px-4 text-center sm:block sm:p-0`,
     dialogOverlay: `fixed inset-0 bg-black opacity-25 transition-opacity`,
-    secondWrapper: `${isDark ? 'bg-black border-[#DC143C]' : 'bg-blue-100 border-blue-800'}  border rounded-lg px-4 pt-5 pb-4 sm:p-6 `,
+    secondWrapper: `${isDark ? 'bg-black border-[#DC143C]' : 'bg-blue-100 border-blue-800'}  border rounded-lg p-2 sm:p-4`,
+    thirdWrapper: `flex flex-col items-center justify-center`,
+    fourthWrapper: `flex items-center justify-center space-x-2 cursor-pointer pb-4 px-2`,
+    icon: `h-14 w-6 sm:h-14 sm:w-6  ${ isDark ? "text-gray-200" : "text-gray-700" }`,
   }
 
   
@@ -50,11 +58,26 @@ const ProfileDropDownModal = () => {
 
             {/* content Part   */}
             <div className={styles.secondWrapper}>
-                <div className="space-y-1">
-                    <SideBarItems text='Profile' Icon={UserIcon} location="/" />
-                    <SideBarItems text='Logout' Icon={LogoutIcon} location="/write" />
+                <div className="">
+
+                    <div className={styles.fourthWrapper}>
+                      <img src={session?.user?.image || ''} className='w-8 rounded-md' />
+                      <h1 className='text-lg font-bold text-gray-200'>{session?.user?.name}</h1>
+                    </div>
+
+                    <div className={styles.fourthWrapper}>
+                      <FcSettings className='icon text-[#DC143C]' />
+                      <h1 className='text-lg font-bold text-gray-200'>Settings</h1>
+                    </div>
+
+                    <div className={styles.fourthWrapper}
+                      onClick={() => signOut()}>
+                      <GoSignOut className='icon text-[#DC143C]' />
+                      <h1 className='text-lg font-bold text-gray-200'>Logout</h1>
+                    </div>
                 </div>
             </div>
+            
             
           </Transition.Child>
         </div>
