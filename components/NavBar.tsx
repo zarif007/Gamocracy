@@ -10,6 +10,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { GoSignIn } from "react-icons/go";
 import { useRecoilState } from "recoil";
 import { showProfileDropdown } from "../atoms/showProfileDropDownAtom";
+import { voiceNavModal } from "../atoms/voiceNavigationModalAtom";
 
 
 const NavBar = () => {
@@ -21,6 +22,7 @@ const NavBar = () => {
 
   const [openDropDown, setOpenDropDown] = useRecoilState(showProfileDropdown);
 
+  const [openVoiceNavigation, setOpenVoiceNavigation] = useRecoilState(voiceNavModal);
 
   const styles = {
     nav: `pt-3 shadow-sm ${
@@ -83,7 +85,8 @@ const NavBar = () => {
                     style={{paddingTop: '10px', paddingBottom: '10px'}}
                   />
               </div>
-              <div className=''>
+              <div className=''
+                onClick={() => setOpenVoiceNavigation(true)}>
                 <FiMic className="icon text-[#DC143C] hover:text-[#e5163f]" />
               </div>
             </div>

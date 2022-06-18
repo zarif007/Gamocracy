@@ -1,23 +1,18 @@
 import { Dialog, Transition } from '@headlessui/react';
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil';
-import { showMenu } from '../../atoms/showMenuAtom';
-import SideBarItems from '../SideBarItems';
-import { HomeIcon, BriefcaseIcon, VideoCameraIcon, MicrophoneIcon, 
-    ShoppingCartIcon, CashIcon, UserGroupIcon, PencilAltIcon, QuestionMarkCircleIcon } from '@heroicons/react/outline'
+import { voiceNavModal } from '../../atoms/voiceNavigationModalAtom';
 
-
-const MenuModal = () => {
+const VoiceNavigationModal = () => {
 
   const isDark = true;
 
-  const [open, setOpen] = useRecoilState(showMenu);
+  const [open, setOpen] = useRecoilState(voiceNavModal);
 
   const styles = {
     secondWrapper: `${isDark ? 'bg-black border-[#DC143C]' : 'bg-blue-100 border-blue-800'}  border rounded-lg px-4 pt-5 pb-4 sm:p-6 `,
   }
 
-  
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
@@ -46,20 +41,10 @@ const MenuModal = () => {
             >
 
               {/* Content Goes here */}
-              <Dialog.Panel className="relative bg-[#121212] rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
-              <div className={styles.secondWrapper}>
-                <div className="space-y-1">
-                  <SideBarItems text='Home' Icon={HomeIcon} location="/" />
-                  <SideBarItems text='Write' Icon={PencilAltIcon} location="/write" />
-                  <SideBarItems text='Ask' Icon={QuestionMarkCircleIcon} location="/ask" />
-                  <SideBarItems text='Go' Icon={VideoCameraIcon} location="/go" />
-                  <SideBarItems text='Podcast' Icon={MicrophoneIcon} location="/podcast" />
-                  <SideBarItems text='Work' Icon={BriefcaseIcon} location="/work" />
-                  <SideBarItems text='Shop' Icon={ShoppingCartIcon} location="/shop" />
-                  <SideBarItems text='Sponsor' Icon={CashIcon} location="/sponsor" />
-                  <SideBarItems text='Vote' Icon={UserGroupIcon} location="/vote" />
+              <Dialog.Panel className="relative text-white bg-[#121212] rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
+                <div className={styles.secondWrapper}>
+                    <h1 className='font-bold text-3xl'>Listening......</h1>
                 </div>
-            </div>
               </Dialog.Panel>
 
             </Transition.Child>
@@ -70,4 +55,4 @@ const MenuModal = () => {
   )
 }
 
-export default MenuModal
+export default VoiceNavigationModal
