@@ -3,11 +3,60 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil';
 import { voiceNavModal } from '../../atoms/voiceNavigationModalAtom';
 
+
+
+
+
 const VoiceNavigationModal = () => {
 
   const isDark = true;
 
   const [open, setOpen] = useRecoilState(voiceNavModal);
+
+  if(open){
+
+    
+
+  }
+
+
+  const voiceCommands = (recognition: any) => {
+    // On start
+    recognition.onstart = () => {
+      console.log('Voice is actived');
+    }
+
+    // Do something when we get a result
+    recognition.onresult = (e: any) => {
+      let current = e.resultIndex;
+
+      let transcript = e.results[current][0].transcript;
+      console.log(transcript)
+    }
+
+    recognition.onspeechend = () => {
+      recognition.stop();
+      console.log('voice stopped');
+    }
+
+  }
+
+  useEffect(() => {
+
+    if (typeof window !== "undefined") {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      const recognition = new SpeechRecognition();
+
+      if(open){
+        recognition.start();
+        voiceCommands(recognition);
+      } else {
+        recognition.stop();
+        console.log('voice stopped');
+      }
+    } 
+  }, [open]);
 
   const styles = {
     secondWrapper: `${isDark ? 'bg-black border-[#DC143C]' : 'bg-blue-100 border-blue-800'}  border rounded-lg px-4 pt-5 pb-4 sm:p-6 `,
