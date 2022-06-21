@@ -1,6 +1,6 @@
 import React from "react";
 import SideBarItems from "./SideBarItems";
-import { HomeIcon, BriefcaseIcon, VideoCameraIcon, MicrophoneIcon, 
+import { HomeIcon, BriefcaseIcon, VideoCameraIcon, MicrophoneIcon, FireIcon,
   ShoppingCartIcon, CashIcon, UserGroupIcon, PencilAltIcon, QuestionMarkCircleIcon } from '@heroicons/react/outline'
 
 const SideBar = () => {
@@ -15,6 +15,7 @@ const SideBar = () => {
         <SideBarItems text='Podcast' Icon={MicrophoneIcon} location="/podcast" />
         <SideBarItems text='Work' Icon={BriefcaseIcon} location="/work" />
         <SideBarItems text='Shop' Icon={ShoppingCartIcon} location="/shop" />
+        <SideBarItems text='NFT' Icon={FireIcon} location="/nft" />
         <SideBarItems text='Sponsor' Icon={CashIcon} location="/sponsor" />
         <SideBarItems text='Vote' Icon={UserGroupIcon} location="/vote" />
       </div>
