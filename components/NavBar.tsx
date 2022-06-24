@@ -21,9 +21,11 @@ const NavBar = () => {
 
   const {data: session} = useSession();
 
-  const [openDropDown, setOpenDropDown] = useRecoilState(showProfileDropdown);
+  const [openDropDown, setOpenDropDown] = useRecoilState<boolean>(showProfileDropdown);
 
-  const [openVoiceNavigation, setOpenVoiceNavigation] = useRecoilState(voiceNavModal);
+  const [openVoiceNavigation, setOpenVoiceNavigation] = useRecoilState<boolean>(voiceNavModal);
+
+  const [showSearchInput, setShowSearchInput] = useState<boolean>(false);
 
   const styles = {
     nav: `pt-3 shadow-sm ${
@@ -89,12 +91,35 @@ const NavBar = () => {
                     style={{paddingTop: '10px', paddingBottom: '10px'}}
                   />
               </div>
-
-              <div className="flex space-x-1">
-                <div className='rounded-full bg-black border border-gray-900 p-2 my-2 md:hidden'
-                  onClick={() => {}}>
-                  <BsSearch className="SecondIcon text-[#DC143C] hover:text-[#e5163f]" />
-                </div>
+              
+              <div className="flex space-x-1 justify-center items-center">
+                {
+                  !showSearchInput ? <div className='rounded-full bg-black border border-gray-900 p-2 my-2 md:hidden'
+                      onClick={() => setShowSearchInput(true)}>
+                      <BsSearch className="SecondIcon text-[#DC143C] hover:text-[#e5163f]" />
+                    </div> : <div className={`relative text-gray-600 focus-within:text-gray-400 md:hidden`} onMouseOut={() => setShowSearchInput(false) }>
+                      <span className={styles.searchIcon}>
+                      <svg
+                          fill="none"
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                          className="w-6 h-6"
+                      >
+                          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                      </svg>
+                      </span>
+                      <input
+                        type="search"
+                        className={styles.searchInput}
+                        placeholder="Search..."
+                        autoComplete="off"
+                        style={{paddingTop: '10px', paddingBottom: '10px'}}
+                      />
+                  </div>
+                }
                 <div className='rounded-full bg-black border border-gray-900 p-2 md:mx-2 my-2'
                   onClick={() => setOpenVoiceNavigation(true)}>
                   <FiMic className="SecondIcon text-[#DC143C] hover:text-[#e5163f]" />

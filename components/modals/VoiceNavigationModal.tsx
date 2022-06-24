@@ -13,6 +13,8 @@ const VoiceNavigationModal = () => {
 
   const [open, setOpen] = useRecoilState(voiceNavModal);
 
+  const [command, setCommand] = useState<string>('');
+
   if(open){
 
     
@@ -32,6 +34,7 @@ const VoiceNavigationModal = () => {
 
       let transcript = e.results[current][0].transcript;
       console.log(transcript)
+      setCommand(transcript)
     }
 
     recognition.onspeechend = () => {
@@ -93,6 +96,7 @@ const VoiceNavigationModal = () => {
               <Dialog.Panel className="relative text-white bg-[#121212] rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
                 <div className={styles.secondWrapper}>
                     <h1 className='font-bold text-3xl'>Listening......</h1>
+                    <h1 className='font-bold text-3xl'>{command}</h1>
                 </div>
               </Dialog.Panel>
 
