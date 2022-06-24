@@ -34,6 +34,11 @@ a {
 
   .icon {
       @apply cursor-pointer w-9 h-9 hover:bg-[#DC143C] hover:bg-opacity-10
-      flex items-center justify-center rounded-full transition ease-out;
+      flex items-center justify-center transition ease-out;
+  }
+
+  .SecondIcon {
+      @apply cursor-pointer w-6 h-6 hover:bg-[#DC143C] hover:bg-opacity-10
+      flex items-center justify-center transition ease-out;
   }
 }

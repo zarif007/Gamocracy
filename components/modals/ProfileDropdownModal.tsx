@@ -1,12 +1,10 @@
 import { Dialog, Transition } from '@headlessui/react';
-import React, { Fragment, useEffect, useRef, useState } from 'react'
+import React, { Fragment } from 'react'
 import { useRecoilState } from 'recoil';
-import SideBarItems from '../SideBarItems';
-import { UserIcon, LogoutIcon } from '@heroicons/react/outline'
 import { showProfileDropdown } from '../../atoms/showProfileDropDownAtom';
 import { signOut, useSession } from 'next-auth/react';
-import { GoCircuitBoard, GoSignOut } from 'react-icons/go';
-import { FcSettings } from 'react-icons/fc';
+import {  GoSignOut } from 'react-icons/go';
+import { AiTwotoneSetting } from "react-icons/ai";
 
 
 const ProfileDropDownModal = () => {
@@ -20,7 +18,7 @@ const ProfileDropDownModal = () => {
   const styles = {
     secondWrapper: `${isDark ? 'bg-black border-[#DC143C]' : 'bg-blue-100 border-blue-800'}  border rounded-lg p-2 sm:p-4`,
     thirdWrapper: `flex flex-col items-center justify-center`,
-    fourthWrapper: `flex items-center justify-center space-x-2 cursor-pointer pb-4 px-2`,
+    fourthWrapper: `flex items-center mx-auto space-x-2 cursor-pointer pb-4 px-2 hover:text-black`,
     icon: `h-14 w-6 sm:h-14 sm:w-6  ${ isDark ? "text-gray-200" : "text-gray-700" }`,
   }
 
@@ -53,7 +51,7 @@ const ProfileDropDownModal = () => {
             >
 
               {/* Content Goes here */}
-              <Dialog.Panel className="relative bg-[#121212] rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
+              <Dialog.Panel className="relative bg-[#121212] rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-md sm:w-full">
                   <div className={styles.secondWrapper}>
                     <div className="">
 
@@ -63,7 +61,7 @@ const ProfileDropDownModal = () => {
                         </div>
 
                         <div className={styles.fourthWrapper}>
-                          <FcSettings className='icon text-[#DC143C]' />
+                          <AiTwotoneSetting className='icon text-[#DC143C]' />
                           <h1 className='text-lg font-bold text-gray-200'>Settings</h1>
                         </div>
 

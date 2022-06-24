@@ -11,6 +11,7 @@ import { GoSignIn } from "react-icons/go";
 import { useRecoilState } from "recoil";
 import { showProfileDropdown } from "../atoms/showProfileDropDownAtom";
 import { voiceNavModal } from "../atoms/voiceNavigationModalAtom";
+import { BsSearch } from "react-icons/bs";
 
 
 const NavBar = () => {
@@ -30,7 +31,7 @@ const NavBar = () => {
     }  sticky top-0 z-50 pb-2 px-2 bg-opacity-50`,
     wrapper: `flex justify-between max-w-full mx-1 lg:mx-auto xl:mx-32`,
     logo: `relative h-12 w-12 md:h-12 md:w-24 cursor-pointer pt-1 md:pt-4`,
-    searchWrapper: `relative text-gray-600 focus-within:text-gray-400`,
+    searchWrapper: `relative text-gray-600 focus-within:text-gray-400 hidden md:inline`,
     searchIcon: `absolute inset-y-0 left-0 flex items-center pl-2`,
     searchInput: `w-full sm:w-72 xl:w-100 text-large font-semibold ${
       isDark
@@ -39,6 +40,9 @@ const NavBar = () => {
     } border-2 rounded-sm  pl-10 focus:outline-none py-4`,
     iconsWrapper: `text-white flex flex-row space-x-2 md:space-x-2 items-center justify-center`,
     icon: `h-14 w-6 sm:h-16 sm:w-8  ${
+      isDark ? "text-gray-200" : "text-gray-700"
+    } hover:text-[#e5163f]`,
+    SecondIcon: `h-14 w-6 sm:h-16 sm:w-8  ${
       isDark ? "text-gray-200" : "text-gray-700"
     } hover:text-[#e5163f]`,
     notificationWrapper: `bg-blue-700 text-xs p-1 animate-pulse rounded-md absolute m-4 ml-3 mt-5`,
@@ -85,10 +89,18 @@ const NavBar = () => {
                     style={{paddingTop: '10px', paddingBottom: '10px'}}
                   />
               </div>
-              <div className=''
-                onClick={() => setOpenVoiceNavigation(true)}>
-                <FiMic className="icon text-[#DC143C] hover:text-[#e5163f]" />
+
+              <div className="flex space-x-1">
+                <div className='rounded-full bg-black border border-gray-900 p-2 my-2 md:hidden'
+                  onClick={() => setOpenVoiceNavigation(true)}>
+                  <BsSearch className="SecondIcon text-[#DC143C] hover:text-[#e5163f]" />
+                </div>
+                <div className='rounded-full bg-black border border-gray-900 p-2 md:mx-2 my-2'
+                  onClick={() => {}}>
+                  <FiMic className="SecondIcon text-[#DC143C] hover:text-[#e5163f]" />
+                </div>
               </div>
+
             </div>
 
             {/* Icons  */}
