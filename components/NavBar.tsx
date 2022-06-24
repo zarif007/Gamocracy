@@ -92,11 +92,11 @@ const NavBar = () => {
 
               <div className="flex space-x-1">
                 <div className='rounded-full bg-black border border-gray-900 p-2 my-2 md:hidden'
-                  onClick={() => setOpenVoiceNavigation(true)}>
+                  onClick={() => {}}>
                   <BsSearch className="SecondIcon text-[#DC143C] hover:text-[#e5163f]" />
                 </div>
                 <div className='rounded-full bg-black border border-gray-900 p-2 md:mx-2 my-2'
-                  onClick={() => {}}>
+                  onClick={() => setOpenVoiceNavigation(true)}>
                   <FiMic className="SecondIcon text-[#DC143C] hover:text-[#e5163f]" />
                 </div>
               </div>
