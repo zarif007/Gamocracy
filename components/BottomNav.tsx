@@ -23,7 +23,7 @@ const BottomNav: React.FC = () => {
 
     const styles = {
         wrapper: `w-full h-24 inline md:hidden`,
-        itemsWrapper: `block fixed inset-x-0 bottom-0 z-50 ${isDark ? 'bg-black border-gray-800' : 'bg-[#fefefa] shadow-gray-200'} border  justify-center items-center`,
+        itemsWrapper: `block fixed inset-x-0 bottom-0 z-50 ${isDark ? 'bg-black border-gray-800' : 'bg-[#fefefa] shadow-gray-200'} border-t  justify-center items-center`,
         iconsWrapper: `w-full focus:text-[#e5163f] hover:text-[#e5163f] justify-center inline-block text-center pt-1 pb-1 items-center`,
         icon: `h-10 w-6 sm:h-12 sm:w-8  inline-flex`,
         iconText: `tab tab-home block text-xs  font-semibold`,
@@ -46,7 +46,7 @@ const BottomNav: React.FC = () => {
                                 </div>
                                 <div className={styles.iconsWrapper} onClick={() => setOpenDropDown(true)}>
                                     <GiBatMask className={styles.icon} />
-                                    <span className={styles.iconText}>Profile</span>
+                                    <span className={styles.iconText}>Account</span>
                                 </div>
                                 <div className={styles.iconsWrapper} onClick={() => {}}>
                                     <IoMdNotifications className={styles.icon} />
