@@ -37,3 +37,7 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+public/workbox-74d02f44.js.map
+public/workbox-74d02f44.js
+public/sw.js.map
+public/sw.js
