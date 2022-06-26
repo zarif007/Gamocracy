@@ -37,10 +37,10 @@ const VoiceNavigationModal = () => {
       setCommand(transcript)
     }
 
-    recognition.onspeechend = () => {
-      recognition.stop();
-      console.log('voice stopped');
-    }
+    // recognition.onspeechend = () => {
+    //   recognition.stop();
+    //   console.log('voice stopped');
+    // }
 
   }
 
