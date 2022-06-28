@@ -12,6 +12,7 @@ import { useRecoilState } from "recoil";
 import { showProfileDropdown } from "../atoms/showProfileDropDownAtom";
 import { voiceNavModal } from "../atoms/voiceNavigationModalAtom";
 import { BsSearch } from "react-icons/bs";
+import { currentNavItem } from "../atoms/currentNavItemAtom";
 
 
 const NavBar = () => {
@@ -26,6 +27,8 @@ const NavBar = () => {
   const [openVoiceNavigation, setOpenVoiceNavigation] = useRecoilState<boolean>(voiceNavModal);
 
   const [showSearchInput, setShowSearchInput] = useState<boolean>(false);
+
+  const [currentNav, setCurrentNav] = useRecoilState<string>(currentNavItem);
 
   const styles = {
     nav: `pt-3 shadow-sm ${
@@ -59,6 +62,7 @@ const NavBar = () => {
 
         {/* Logo  */}
         <div className={styles.logo} onClick={() => {
+          setCurrentNav('Home')
           router.push('/');
         }}>
           <div className="">

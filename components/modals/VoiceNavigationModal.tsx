@@ -1,4 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react';
+import { useRouter } from 'next/router';
 import React, { Fragment, useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil';
 import { voiceNavModal } from '../../atoms/voiceNavigationModalAtom';
@@ -15,17 +16,19 @@ const VoiceNavigationModal = () => {
 
   const [command, setCommand] = useState<string>('');
 
-  if(open){
+  const [voiceState, setVoiceState] = useState<String>('Listening......');
 
-    
+  const [result, setResult] = useState<String>('');
 
-  }
+  const router = useRouter();
 
 
   const voiceCommands = (recognition: any) => {
     // On start
     recognition.onstart = () => {
-      console.log('Voice is actived');
+      setCommand('');
+      setResult('');
+      setVoiceState('Listening......');
     }
 
     // Do something when we get a result
@@ -33,19 +36,30 @@ const VoiceNavigationModal = () => {
       let current = e.resultIndex;
 
       let transcript = e.results[current][0].transcript;
-      console.log(transcript)
       setCommand(transcript)
+
+      const routes = ['home', 'write', 'ask', 'go', 'podcast', 'work', 'shop', 'nft', 'sponsor', 'vote'];
+
+      routes.map((route: string) => {
+        if(transcript.includes(route)){
+          setResult(`Navigating to ${route}`);
+          route === 'home' ? router.push('/') : router.push(`/${route}`);
+
+          setTimeout(() => setOpen(false), 1000);
+        }
+      })
+
     }
 
-    // recognition.onspeechend = () => {
-    //   recognition.stop();
-    //   console.log('voice stopped');
-    // }
+    recognition.onspeechend = () => {
+      recognition.stop();
+      setVoiceState('Stopped')
+      setResult(`Did not get it :(`);
+    }
 
   }
 
-  useEffect(() => {
-
+  const activateVoice = () => {
     if (typeof window !== "undefined") {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -56,13 +70,18 @@ const VoiceNavigationModal = () => {
         voiceCommands(recognition);
       } else {
         recognition.stop();
-        console.log('voice stopped');
+        setVoiceState('Stopped')
       }
-    } 
+    }
+  }
+
+  useEffect(() => {
+    activateVoice(); 
   }, [open]);
 
   const styles = {
     secondWrapper: `${isDark ? 'bg-black border-[#DC143C]' : 'bg-blue-100 border-blue-800'}  border rounded-lg px-4 pt-5 pb-4 sm:p-6 `,
+    reusltStyle: `${result === 'Did not get it :(' ? 'text-red-500' : 'text-blue-500'} font-semibold text-lg mb-6`,
   }
 
   return (
@@ -95,8 +114,13 @@ const VoiceNavigationModal = () => {
               {/* Content Goes here */}
               <Dialog.Panel className="relative text-white bg-[#121212] rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
                 <div className={styles.secondWrapper}>
-                    <h1 className='font-bold text-3xl'>Listening......</h1>
+                    <h1 className='font-bold text-3xl'>{voiceState}</h1>
                     <h1 className='font-bold text-3xl'>{command}</h1>
+                    <h1 className={styles.reusltStyle}>{result}</h1>
+                    <span 
+                      className='px-4 py-2 cursor-pointer font-semibold text-lg text-[#DC143C] border-[#DC143C] border rounded-sm'
+                      onClick={() => activateVoice()}>
+                      Try again</span>
                 </div>
               </Dialog.Panel>
 
