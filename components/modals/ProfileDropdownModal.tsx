@@ -4,8 +4,7 @@ import { useRecoilState } from 'recoil';
 import { showProfileDropdown } from '../../atoms/showProfileDropDownAtom';
 import { signOut, useSession } from 'next-auth/react';
 import {  GoSignOut } from 'react-icons/go';
-import { AiTwotoneSetting } from "react-icons/ai";
-
+import { RiSettingsFill } from "react-icons/ri";
 
 const ProfileDropDownModal = () => {
 
@@ -57,18 +56,18 @@ const ProfileDropDownModal = () => {
 
                         <div className={styles.fourthWrapper}>
                           <img src={session?.user?.image || ''} className='w-8 rounded-md' />
-                          <h1 className='text-lg font-bold text-gray-200'>{session?.user?.name}</h1>
+                          <h1 className='text-lg font-bold text-gray-200 hover:text-[#DC143C]'>{session?.user?.name}</h1>
                         </div>
 
                         <div className={styles.fourthWrapper}>
-                          <AiTwotoneSetting className='icon text-[#DC143C]' />
-                          <h1 className='text-lg font-bold text-gray-200'>Settings</h1>
+                          <RiSettingsFill className='icon text-[#DC143C]' />
+                          <h1 className='text-lg font-bold text-gray-200 hover:text-[#DC143C]'>Settings</h1>
                         </div>
 
                         <div className={styles.fourthWrapper}
                           onClick={() => signOut()}>
                           <GoSignOut className='icon text-[#DC143C]' />
-                          <h1 className='text-lg font-bold text-gray-200'>Logout</h1>
+                          <h1 className='text-lg font-bold text-gray-200 hover:text-[#DC143C]'>Logout</h1>
                         </div>
                     </div>
                 </div>
