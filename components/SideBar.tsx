@@ -15,7 +15,7 @@ const SideBar = () => {
         <SideBarItems text='Podcast' Icon={MicrophoneIcon} location="/podcast" />
         <SideBarItems text='Work' Icon={BriefcaseIcon} location="/work" />
         <SideBarItems text='Shop' Icon={ShoppingCartIcon} location="/shop" />
-        <SideBarItems text='NFT' Icon={FireIcon} location="/nft" />
+        <SideBarItems text='Nft' Icon={FireIcon} location="/nft" />
         <SideBarItems text='Sponsor' Icon={CashIcon} location="/sponsor" />
         <SideBarItems text='Vote' Icon={UserGroupIcon} location="/vote" />
       </div>
