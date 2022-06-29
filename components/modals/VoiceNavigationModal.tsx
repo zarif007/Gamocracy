@@ -45,7 +45,10 @@ const VoiceNavigationModal = () => {
           setResult(`Navigating to ${route}`);
           route === 'home' ? router.push('/') : router.push(`/${route}`);
 
-          setTimeout(() => setOpen(false), 1000);
+          setTimeout(() => {
+            setOpen(false)
+
+          }, 1500);
         }
       })
 
@@ -54,6 +57,7 @@ const VoiceNavigationModal = () => {
     recognition.onspeechend = () => {
       recognition.stop();
       setVoiceState('Stopped')
+      setCommand('');
       setResult(`Did not get it :(`);
     }
 
@@ -65,6 +69,7 @@ const VoiceNavigationModal = () => {
 
       const recognition = new SpeechRecognition();
 
+      
       if(open){
         recognition.start();
         voiceCommands(recognition);
