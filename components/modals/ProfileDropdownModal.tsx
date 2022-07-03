@@ -5,6 +5,7 @@ import { showProfileDropdown } from '../../atoms/showProfileDropDownAtom';
 import { signOut, useSession } from 'next-auth/react';
 import {  GoSignOut } from 'react-icons/go';
 import { RiSettingsFill } from "react-icons/ri";
+import { MdOutlineLogout } from 'react-icons/md';
 
 const ProfileDropDownModal = () => {
 
@@ -66,7 +67,7 @@ const ProfileDropDownModal = () => {
 
                         <div className={styles.fourthWrapper}
                           onClick={() => signOut()}>
-                          <GoSignOut className='icon text-[#DC143C]' />
+                          <MdOutlineLogout className='icon text-[#DC143C]' />
                           <h1 className='text-lg font-bold text-gray-200 hover:text-[#DC143C]'>Logout</h1>
                         </div>
                     </div>

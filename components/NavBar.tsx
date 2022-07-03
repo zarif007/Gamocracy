@@ -1,18 +1,19 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import logo from "../public/logo2.png";
 import { BiListPlus } from "react-icons/bi";
 import { GiBatMask } from "react-icons/gi";
 import { IoMdNotifications } from "react-icons/io";
 import { FiMic } from "react-icons/fi";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { GoSignIn } from "react-icons/go";
+import { signIn, useSession } from "next-auth/react";
 import { useRecoilState } from "recoil";
 import { showProfileDropdown } from "../atoms/showProfileDropDownAtom";
 import { voiceNavModal } from "../atoms/voiceNavigationModalAtom";
 import { BsSearch } from "react-icons/bs";
 import { currentNavItem } from "../atoms/currentNavItemAtom";
+import { GrLogin } from "react-icons/gr";
+import { MdOutlineLogin } from "react-icons/md";
 
 
 const NavBar = () => {
@@ -152,7 +153,7 @@ const NavBar = () => {
                   </> : <div
                     className="hidden md:inline"
                     onClick={() => signIn()}>
-                    <GoSignIn className="icon text-[#DC143C] hover:text-[#e5163f] rounded-none" />
+                    <MdOutlineLogin className="icon text-[#DC143C] hover:text-[#e5163f] rounded-none" />
                   </div>
                 }
             </div>

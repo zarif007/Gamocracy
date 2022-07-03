@@ -1,13 +1,13 @@
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import React from 'react'
-import { BiListPlus, BiTrendingUp } from "react-icons/bi";
+import { BiListPlus } from "react-icons/bi";
 import { CgMenuCheese } from 'react-icons/cg';
-import { GiBatMask, GiEgyptianProfile, GiPlagueDoctorProfile } from "react-icons/gi";
-import { GoSignIn } from 'react-icons/go';
+import { GiBatMask } from "react-icons/gi";
 import { IoMdNotifications } from 'react-icons/io';
 import { useRecoilState } from 'recoil';
 import { showMenu } from '../atoms/showMenuAtom';
 import { showProfileDropdown } from '../atoms/showProfileDropDownAtom';
+import { MdOutlineLogin } from "react-icons/md";
 
 
 const BottomNav: React.FC = () => {
@@ -55,7 +55,7 @@ const BottomNav: React.FC = () => {
                             </> : <div
                                 className={styles.iconsWrapper}
                                 onClick={() => signIn()}>
-                                <GoSignIn className={styles.icon} />
+                                <MdOutlineLogin className={styles.icon} />
                                 <span className={styles.iconText}>Login</span>
                             </div>
                         }

@@ -3,7 +3,7 @@ import React, { Fragment } from 'react'
 import { useRecoilState } from 'recoil';
 import { showMenu } from '../../atoms/showMenuAtom';
 import SideBarItems from '../SideBarItems';
-import { HomeIcon, BriefcaseIcon, VideoCameraIcon, MicrophoneIcon, FireIcon,
+import { HomeIcon, BriefcaseIcon, VideoCameraIcon, MicrophoneIcon, FireIcon, LibraryIcon,
     ShoppingCartIcon, CashIcon, UserGroupIcon, PencilAltIcon, QuestionMarkCircleIcon } from '@heroicons/react/outline'
 
 
@@ -52,6 +52,7 @@ const MenuModal = () => {
                   <SideBarItems text='Home' Icon={HomeIcon} location="/" />
                   <SideBarItems text='Write' Icon={PencilAltIcon} location="/write" />
                   <SideBarItems text='Ask' Icon={QuestionMarkCircleIcon} location="/ask" />
+                  <SideBarItems text='Clan' Icon={LibraryIcon} location="/clan" />
                   <SideBarItems text='Go' Icon={VideoCameraIcon} location="/go" />
                   <SideBarItems text='Podcast' Icon={MicrophoneIcon} location="/podcast" />
                   <SideBarItems text='Work' Icon={BriefcaseIcon} location="/work" />
