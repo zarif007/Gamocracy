@@ -2,8 +2,14 @@ import React from "react";
 import SideBarItems from "./SideBarItems";
 import { HomeIcon, BriefcaseIcon, VideoCameraIcon, MicrophoneIcon, FireIcon, UserGroupIcon, LibraryIcon,
   ShoppingCartIcon, CashIcon, PencilAltIcon, QuestionMarkCircleIcon } from '@heroicons/react/outline'
+import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from "react-icons/ai";
+import { useRecoilState } from "recoil";
+import { sidebarOpen } from "../atoms/sidebarOpenAtom";
 
 const SideBar = () => {
+
+
+  const [isSidebarOpen, setisSidebarOpen] = useRecoilState<boolean>(sidebarOpen);
 
   return (
     <div className="md:flex flex-col items-start w-full px-2 fixed h-full hidden z-0">
@@ -19,6 +25,16 @@ const SideBar = () => {
         <SideBarItems text='Nft' Icon={FireIcon} location="/nft" />
         <SideBarItems text='Sponsor' Icon={CashIcon} location="/sponsor" />
         <SideBarItems text='Vote' Icon={UserGroupIcon} location="/vote" />
+
+        
+        {
+          isSidebarOpen ? <AiOutlineDoubleLeft className="text-gray-600 h-8 w-8 m-1 cursor-pointer" 
+            onClick={() => setisSidebarOpen(false)} /> : 
+          <AiOutlineDoubleRight className="text-gray-600 h-8 w-8 m-1 cursor-pointer"
+            onClick={() => setisSidebarOpen(true)} />
+        }
+
+        
       </div>
       
     </div>
