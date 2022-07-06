@@ -31,7 +31,7 @@ const SideBarItems: React.FC<{ Icon: any, text: string, location: string }> = ({
       </div>
       {
         currentNav === text && 
-        <div className='flex text-gray-300 font-semibold ml-6 flex-col'>
+        <div className='text-gray-300 font-semibold ml-6 flex-col hidden md:flex'>
 
           <SubSideBar SideIcon={AiOutlinePlus} text='Create' />
 

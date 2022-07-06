@@ -2,6 +2,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { useRouter } from 'next/router';
 import React, { Fragment, useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil';
+import { theme } from '../../atoms/themeAtom';
 import { voiceNavModal } from '../../atoms/voiceNavigationModalAtom';
 
 
@@ -13,6 +14,8 @@ const VoiceNavigationModal = () => {
   const isDark = true;
 
   const [open, setOpen] = useRecoilState(voiceNavModal);
+
+  const [currentTheme] = useRecoilState(theme);
 
   const [command, setCommand] = useState<string>('');
 
@@ -85,7 +88,7 @@ const VoiceNavigationModal = () => {
   }, [open]);
 
   const styles = {
-    secondWrapper: `${isDark ? 'bg-black border-[#DC143C]' : 'bg-blue-100 border-blue-800'}  border rounded-lg px-4 pt-5 pb-4 sm:p-6 `,
+    secondWrapper: `bg-${currentTheme.background} border-[${currentTheme.crimson}]  border rounded-lg px-4 pt-5 pb-4 sm:p-6 `,
     reusltStyle: `${result === 'Did not get it :(' ? 'text-red-500' : 'text-blue-500'} font-semibold text-lg mb-6`,
   }
 
@@ -101,7 +104,7 @@ const VoiceNavigationModal = () => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black bg-opacity-75 transition-opacity" />
+          <div className={`fixed inset-0 bg-${currentTheme.background} bg-opacity-75 transition-opacity`} />
         </Transition.Child>
 
         <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -117,13 +120,13 @@ const VoiceNavigationModal = () => {
             >
 
               {/* Content Goes here */}
-              <Dialog.Panel className="relative text-white bg-[#121212] rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
+              <Dialog.Panel className={`relative text-white bg-${currentTheme.wrapper} rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full`}>
                 <div className={styles.secondWrapper}>
                     <h1 className='font-bold text-3xl'>{voiceState}</h1>
                     <h1 className='font-bold text-3xl'>{command}</h1>
                     <h1 className={styles.reusltStyle}>{result}</h1>
                     <span 
-                      className='px-4 py-2 cursor-pointer font-semibold text-lg text-[#DC143C] border-[#DC143C] border rounded-sm'
+                      className={`px-4 py-2 cursor-pointer font-semibold text-lg text-[${currentTheme.crimson}] border-[${currentTheme.crimson}] border rounded-sm`}
                       onClick={() => activateVoice()}>
                       Try again</span>
                 </div>

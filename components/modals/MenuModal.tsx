@@ -5,16 +5,17 @@ import { showMenu } from '../../atoms/showMenuAtom';
 import SideBarItems from '../SideBarItems';
 import { HomeIcon, BriefcaseIcon, VideoCameraIcon, MicrophoneIcon, FireIcon, LibraryIcon,
     ShoppingCartIcon, CashIcon, UserGroupIcon, PencilAltIcon, QuestionMarkCircleIcon } from '@heroicons/react/outline'
+import { theme } from '../../atoms/themeAtom';
 
 
 const MenuModal = () => {
 
-  const isDark = true;
-
   const [open, setOpen] = useRecoilState(showMenu);
 
+  const [currentTheme] = useRecoilState(theme);
+
   const styles = {
-    secondWrapper: `${isDark ? 'bg-black border-[#DC143C]' : 'bg-blue-100 border-blue-800'}  border rounded-lg px-4 pt-5 pb-4 sm:p-6 `,
+    secondWrapper: ` bg-${currentTheme.background} border-[${currentTheme.crimson}]  border rounded-lg px-4 pt-5 pb-4 sm:p-6 `,
   }
 
   
@@ -30,7 +31,7 @@ const MenuModal = () => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black bg-opacity-75 transition-opacity" />
+          <div className={`fixed inset-0 bg-${currentTheme.background} bg-opacity-75 transition-opacity`} />
         </Transition.Child>
 
         <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -46,7 +47,7 @@ const MenuModal = () => {
             >
 
               {/* Content Goes here */}
-              <Dialog.Panel className="relative bg-[#121212] rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
+              <Dialog.Panel className={`relative bg-[${currentTheme.wrapper}] rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full`}>
               <div className={styles.secondWrapper}>
                 <div className="space-y-1">
                   <SideBarItems text='Home' Icon={HomeIcon} location="/" />
