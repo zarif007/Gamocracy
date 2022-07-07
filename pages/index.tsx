@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import { useRecoilState } from 'recoil'
 import { sidebarOpen } from '../atoms/sidebarOpenAtom'
@@ -8,7 +8,23 @@ import NavBar from '../components/NavBar'
 import SideBar from '../components/SideBar'
 import Widgets from '../components/Widgets'
 
-const Home: NextPage = () => {
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  let data = {}
+  await fetch('https://dummyjson.com/products/1')
+    .then(res => res.json())
+    .then(res => data = res)
+
+  return {
+    props: { 
+      data,
+    },
+  };
+};
+
+const Home: NextPage = ({ data }: any) => {
+
+  console.log(data)
   
   const [isSidebarOpen] = useRecoilState<boolean>(sidebarOpen);
 

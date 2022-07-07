@@ -11,8 +11,6 @@ import { voiceNavModal } from '../../atoms/voiceNavigationModalAtom';
 
 const VoiceNavigationModal = () => {
 
-  const isDark = true;
-
   const [open, setOpen] = useRecoilState(voiceNavModal);
 
   const [currentTheme] = useRecoilState(theme);
