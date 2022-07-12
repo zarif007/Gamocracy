@@ -11,7 +11,7 @@ import Widgets from '../components/Widgets'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   let data = {}
-  await fetch('http://localhost:3000/api/hello')
+  await fetch('https://dummyjson.com/products/1')
     .then(res => res.json())
     .then(res => data = res)
 
