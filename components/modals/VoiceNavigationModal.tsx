@@ -27,6 +27,7 @@ const VoiceNavigationModal = () => {
   const voiceCommands = (recognition: any) => {
     // On start
     recognition.onstart = () => {
+
       setCommand('');
       setResult('');
       setVoiceState('Listening......');
@@ -39,7 +40,8 @@ const VoiceNavigationModal = () => {
       let transcript = e.results[current][0].transcript;
       setCommand(transcript)
 
-      const routes = ['home', 'write', 'ask', 'go', 'podcast', 'work', 'shop', 'nft', 'sponsor', 'vote'];
+      const routes = ['home', 'write', 'ask', 'go', 'podcast', 'work', 
+                      'shop', 'nft', 'sponsor', 'vote', 'clan'];
 
       routes.map((route: string) => {
         if(transcript.includes(route)){
@@ -48,7 +50,7 @@ const VoiceNavigationModal = () => {
 
           setTimeout(() => {
             setOpen(false)
-
+  
           }, 1500);
         }
       })

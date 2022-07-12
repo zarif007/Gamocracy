@@ -19,9 +19,10 @@ const ProfileDropDownModal = () => {
   const styles = {
     secondWrapper: `bg-${currentTheme.background} border-[${currentTheme.crimson}]  border rounded-lg p-2 sm:p-4`,
     thirdWrapper: `flex flex-col items-center justify-center`,
-    fourthWrapper: `flex items-center mx-auto space-x-2 cursor-pointer pb-4 px-2 hover:text-black`,
-    icon: `h-14 w-6 sm:h-14 sm:w-6 text-gray-200`,
-    text: `text-lg font-bold text-gray-200 hover:text-[${currentTheme.hover}]`,
+    fourthWrapper: `flex items-center mx-auto space-x-2 cursor-pointer px-2 hover:text-white
+                    hover:bg-[${currentTheme.hover}] bg-zinc-900 m-1 py-3 rounded-md text-[#DC143C]`,
+    icon: `h-14 w-6 sm:h-14 sm:w-6`,
+    text: `text-lg font-bold text-white`,
   }
 
   
@@ -53,7 +54,7 @@ const ProfileDropDownModal = () => {
             >
 
               {/* Content Goes here */}
-              <Dialog.Panel className="relative bg-[#121212] rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-md sm:w-full">
+              <Dialog.Panel className="relative bg-[#121212] rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg w-full">
                   <div className={styles.secondWrapper}>
                     <div className="">
 
@@ -63,13 +64,13 @@ const ProfileDropDownModal = () => {
                         </div>
 
                         <div className={styles.fourthWrapper}>
-                          <RiSettingsFill className={`icon text-[#DC143C]`} />
+                          <RiSettingsFill className={`icon`} />
                           <h1 className={styles.text}>Settings</h1>
                         </div>
 
                         <div className={styles.fourthWrapper}
                           onClick={() => signOut()}>
-                          <MdOutlineLogout className={`icon text-[#DC143C]`} />
+                          <MdOutlineLogout className={`icon`} />
                           <h1 className={styles.text}>Logout</h1>
                         </div>
                     </div>

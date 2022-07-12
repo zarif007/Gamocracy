@@ -43,7 +43,7 @@ const NavBar = () => {
       isDark
         ? "text-white bg-[#0c1012] focus:bg-gray-900 border-[#DC143C]"
         : "text-black bg-[#FAF9F6] focus:bg-gray-100 border-[#a1a1aa]"
-    } border-2 rounded-sm  pl-10 focus:outline-none py-4`,
+    } border-2 rounded-md  pl-10 focus:outline-none py-4`,
     iconsWrapper: `text-white flex flex-row space-x-2 md:space-x-2 items-center justify-center`,
     icon: `h-14 w-6 sm:h-16 sm:w-8  ${
       isDark ? "text-gray-200" : "text-gray-700"
@@ -53,7 +53,7 @@ const NavBar = () => {
     } hover:text-[#e5163f]`,
     notificationWrapper: `bg-blue-700 text-xs p-1 animate-pulse rounded-md absolute m-4 ml-3 mt-5`,
     userImage: `h-8 sm:h-10 rounded-full cursor-pointer pt-2`,
-    buttons: `bg-[#DC143C] hover:bg-[#e5163f] text-white rounded-sm font-bold px-3 items-center`,
+    buttons: `bg-[#DC143C] hover:bg-[#e5163f] text-white rounded-md font-bold px-3 items-center`,
   };
 
 
