@@ -88,7 +88,7 @@ const VoiceNavigationModal = () => {
   }, [open]);
 
   const styles = {
-    secondWrapper: `bg-${currentTheme.background} border-[${currentTheme.crimson}]  border rounded-lg px-4 pt-5 pb-4 sm:p-6 `,
+    secondWrapper: `bg-${currentTheme.background} border-[${currentTheme.crimson}]  border-2 rounded-lg px-4 pt-5 pb-4 sm:p-6 `,
     reusltStyle: `${result === 'Did not get it :(' ? 'text-red-500' : 'text-blue-500'} font-semibold text-lg mb-6`,
   }
 

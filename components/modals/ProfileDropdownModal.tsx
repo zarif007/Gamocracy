@@ -17,7 +17,7 @@ const ProfileDropDownModal = () => {
   const { data: session } = useSession();
 
   const styles = {
-    secondWrapper: `bg-${currentTheme.background} border-[${currentTheme.crimson}]  border rounded-lg p-2 sm:p-4`,
+    secondWrapper: `bg-${currentTheme.background} border-[${currentTheme.crimson}]  border-2 rounded-lg p-2 sm:p-4`,
     thirdWrapper: `flex flex-col items-center justify-center`,
     fourthWrapper: `flex items-center mx-auto space-x-2 cursor-pointer px-2 hover:text-white
                     hover:bg-[${currentTheme.hover}] bg-zinc-900 m-1 py-3 rounded-md text-[#DC143C]`,

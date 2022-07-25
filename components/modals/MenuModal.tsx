@@ -15,7 +15,7 @@ const MenuModal = () => {
   const [currentTheme] = useRecoilState(theme);
 
   const styles = {
-    secondWrapper: ` bg-${currentTheme.background} border-[${currentTheme.crimson}]  border rounded-lg px-4 pt-5 pb-4 sm:p-6 `,
+    secondWrapper: ` bg-${currentTheme.background} border-[${currentTheme.crimson}]  border-2 rounded-lg px-4 pt-5 pb-4 sm:p-6 `,
   }
 
   
