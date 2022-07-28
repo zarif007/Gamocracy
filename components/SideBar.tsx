@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SideBarItems from "./SideBarItems";
 import { HomeIcon, BriefcaseIcon, VideoCameraIcon, MicrophoneIcon, FireIcon, UserGroupIcon, LibraryIcon,
   ShoppingCartIcon, CashIcon, PencilAltIcon, QuestionMarkCircleIcon } from '@heroicons/react/outline'
@@ -6,10 +6,16 @@ import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from "react-icons/ai";
 import { useRecoilState } from "recoil";
 import { sidebarOpen } from "../atoms/sidebarOpenAtom";
 
+
 const SideBar = () => {
 
-
   const [isSidebarOpen, setisSidebarOpen] = useRecoilState<boolean>(sidebarOpen);
+
+
+  useEffect(() => {
+    const isOpen: string = window.localStorage.getItem('IS_SIDEBAR_OPEN') || '';
+    setisSidebarOpen(JSON.parse(isOpen))
+  }, [])
 
   return (
     <div className="md:flex flex-col items-start w-full px-2 fixed h-full hidden z-0">
@@ -29,9 +35,15 @@ const SideBar = () => {
         
         {
           isSidebarOpen ? <AiOutlineDoubleLeft className="text-gray-600 h-8 w-8 m-1 cursor-pointer" 
-            onClick={() => setisSidebarOpen(false)} /> : 
+            onClick={() => {
+              setisSidebarOpen(false);
+              window.localStorage.setItem('IS_SIDEBAR_OPEN', JSON.stringify(false));
+            }} /> : 
           <AiOutlineDoubleRight className="text-gray-600 h-8 w-8 m-1 cursor-pointer"
-            onClick={() => setisSidebarOpen(true)} />
+            onClick={() => {
+              setisSidebarOpen(true);
+              window.localStorage.setItem('IS_SIDEBAR_OPEN', JSON.stringify(true));
+            }} />
         }
 
         

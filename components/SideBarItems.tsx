@@ -7,11 +7,13 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import { TbTrendingUp } from "react-icons/tb";
 import { HiOutlineLibrary } from "react-icons/hi";
 
+
 const SideBarItems: React.FC<{ Icon: any, text: string, location: string }> = ({ Icon, text, location }) => {
 
   const [currentNav, setCurrentNav] = useRecoilState<string>(currentNavItem);
 
   const [isSidebarOpen] = useRecoilState<boolean>(sidebarOpen);
+
 
   const router = useRouter();
 

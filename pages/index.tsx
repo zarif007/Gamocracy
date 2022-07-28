@@ -23,8 +23,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 const Home: NextPage = ({ data }: any) => {
-
-  console.log(data)
   
   const [isSidebarOpen] = useRecoilState<boolean>(sidebarOpen);
 
