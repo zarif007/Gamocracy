@@ -67,8 +67,8 @@ const VoiceNavigationModal = () => {
   }
 
   const activateVoice = () => {
-    if (typeof window !== "undefined") {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (window !== undefined) {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || '';
 
       const recognition = new SpeechRecognition();
 
