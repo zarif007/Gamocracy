@@ -68,18 +68,24 @@ const VoiceNavigationModal = () => {
 
   const activateVoice = () => {
     if (window !== undefined) {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || '';
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-      const recognition = new SpeechRecognition();
+      if(SpeechRecognition) {
+        const recognition = new SpeechRecognition();
 
-      
-      if(open){
-        recognition.start();
-        voiceCommands(recognition);
+        if(open){
+          recognition.start();
+          voiceCommands(recognition);
+        } else {
+          recognition.stop();
+          setVoiceState('Stopped')
+        }
       } else {
-        recognition.stop();
         setVoiceState('Stopped')
+        setCommand('');
+        setResult(`Sorry :( not supported yet`);
       }
+      
     }
   }
 
@@ -89,7 +95,7 @@ const VoiceNavigationModal = () => {
 
   const styles = {
     secondWrapper: `bg-${currentTheme.background} border-[${currentTheme.crimson}]  border-2 rounded-lg px-4 pt-5 pb-4 sm:p-6 `,
-    reusltStyle: `${result === 'Did not get it :(' ? 'text-red-500' : 'text-blue-500'} font-semibold text-lg mb-6`,
+    reusltStyle: `${!result.startsWith('Navigating') ? 'text-red-500' : 'text-blue-500'} font-semibold text-lg mb-6`,
   }
 
   return (
