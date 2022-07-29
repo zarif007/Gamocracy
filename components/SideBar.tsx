@@ -13,9 +13,17 @@ const SideBar = () => {
 
 
   useEffect(() => {
-    const isOpen: string = window.localStorage.getItem('IS_SIDEBAR_OPEN') || '';
-    setisSidebarOpen(JSON.parse(isOpen))
-  }, [])
+    if(window !== undefined) {
+      const isOpen: string = window.localStorage.getItem('IS_SIDEBAR_OPEN') || '';
+      setisSidebarOpen(JSON.parse(isOpen || 'true'))
+    }
+  }, []);
+
+  const setOnLocalStorage = (value: boolean) => {
+    if(window !== undefined) {
+      window.localStorage.setItem('IS_SIDEBAR_OPEN', JSON.stringify(value));
+    }
+  }
 
   return (
     <div className="md:flex flex-col items-start w-full px-2 fixed h-full hidden z-0">
@@ -37,12 +45,12 @@ const SideBar = () => {
           isSidebarOpen ? <AiOutlineDoubleLeft className="text-gray-600 h-8 w-8 m-1 cursor-pointer" 
             onClick={() => {
               setisSidebarOpen(false);
-              window.localStorage.setItem('IS_SIDEBAR_OPEN', JSON.stringify(false));
+              setOnLocalStorage(false);
             }} /> : 
           <AiOutlineDoubleRight className="text-gray-600 h-8 w-8 m-1 cursor-pointer"
             onClick={() => {
               setisSidebarOpen(true);
-              window.localStorage.setItem('IS_SIDEBAR_OPEN', JSON.stringify(true));
+              setOnLocalStorage(true);
             }} />
         }
 
