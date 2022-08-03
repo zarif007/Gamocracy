@@ -4,6 +4,7 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil';
 import { theme } from '../../atoms/themeAtom';
 import { voiceNavModal } from '../../atoms/voiceNavigationModalAtom';
+import EscForModals from '../EscForModals';
 
 
 
@@ -128,6 +129,7 @@ const VoiceNavigationModal = () => {
               {/* Content Goes here */}
               <Dialog.Panel className={`relative text-white bg-${currentTheme.wrapper} rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full`}>
                 <div className={styles.secondWrapper}>
+                    <EscForModals setOpen={setOpen} />
                     <h1 className='font-bold text-3xl'>{voiceState}</h1>
                     <h1 className='font-bold text-3xl'>{command}</h1>
                     <h1 className={styles.reusltStyle}>{result}</h1>

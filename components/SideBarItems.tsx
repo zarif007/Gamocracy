@@ -26,7 +26,7 @@ const SideBarItems: React.FC<{ Icon: any, text: string, location: string }> = ({
           setCurrentNav(text)
           router.push(`/${location}`)
         }}>
-        <Icon className='h-7'/>
+        <Icon className='h-7 hover:animate-spin'/>
         {
           isSidebarOpen && <span className='font-bold'>{text}</span>
         }
@@ -54,7 +54,7 @@ const SubSideBar: React.FC<{ SideIcon: any, text: string }> = ({ SideIcon, text 
   return (
     <div className='flex flex-row hoverAnimation rounded-md py-1 px-1 space-x-1 w-full'>
       <div className=''>
-        <SideIcon className='h-5 w-5' />
+        <SideIcon className='h-5 w-5 hover:animate-spin' />
       </div>
       {
         isSidebarOpen && <span className='font-semibold'>{text}</span>
