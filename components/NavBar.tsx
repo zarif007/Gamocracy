@@ -12,8 +12,8 @@ import { showProfileDropdown } from "../atoms/showProfileDropDownAtom";
 import { voiceNavModal } from "../atoms/voiceNavigationModalAtom";
 import { BsSearch } from "react-icons/bs";
 import { currentNavItem } from "../atoms/currentNavItemAtom";
-import { GrLogin } from "react-icons/gr";
 import { MdOutlineLogin } from "react-icons/md";
+import { creationModal } from "../atoms/creationModal";
 
 
 const NavBar = () => {
@@ -30,6 +30,8 @@ const NavBar = () => {
   const [showSearchInput, setShowSearchInput] = useState<boolean>(false);
 
   const [currentNav, setCurrentNav] = useRecoilState<string>(currentNavItem);
+
+  const [openCreationModal, setOpenCreationModal] = useRecoilState(creationModal);
 
   const styles = {
     nav: `pt-3 shadow-sm ${
@@ -137,7 +139,8 @@ const NavBar = () => {
             <div className={styles.iconsWrapper}>
                 {
                   session?.user?.email ? <>
-                    <button className={`${styles.buttons} hidden md:flex`}>
+                    <button className={`${styles.buttons} hidden md:flex`}
+                      onClick={() => setOpenCreationModal(true)}>
                         Create
                         <BiListPlus 
                             className="h-10 w-6 sm:h-12 sm:w-8 pl-2" 

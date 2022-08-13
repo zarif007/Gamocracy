@@ -30,7 +30,6 @@ const SideBar = () => {
       <div className="space-y-1">
         <SideBarItems text='Home' Icon={HomeIcon} location="/" />
         <SideBarItems text='Write' Icon={PencilAltIcon} location="/write" />
-        <SideBarItems text='Ask' Icon={QuestionMarkCircleIcon} location="/ask" />
         <SideBarItems text='Clan' Icon={LibraryIcon} location="/clan" />
         <SideBarItems text='Go' Icon={VideoCameraIcon} location="/go" />
         <SideBarItems text='Podcast' Icon={MicrophoneIcon} location="/podcast" />

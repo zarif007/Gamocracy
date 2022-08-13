@@ -8,6 +8,7 @@ import { useRecoilState } from 'recoil';
 import { showMenu } from '../atoms/showMenuAtom';
 import { showProfileDropdown } from '../atoms/showProfileDropDownAtom';
 import { MdOutlineLogin } from "react-icons/md";
+import { creationModal } from '../atoms/creationModal';
 
 
 const BottomNav: React.FC = () => {
@@ -19,6 +20,8 @@ const BottomNav: React.FC = () => {
     const [openMenu, setOpenMenu] = useRecoilState(showMenu);
 
     const [openDropDown, setOpenDropDown] = useRecoilState(showProfileDropdown);
+
+    const [openCreationModal, setOpenCreationModal] = useRecoilState(creationModal);
 
 
     const styles = {
@@ -40,7 +43,7 @@ const BottomNav: React.FC = () => {
                         </div>
                         {
                             session?.user?.email ? <>
-                                <div className={styles.iconsWrapper} onClick={() => {}} >
+                                <div className={styles.iconsWrapper} onClick={() => setOpenCreationModal(true)} >
                                     <BiListPlus className={styles.icon} />
                                     <span className={styles.iconText}>Create</span>
                                 </div>
@@ -54,8 +57,8 @@ const BottomNav: React.FC = () => {
                                 </div>
                             </> : <div
                                 className={styles.iconsWrapper}
-                                onClick={() => signIn()}>
-                                <MdOutlineLogin className={styles.icon} />
+                                    onClick={() => signIn()}>
+                                    <MdOutlineLogin className={styles.icon} />
                                 <span className={styles.iconText}>Login</span>
                             </div>
                         }

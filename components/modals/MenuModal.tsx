@@ -68,11 +68,6 @@ const MenuModal = () => {
                       location="/write"
                     />
                     <SideBarItems
-                      text="Ask"
-                      Icon={QuestionMarkCircleIcon}
-                      location="/ask"
-                    />
-                    <SideBarItems
                       text="Clan"
                       Icon={LibraryIcon}
                       location="/clan"

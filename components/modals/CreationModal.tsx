@@ -7,19 +7,19 @@ import { RiSettingsFill } from "react-icons/ri";
 import { MdOutlineLogout } from "react-icons/md";
 import { theme } from "../../atoms/themeAtom";
 import EscForModals from "../EscForModals";
+import { creationModal } from './../../atoms/creationModal';
+import { FcAnswers, FcBarChart, FcDocument, FcEditImage, FcIdea, FcLike, FcList, FcQuestions } from "react-icons/fc";
 
-const ProfileDropDownModal = () => {
+const CreationModal = () => {
 
-  const [open, setOpen] = useRecoilState(showProfileDropdown);
+  const [open, setOpen] = useRecoilState(creationModal);
   const [currentTheme] = useRecoilState(theme);
-
-  const { data: session } = useSession();
 
   const styles = {
     secondWrapper: `bg-${currentTheme.background} border-[${currentTheme.crimson}]  border-2 rounded-lg p-2 sm:p-4`,
     thirdWrapper: `flex flex-col items-center justify-center`,
     fourthWrapper: `flex items-center mx-auto space-x-2 cursor-pointer px-2 hover:text-white
-                    hover:bg-[${currentTheme.hover}] bg-zinc-900 m-1 py-3 rounded-md text-[#DC143C]`,
+                    hover:bg-[${currentTheme.hover}] bg-zinc-900 m-1 py-3 rounded-md text-[#DC143C] w-full`,
     icon: `h-14 w-6 sm:h-14 sm:w-6`,
     text: `text-lg font-bold text-white`,
   };
@@ -57,25 +57,45 @@ const ProfileDropDownModal = () => {
                 <div className={styles.secondWrapper}>
                   <EscForModals setOpen={setOpen} />
                   <div className="">
-                    <div className={styles.fourthWrapper}>
-                      <img
-                        src={session?.user?.image || ""}
-                        className="w-8 rounded-md"
-                      />
-                      <h1 className={styles.text}>{session?.user?.name}</h1>
+
+                    <div className="flex space-x-1">
+                        <div className={styles.fourthWrapper}>
+                            <FcDocument className={`icon`} />
+                            <h1 className={styles.text}>Blog</h1>
+                        </div>
+
+                        <div className={styles.fourthWrapper}>
+                            <FcEditImage className={`icon`} />
+                            <h1 className={styles.text}>Post</h1>
+                        </div>
                     </div>
 
-                    <div className={styles.fourthWrapper}>
-                      <RiSettingsFill className={`icon`} />
-                      <h1 className={styles.text}>Settings</h1>
+                    <div className="flex space-x-1">
+                    <div
+                      className={styles.fourthWrapper}>
+                      <FcQuestions className={`icon`} />
+                      <h1 className={styles.text}>Ask</h1>
                     </div>
 
                     <div
-                      className={styles.fourthWrapper}
-                      onClick={() => signOut()}
-                    >
-                      <MdOutlineLogout className={`icon`} />
-                      <h1 className={styles.text}>Logout</h1>
+                      className={styles.fourthWrapper}>
+                      <FcIdea className={`icon`} />
+                      <h1 className={styles.text}>Idea</h1>
+                    </div>
+                    </div>
+
+                    <div className="flex space-x-1">
+                    <div
+                      className={styles.fourthWrapper}>
+                      <FcAnswers className={`icon`} />
+                      <h1 className={styles.text}>Review</h1>
+                    </div>
+
+                    <div
+                      className={styles.fourthWrapper}>
+                      <FcBarChart className={`icon`} />
+                      <h1 className={styles.text}>Poll</h1>
+                    </div>
                     </div>
                   </div>
                 </div>
@@ -88,4 +108,4 @@ const ProfileDropDownModal = () => {
   );
 };
 
-export default ProfileDropDownModal;
+export default CreationModal;
