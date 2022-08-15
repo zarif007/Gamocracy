@@ -50,7 +50,7 @@ const CreationModal = () => {
         </Transition.Child>
 
         <div className="fixed z-10 inset-0 overflow-y-auto">
-          <div className="flex items-center sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
+          <div className="flex items-center sm:items-center justify-center min-h-full p-4 text-center sm:p-0 mt-20">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
