@@ -140,7 +140,11 @@ const NavBar = () => {
                 {
                   session?.user?.email ? <>
                     <button className={`${styles.buttons} hidden md:flex`}
-                      onClick={() => setOpenCreationModal(true)}>
+                      onClick={() => {
+                        let {modal, blog, post, ask, idea, review, poll} = openCreationModal;
+                        modal = true;
+                        setOpenCreationModal({modal, blog, post, ask, idea, review, poll})
+                      }}>
                         Create
                         <BiListPlus 
                             className="h-10 w-6 sm:h-12 sm:w-8 pl-2" 
