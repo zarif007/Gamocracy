@@ -43,7 +43,11 @@ const BottomNav: React.FC = () => {
                         </div>
                         {
                             session?.user?.email ? <>
-                                <div className={styles.iconsWrapper} onClick={() => setOpenCreationModal(true)} >
+                                <div className={styles.iconsWrapper} onClick={() => {
+                                    let {modal, blog, post, ask, idea, review, poll} = openCreationModal;
+                                    modal = true;
+                                    setOpenCreationModal({modal, blog, post, ask, idea, review, poll})
+                                }} >
                                     <BiListPlus className={styles.icon} />
                                     <span className={styles.iconText}>Create</span>
                                 </div>
