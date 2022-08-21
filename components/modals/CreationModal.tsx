@@ -61,7 +61,7 @@ const CreationModal = () => {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               {/* Content Goes here */}
-              <Dialog.Panel className={`relative bg-[#121212] rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 ${modal ? 'sm:max-w-2xl' : 'sm:max-w-4xl'} w-full`}>
+              <Dialog.Panel className={`mb-20 relative bg-[#121212] rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 ${modal ? 'sm:max-w-2xl' : 'sm:max-w-4xl'} w-full`}>
                 <div className={styles.secondWrapper}>
 
                   {/* Menu  */}
