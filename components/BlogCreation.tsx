@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import "../node_modules/react-quill/dist/quill.snow.css";
 
 import DOMPurify from "isomorphic-dompurify";
+import axios from "axios";
 
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
@@ -45,24 +46,33 @@ const formats = [
 ];
 
 const BlogCreation = () => {
-  const [content, setContent] = useState<{ title: String; body: string }>({
+
+  const [blog, setBlog] = useState<{ blogId: string, coverImage: string, title: String; content: string }>({
+    blogId: "2qq2ddd2",
+    coverImage: "",
     title: "",
-    body: "",
+    content: "",
   });
 
   const [showTitleBorder, setShowTitleBorder] = useState<boolean>(false);
 
   const [showPreview, setShowPreview] = useState<boolean>(false);
 
+
+  const handleSubmit = () => {
+    axios.post('https://dacgzl9krh.execute-api.us-east-1.amazonaws.com/staging', blog)
+      .then(res => console.log(res))
+  }
+
   return (
     <div className="text-white text-2xl">
       {showPreview ? (
         <div className="flex justify-center font-semibold text-gray-300 flex-col m-4">
-          <h1 className="text-5xl font-bold my-6">{content.title}</h1>
+          <h1 className="text-5xl font-bold my-6">{blog.title}</h1>
           {
             <div
               dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(content.body),
+                __html: DOMPurify.sanitize(blog.content),
               }}
             />
           }
@@ -75,7 +85,7 @@ const BlogCreation = () => {
                 Cover Image
               </label>
               <div className="flex items-center justify-center w-full">
-                <label className="flex flex-col rounded-sm border-2 border-dashed border-white w-full h-30 p-10 group text-center">
+                <label className="flex flex-col rounded-sm border-2 border-dashed border-white w-full h-20 md:h-40 p-10 group text-center">
                   <div className="h-full w-full text-center flex flex-col justify-center items-center  ">
                     <p className="pointer-none text-gray-500 ">
                       <span className="text-sm">Drag and drop</span> files here{" "}
@@ -90,32 +100,32 @@ const BlogCreation = () => {
           <p className="mt-6 text-xl font-bold text-gray-300">Title</p>
           <input
             className={`border ${!showTitleBorder && "border-black"} ${
-              content.title === "" && "border-white"
+              blog.title === "" && "border-white"
             } w-full py-3 bg-black text-3xl font-bold mb-4 mt-1 px-1`}
             placeholder="Put a Killing Title"
-            defaultValue={`${content.title}`}
+            defaultValue={`${blog.title}`}
             onChange={(e: any) => {
-              const updated = content;
+              const updated = blog;
               updated.title = e.target.value;
-              setContent(updated);
+              setBlog(updated);
             }}
             onMouseOut={() => setShowTitleBorder(false)}
             onClick={() => setShowTitleBorder(true)}
           />
 
-          <p className="my-2 text-xl font-bold text-gray-300">Content</p>
+          <p className="my-2 text-xl font-bold text-gray-300">blog</p>
           <div className="mb-20 mt-2">
             <QuillNoSSRWrapper
               className=""
-              defaultValue={`${content.body}`}
+              defaultValue={`${blog.content}`}
               theme="snow"
-              placeholder={content.body}
+              placeholder={blog.content}
               modules={modules}
               formats={formats}
               onChange={(e: any) => {
-                const updated = content;
-                updated.body = e;
-                setContent(updated);
+                const updated = blog;
+                updated.content = e;
+                setBlog(updated);
               }}
             />
           </div>
@@ -128,7 +138,9 @@ const BlogCreation = () => {
         >
           {!showPreview ? "Preview" : "Keep Editing"}
         </button>
-        <button className="py-1 px-6 rounded-md bg-[#DC143C] text-lg font-semibold text-white">
+        <button 
+          className="py-1 px-6 rounded-md bg-[#DC143C] text-lg font-semibold text-white"
+          onClick={handleSubmit}>
           Post
         </button>
       </div>
