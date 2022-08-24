@@ -4,6 +4,7 @@ import { getProviders, signIn  } from 'next-auth/react'
 import Image from 'next/image';
 import logo from '../../public/logo2.png'
 
+
 const SignIn: React.FC<{providers: any}> = ({ providers }) => {
 
   const isDark = true;
