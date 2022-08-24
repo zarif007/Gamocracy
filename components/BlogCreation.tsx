@@ -53,6 +53,7 @@ const BlogCreation = () => {
     title: "",
     content: "",
   });
+  
 
   const [showTitleBorder, setShowTitleBorder] = useState<boolean>(false);
 
