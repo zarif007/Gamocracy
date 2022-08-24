@@ -5,16 +5,15 @@ import { Menu } from '@headlessui/react'
 import { currentNavItem } from "../atoms/currentNavItemAtom";
 
 const Feed: React.FC<{ name: string }> = ({ name }) => {
-  const [opened, setOpened] = useState(true);
 
-  const [Menu, setMenu] = useRecoilState(showMenu);
+  const [menu, setMenu] = useRecoilState(showMenu);
 
   const [currentNav, setCurrentNav] = useRecoilState<string>(currentNavItem);
 
   useEffect(() => {
     setMenu(false);
     setCurrentNav(name);
-  }, [])
+  }, [menu, currentNav])
 
 
   return (
