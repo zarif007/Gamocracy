@@ -1,9 +1,10 @@
 import dynamic from "next/dynamic";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../node_modules/react-quill/dist/quill.snow.css";
-
 import DOMPurify from "isomorphic-dompurify";
 import axios from "axios";
+import { v4 as uuidv4 } from 'uuid';
+
 
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
@@ -17,8 +18,6 @@ const modules = {
     ["bold", "italic", "underline", "strike", "blockquote"],
     ["image"],
     [
-      { list: "ordered" },
-      { list: "bullet" },
       { indent: "-1" },
       { indent: "+1" },
     ],
@@ -38,8 +37,6 @@ const formats = [
   "underline",
   "strike",
   "blockquote",
-  "list",
-  "bullet",
   "indent",
   "link",
   "image",
@@ -48,27 +45,44 @@ const formats = [
 const BlogCreation = () => {
 
   const [blog, setBlog] = useState<{ blogId: string, coverImage: string, title: String; content: string }>({
-    blogId: "2qq2ewddd2",
+    blogId: '',
     coverImage: "",
     title: "",
     content: "",
   });
-  
+
 
   const [showTitleBorder, setShowTitleBorder] = useState<boolean>(false);
 
   const [showPreview, setShowPreview] = useState<boolean>(false);
 
+  const [coverImageInBase64, setCoverImageInBase64] = useState<string>('');
 
-  const handleSubmit = () => {
-    // axios.post('https://dacgzl9krh.execute-api.us-east-1.amazonaws.com/staging', blog)
-    //   .then(res => console.log(res))
+  const handleImageUpload = (e: any) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setCoverImageInBase64(reader.result?.toString() || '');
+      
+    }
+
+    reader.readAsDataURL(file)
+  }
+
+
+  const handleSubmit = async () => {
+    setBlog({...blog, blogId: uuidv4(), coverImage: coverImageInBase64})
+    console.log(blog.blogId)
+    await axios.post('https://dacgzl9krh.execute-api.us-east-1.amazonaws.com/staging', blog)
+      .then(res => console.log(res))
   }
 
   return (
     <div className="text-white text-2xl">
       {showPreview ? (
         <div className="flex justify-center font-semibold text-gray-300 flex-col m-4">
+          <img src={`${coverImageInBase64}`} width='1200px' />
           <h1 className="text-5xl font-bold my-6">{blog.title}</h1>
           {
             <div
@@ -86,15 +100,17 @@ const BlogCreation = () => {
                 Cover Image
               </label>
               <div className="flex items-center justify-center w-full">
-                <label className="flex flex-col rounded-sm border-2 border-dashed border-white w-full h-20 md:h-40 p-10 group text-center">
-                  <div className="h-full w-full text-center flex flex-col justify-center items-center  ">
-                    <p className="pointer-none text-gray-500 ">
-                      <span className="text-sm">Drag and drop</span> files here{" "}
-                      <br /> or select a file from your computer
-                    </p>
-                  </div>
-                  <input type="file" accept="image/png" hidden />
-                </label>
+                {
+                  coverImageInBase64 === '' ? <label className="flex flex-col rounded-sm border-2 border-dashed border-white w-full h-20 md:h-40 p-10 group text-center">
+                    <div className="h-full w-full text-center flex flex-col justify-center items-center  ">
+                      <p className="pointer-none text-gray-500 ">
+                        <span className="text-sm">Drag and drop</span> files here{" "}
+                        <br /> or select a file from your computer
+                      </p>
+                    </div>
+                    <input type="file" accept="image/png" hidden onChange={(e: any) => handleImageUpload(e)} />
+                  </label> : <img src={`${coverImageInBase64}`} width='1200px' onClick={() => setCoverImageInBase64('')} />
+                }
               </div>
             </div>
           </div>
