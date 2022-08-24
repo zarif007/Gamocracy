@@ -17,7 +17,7 @@ const SignIn: React.FC<{providers: any}> = ({ providers }) => {
   return (
     <div className={`${isDark ? 'bg-[#0E0E10]' : 'bg-[#F9F6EE]'}`}>
       <div className='flex justify-center items-center pt-20'>
-        <Image src={logo} objectFit='fill' />
+        <Image src={logo} objectFit='fill' alt="logo" />
       </div>
       <div className={styles.wrapper}>
         {Object.values(providers).map((provider: any) => (
