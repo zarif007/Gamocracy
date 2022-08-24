@@ -48,7 +48,7 @@ const formats = [
 const BlogCreation = () => {
 
   const [blog, setBlog] = useState<{ blogId: string, coverImage: string, title: String; content: string }>({
-    blogId: "2qq2ddd2",
+    blogId: "2qq2ewddd2",
     coverImage: "",
     title: "",
     content: "",
@@ -60,8 +60,8 @@ const BlogCreation = () => {
 
 
   const handleSubmit = () => {
-    axios.post('https://dacgzl9krh.execute-api.us-east-1.amazonaws.com/staging', blog)
-      .then(res => console.log(res))
+    // axios.post('https://dacgzl9krh.execute-api.us-east-1.amazonaws.com/staging', blog)
+    //   .then(res => console.log(res))
   }
 
   return (
