@@ -12,7 +12,7 @@ const BlogContent = ({ blog }: any) => {
         <meta name="description" content="Write About Games" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex justify-center font-semibold text-gray-300 flex-col border-x-2 border-[#DC143C] bg-[#121212]">
+      <div className="rounded-md flex justify-center font-semibold text-gray-300 flex-col border-x-2 border-[#DC143C] bg-[#121212] border-b-2">
         <Image
           src={blog.coverImage}
           alt="Current Image"

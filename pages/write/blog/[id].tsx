@@ -23,10 +23,22 @@ const Blog = ({ blog }: any) => {
   return (
     <div className='bg-black min-h-screen'>
       <NavBar />
-      <div className='flex max-w-5xl mx-auto justify-center'>
+      <div className='flex max-w-5xl mx-auto justify-center flex-col'>
         <BlogContent blog={blog} />
+
+        <div className='my-6'>
+          <Comments />
+        </div>
       </div>
 
+    </div>
+  )
+}
+
+const Comments = () => {
+  return (
+    <div className='border-2 p-6 border-[#DC143C] rounded-md'>
+      <h1 className='font-bold text-xl text-gray-300'>Comments</h1>
     </div>
   )
 }
