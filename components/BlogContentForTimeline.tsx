@@ -18,8 +18,11 @@ const BlogContentForTimeline = ({ blog }: any) => {
           height={300}
           className="rounded-md"
         />
+        <div className="m-2 mx-4">
+            <span className='rounded-md text-lg font-semibold py-1 px-3 border border-[#DC143C] text-[#DC143C]'>Blog📝</span>
+        </div>
         <div className="mx-4 mb-4">
-        <h1 className="text-5xl md:text-6xl font-bold my-12 text-[#DC143C]">{blog.title}</h1>
+        <h1 className="text-5xl md:text-6xl font-bold my6 text-[#DC143C]">{blog.title}</h1>
         </div>
       </div>
     </div>
