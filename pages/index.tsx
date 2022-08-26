@@ -59,15 +59,15 @@ const Home: NextPage = ({ blogs }: any) => {
           </div>
           <div className={styles.feedWrapper}>
             <Feed name='Home' />
-            {/* <div className='m-2'>
+            <div className='m-2'>
               {
-                blogs.map((blog: any) => {
+                blogs.map((blog: any, index: number) => {
                   return (
-                    <BlogContentForTimeline blog={blog} />
+                    <BlogContentForTimeline key={index} blog={blog} />
                   )
                 })
               }
-            </div> */}
+            </div>
           </div>
           <div className={styles.widgetsWrapper}>
             <Widgets />
