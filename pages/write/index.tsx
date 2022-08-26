@@ -4,6 +4,7 @@ import Head from 'next/head'
 import { useRecoilState } from 'recoil'
 import { sidebarOpen } from '../../atoms/sidebarOpenAtom'
 import BlogContent from '../../components/BlogContent'
+import BlogContentForTimeline from '../../components/BlogContentForTimeline'
 import ComponenetsForIndexes from '../../components/ComponenetsForIndexes'
 import Feed from '../../components/Feed'
 import NavBar from '../../components/NavBar'
@@ -55,7 +56,7 @@ const Write: NextPage = ({blogs}: any) => {
               {
                 blogs.map((blog: any) => {
                   return (
-                    <BlogContent blog={blog} />
+                    <BlogContentForTimeline blog={blog} />
                   )
                 })
               }
