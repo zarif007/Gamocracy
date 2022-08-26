@@ -149,7 +149,7 @@ const BlogCreation = () => {
             onClick={() => setShowTitleBorder(true)}
           />
 
-          <p className="my-2 text-xl font-bold text-gray-300">blog</p>
+          <p className="my-2 text-xl font-bold text-gray-300">Content</p>
           <div className="mb-20 mt-2">
             <QuillNoSSRWrapper
               className=""
