@@ -4,7 +4,11 @@ import "../node_modules/react-quill/dist/quill.snow.css";
 import DOMPurify from "isomorphic-dompurify";
 import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
-
+import 'react-quill/dist/quill.snow.css';
+import Image from "next/image";
+import { FaGgCircle } from "react-icons/fa";
+import { useRouter } from 'next/router'
+import BlogContent from "./BlogContent";
 
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
@@ -45,12 +49,13 @@ const formats = [
 const BlogCreation = () => {
 
   const [blog, setBlog] = useState<{ blogId: string, coverImage: string, title: String; content: string }>({
-    blogId: '',
+    blogId: uuidv4(),
     coverImage: "",
     title: "",
     content: "",
   });
 
+  const router = useRouter();
 
   const [showTitleBorder, setShowTitleBorder] = useState<boolean>(false);
 
@@ -58,40 +63,44 @@ const BlogCreation = () => {
 
   const [coverImageInBase64, setCoverImageInBase64] = useState<string>('');
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const handleImageUpload = (e: any) => {
     const file = e.target.files[0];
     const reader = new FileReader();
 
     reader.onloadend = () => {
-      setCoverImageInBase64(reader.result?.toString() || '');
-      
+      setCoverImageInBase64(reader.result?.toString() || ''); 
+      setBlog({...blog, coverImage: reader.result?.toString() || ''})     
     }
 
-    reader.readAsDataURL(file)
+    reader.readAsDataURL(file);
   }
 
 
   const handleSubmit = async () => {
-    setBlog({...blog, blogId: uuidv4(), coverImage: coverImageInBase64})
-    console.log(blog.blogId)
+    if(isLoading) return;
+
+    setIsLoading(true);
+
+    setBlog({...blog, coverImage: coverImageInBase64})
+
+    console.log(blog)
+    
     await axios.post('https://dacgzl9krh.execute-api.us-east-1.amazonaws.com/staging', blog)
-      .then(res => console.log(res))
+      .then(res => {
+        if(res.status === 201){
+          router.push(`/write/blog/${res.data.blogId}`);
+        }
+      })
+    
+    setIsLoading(false);
   }
 
   return (
     <div className="text-white text-2xl">
       {showPreview ? (
-        <div className="flex justify-center font-semibold text-gray-300 flex-col m-4">
-          <img src={`${coverImageInBase64}`} width='1200px' />
-          <h1 className="text-5xl font-bold my-6">{blog.title}</h1>
-          {
-            <div
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(blog.content),
-              }}
-            />
-          }
-        </div>
+        <BlogContent blog={blog} />
       ) : (
         <>
           <div>
@@ -103,13 +112,13 @@ const BlogCreation = () => {
                 {
                   coverImageInBase64 === '' ? <label className="flex flex-col rounded-sm border-2 border-dashed border-white w-full h-20 md:h-40 p-10 group text-center">
                     <div className="h-full w-full text-center flex flex-col justify-center items-center  ">
-                      <p className="pointer-none text-gray-500 ">
-                        <span className="text-sm">Drag and drop</span> files here{" "}
-                        <br /> or select a file from your computer
+                      <p className="pointer-none text-gray-500 text-sm md:text-lg">
+                        <span className="">select a file from your computer</span>
+                        <br />Try to follow 3:1 ratio
                       </p>
                     </div>
                     <input type="file" accept="image/png" hidden onChange={(e: any) => handleImageUpload(e)} />
-                  </label> : <img src={`${coverImageInBase64}`} width='1200px' onClick={() => setCoverImageInBase64('')} />
+                  </label> : <Image src={coverImageInBase64} alt="Current Image" width={900} height={300} onClick={() => setCoverImageInBase64('')} />
                 }
               </div>
             </div>
@@ -156,9 +165,17 @@ const BlogCreation = () => {
           {!showPreview ? "Preview" : "Keep Editing"}
         </button>
         <button 
-          className="py-1 px-6 rounded-md bg-[#DC143C] text-lg font-semibold text-white"
+          disabled={isLoading}
+          className={`py-1 px-6 rounded-md bg-[#DC143C] text-lg font-semibold text-white ${isLoading && 'opacity-80 cursor-not-allowed'}`}
           onClick={handleSubmit}>
-          Post
+            {
+              isLoading ? <div className="flex justify-center items-center space-x-2">
+                <FaGgCircle className="animate-spin h-5 w-5" />
+                <p>Posting </p>
+              </div> : <p>
+                Post
+              </p>
+            }
         </button>
       </div>
     </div>

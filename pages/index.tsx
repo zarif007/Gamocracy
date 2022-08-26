@@ -39,6 +39,10 @@ const Home: NextPage = ({ data }: any) => {
         <title>Gamocracy</title>
         <meta name="description" content="A Gamers Community" />
         <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/react-quill@1.3.3/dist/quill.snow.css"
+        />
       </Head>
 
       {/* 
