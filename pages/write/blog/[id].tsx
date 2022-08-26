@@ -28,7 +28,6 @@ const Blog = ({ blog }: any) => {
         <BlogContent blog={blog} />
       </div>
 
-      <CreationModal />
     </div>
   )
 }

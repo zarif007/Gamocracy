@@ -49,10 +49,7 @@ const VoiceNavigationModal = () => {
           setResult(`Navigating to ${route}`);
           route === 'home' ? router.push('/') : router.push(`/${route}`);
 
-          setTimeout(() => {
-            setOpen(false)
-  
-          }, 1500);
+          setOpen(false)
         }
       })
 

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Head from "next/head";
 
 const BlogContent = ({ blog }: any) => {
+
   return (
     <div className="bg-black text-gray-200">
       <Head>
@@ -18,7 +19,7 @@ const BlogContent = ({ blog }: any) => {
           width={900}
           height={300}
         />
-        <div className="m-4">
+        <div className="">
         <h1 className="text-5xl md:text-6xl font-bold my-12 text-[#DC143C]">{blog.title}</h1>
           {
             <div

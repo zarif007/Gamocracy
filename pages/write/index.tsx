@@ -1,4 +1,5 @@
-import type { NextPage } from 'next'
+import axios from 'axios'
+import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import { useRecoilState } from 'recoil'
 import { sidebarOpen } from '../../atoms/sidebarOpenAtom'
@@ -6,10 +7,23 @@ import ComponenetsForIndexes from '../../components/ComponenetsForIndexes'
 import Feed from '../../components/Feed'
 import NavBar from '../../components/NavBar'
 import SideBar from '../../components/SideBar'
-import Widgets from '../../components/Widgets'
+import Widgets from '../../components/Widgets' 
 
 
-const Write: NextPage = () => {
+
+// export const getServerSideProps: GetServerSideProps = async () => {
+
+//   const { data } = await axios.get(`https://dacgzl9krh.execute-api.us-east-1.amazonaws.com/staging`);
+
+//   return {
+//     props: { 
+//       blogs: data,
+//      },
+//   };
+// };
+
+
+const Write: NextPage = ({blogs}: any) => {
 
   const [isSidebarOpen] = useRecoilState<boolean>(sidebarOpen);
 
