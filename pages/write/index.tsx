@@ -51,6 +51,15 @@ const Write: NextPage = ({blogs}: any) => {
           </div>
           <div className={styles.feedWrapper}>
             <Feed name='Write' />
+            <div className='m-2'>
+              {
+                blogs.map((blog: any) => {
+                  return (
+                    <BlogContent blog={blog} />
+                  )
+                })
+              }
+            </div>
           </div>
           <div className={styles.widgetsWrapper}>
             <Widgets />

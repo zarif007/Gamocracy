@@ -1,7 +1,9 @@
+import axios from 'axios'
 import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import { useRecoilState } from 'recoil'
 import { sidebarOpen } from '../atoms/sidebarOpenAtom'
+import BlogContent from '../components/BlogContent'
 import ComponenetsForIndexes from '../components/ComponenetsForIndexes'
 import Feed from '../components/Feed'
 import NavBar from '../components/NavBar'
@@ -10,19 +12,17 @@ import Widgets from '../components/Widgets'
 
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  let data = {}
-  // await fetch('https://dummyjson.com/products/1')
-  //   .then(res => res.json())
-  //   .then(res => data = res)
+
+  const { data } = await axios.get(`https://dacgzl9krh.execute-api.us-east-1.amazonaws.com/staging`);
 
   return {
     props: { 
-      data,
-    },
+      blogs: data,
+     },
   };
 };
 
-const Home: NextPage = ({ data }: any) => {
+const Home: NextPage = ({ blogs }: any) => {
   
   const [isSidebarOpen] = useRecoilState<boolean>(sidebarOpen);
 
@@ -59,6 +59,15 @@ const Home: NextPage = ({ data }: any) => {
           </div>
           <div className={styles.feedWrapper}>
             <Feed name='Home' />
+            <div className='m-2'>
+              {
+                blogs.map((blog: any) => {
+                  return (
+                    <BlogContent blog={blog} />
+                  )
+                })
+              }
+            </div>
           </div>
           <div className={styles.widgetsWrapper}>
             <Widgets />
