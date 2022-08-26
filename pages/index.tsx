@@ -59,7 +59,7 @@ const Home: NextPage = ({ blogs }: any) => {
           </div>
           <div className={styles.feedWrapper}>
             <Feed name='Home' />
-            <div className='m-2'>
+            {/* <div className='m-2'>
               {
                 blogs.map((blog: any) => {
                   return (
@@ -67,7 +67,7 @@ const Home: NextPage = ({ blogs }: any) => {
                   )
                 })
               }
-            </div>
+            </div> */}
           </div>
           <div className={styles.widgetsWrapper}>
             <Widgets />
