@@ -3,7 +3,6 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import React from 'react'
 import BlogContent from '../../../components/BlogContent';
-import CreationModal from '../../../components/modals/CreationModal';
 import NavBar from '../../../components/NavBar';
 
 
