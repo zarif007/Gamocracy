@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import Image from 'next/image'
 import { useRecoilState } from 'recoil'
 import { sidebarOpen } from '../../atoms/sidebarOpenAtom'
 import ComponenetsForIndexes from '../../components/ComponenetsForIndexes'
@@ -7,6 +8,17 @@ import Feed from '../../components/Feed'
 import NavBar from '../../components/NavBar'
 import SideBar from '../../components/SideBar'
 import Widgets from '../../components/Widgets'
+
+
+const data = [
+  {
+    name: 'BoredGone #004',
+    account: 'Orgg',
+    img: 'https://www.cgmasteracademy.com/wp-content/uploads/2020/12/Character_Creation_for_Games_search.jpeg',
+    eth: 24.5,
+    lastSale: 22.9,
+  }
+]
 
 
 const Nft: NextPage = () => {
@@ -35,6 +47,24 @@ const Nft: NextPage = () => {
           </div>
           <div className={styles.feedWrapper}>
             <Feed name='Nft' />
+
+            <div className="m-2">
+              {
+                data.map((ds: any) => {
+                  return (
+                    <div className='flex flex-col w-1/4'>
+                      <div className='border-2 border-gray-600 rounded-lg p-1'>
+                        <img src={ds.img} style={{width: '200px'}} className="rounded-lg" />
+                      </div>
+                      <div className='flex justify-between text-[#DC143C] font-semibold p-1'>
+                        <p>{ds.name}</p>
+                        <p className='text-blue-500 text-sm'>{ds.account}</p>
+                      </div>
+                    </div>
+                  )
+                })
+              }
+            </div>
           </div>
           <div className={styles.widgetsWrapper}>
             <Widgets />

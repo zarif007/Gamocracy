@@ -65,6 +65,8 @@ const BlogCreation = () => {
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const [error, setError] = useState<string>('');
+
   const handleImageUpload = (e: any) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -83,16 +85,24 @@ const BlogCreation = () => {
 
     setIsLoading(true);
 
-    setBlog({...blog, coverImage: coverImageInBase64})
+    setError('')
 
-    console.log(blog)
+    setBlog({...blog, coverImage: coverImageInBase64})
     
-    await axios.post('https://dacgzl9krh.execute-api.us-east-1.amazonaws.com/staging', blog)
+    try{
+      await axios.post('https://dacgzl9krh.execute-api.us-east-1.amazonaws.com/staging', blog)
       .then(res => {
         if(res.status === 201){
           router.push(`/write/blog/${res.data.blogId}`);
+        } else {
+          setError('Over sized data')
+          setIsLoading(false);
         }
       })
+    } catch {
+      setError('Over sized data')
+      setIsLoading(false);
+    }
     
     setIsLoading(false);
   }
@@ -157,7 +167,8 @@ const BlogCreation = () => {
           </div>
         </>
       )}
-      <div className="flex space-x-2 justify-end">
+      <div className="mb-2 text-xl font-semibold text-red-500">{error}</div>
+      <div className="flex space-x-2 justify-end mt-2">
         <button
           className="py-1 px-3 rounded-md border-2 border-[#DC143C] text-lg font-semibold text-[#DC143C]"
           onClick={() => setShowPreview(!showPreview)}
