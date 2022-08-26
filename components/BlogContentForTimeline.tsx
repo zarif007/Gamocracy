@@ -29,4 +29,5 @@ const BlogContentForTimeline = ({ blog }: any) => {
   )
 }
 
+
 export default BlogContentForTimeline
