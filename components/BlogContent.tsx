@@ -5,7 +5,7 @@ import Head from "next/head";
 
 const BlogContent = ({ blog }: any) => {
   return (
-    <div className="bg-black text-gray-200 border-2 border-[#DC143C]">
+    <div className="bg-black text-gray-200">
       <Head>
         <title>{blog.title}</title>
         <meta name="description" content="Write About Games" />
