@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { showProfileDropdown } from "../../atoms/showProfileDropDownAtom";
 import { signOut, useSession } from "next-auth/react";

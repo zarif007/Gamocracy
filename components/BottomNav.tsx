@@ -33,7 +33,7 @@ const BottomNav: React.FC = () => {
     }
 
     return (
-        <div>
+        <div className='mt-32'>
             <div className={styles.wrapper}>
                 <section className={styles.itemsWrapper}>
                     <div className="flex justify-between text-[#DC143C]">

@@ -1,9 +1,13 @@
 import axios from 'axios';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { GiBulletBill, GiSilverBullet } from 'react-icons/gi';
+import { useRecoilState } from 'recoil';
+import { creationModal } from '../../../atoms/creationModal';
 import BlogContent from '../../../components/BlogContent';
+import BottomNav from '../../../components/BottomNav';
+import ComponenetsForIndexes from '../../../components/ComponenetsForIndexes';
 import NavBar from '../../../components/NavBar';
 
 
@@ -20,6 +24,21 @@ export const getServerSideProps: GetServerSideProps = async ( { params } ) => {
 
 const Blog = ({ blog }: any) => {
 
+  const [openCreationModal, setOpenCreationModal] =
+    useRecoilState(creationModal);
+
+  useEffect(() => {
+    setOpenCreationModal({
+      modal: false,
+      blog: false,
+      post: false,
+      ask: false,
+      idea: false,
+      review: false,
+      poll: false,
+    });
+  }, [])
+
   const { query: { id } } = useRouter();
   return (
     <div className='bg-black min-h-screen'>
@@ -31,7 +50,8 @@ const Blog = ({ blog }: any) => {
           <Comments />
         </div>
       </div>
-
+      <BottomNav />
+      <ComponenetsForIndexes />
     </div>
   )
 }

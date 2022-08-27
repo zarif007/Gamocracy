@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { showMenu } from "../../atoms/showMenuAtom";
 import SideBarItems from "../SideBarItems";
@@ -21,6 +21,10 @@ import { theme } from "../../atoms/themeAtom";
 
 const MenuModal = () => {
   const [open, setOpen] = useRecoilState(showMenu);
+
+  // useEffect(() => {
+  //   console.log(open)
+  // }, [open])
 
   const [currentTheme] = useRecoilState(theme);
 

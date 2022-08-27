@@ -13,7 +13,7 @@ const Feed: React.FC<{ name: string }> = ({ name }) => {
   useEffect(() => {
     setMenu(false);
     setCurrentNav(name);
-  }, [menu, currentNav, name])
+  }, [currentNav, name])
 
 
   return (
