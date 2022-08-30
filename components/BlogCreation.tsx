@@ -9,7 +9,19 @@ import Image from "next/image";
 import { FaGgCircle } from "react-icons/fa";
 import { useRouter } from 'next/router'
 import BlogContent from "./BlogContent";
+import AWS from 'aws-sdk'
 
+
+// S3 Buckect config
+const S3 = new AWS.S3({
+  credentials: {
+    accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID || '',
+    secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY_ID || '',
+  }
+})
+
+
+// Options of Rich text Editor
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
@@ -63,12 +75,17 @@ const BlogCreation = () => {
 
   const [coverImageInBase64, setCoverImageInBase64] = useState<string>('');
 
+  const [coverImageInUrl, setCoverImageInUrl] = useState<string>('');
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [error, setError] = useState<string>('');
 
+
+  // Store both base64 and file format of the coverImage
   const handleImageUpload = (e: any) => {
     const file = e.target.files[0];
+    setCoverImageInUrl(e.target.files[0]);
     const reader = new FileReader();
 
     reader.onloadend = () => {
@@ -80,15 +97,31 @@ const BlogCreation = () => {
   }
 
 
+  // Upload coverImage on S3 and upload the entire blog part on dynamoDB 
   const handleSubmit = async () => {
     if(isLoading) return;
 
     setIsLoading(true);
 
-    setError('')
+    setError('');
 
-    setBlog({...blog, coverImage: coverImageInBase64})
-    
+    const imageName = `blog/${blog.title}_${Date.now()}.jpg`;
+
+    const params = {
+      Bucket: 'gc-s3images',
+      Key: imageName,
+      Body: coverImageInUrl,
+    }
+
+    try {
+      const uploadedDataOnS3 = await S3.upload(params).promise()
+      const up = blog;
+      up.coverImage = uploadedDataOnS3.Location;
+      setBlog(up);
+    } catch (err) {
+      console.log('error', err)
+    }
+
     try{
       await axios.post('https://dacgzl9krh.execute-api.us-east-1.amazonaws.com/staging', blog)
       .then(res => {
@@ -110,8 +143,10 @@ const BlogCreation = () => {
   return (
     <div className="text-white text-2xl">
       {showPreview ? (
+        // Preview before uploading part
         <BlogContent blog={blog} />
       ) : (
+        // Blog uploading part
         <>
           <div>
             <div className="grid grid-cols-1 space-y-2 pt-4">
@@ -167,7 +202,11 @@ const BlogCreation = () => {
           </div>
         </>
       )}
+
+      {/* Error */}
       <div className="mb-2 text-xl font-semibold text-red-500">{error}</div>
+
+      {/* Button of preview and post */}
       <div className="flex space-x-2 justify-end mt-2">
         <button
           className="py-1 px-3 rounded-md border-2 border-[#DC143C] text-lg font-semibold text-[#DC143C]"

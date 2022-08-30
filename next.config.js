@@ -8,7 +8,10 @@ const nextConfig = withPWA({
     register: true,
     skipWaiting: true,
     // disable: process.env.NODE_ENV === 'development',
-  }
+  },
+  images: {
+    domains: ['gc-s3images.s3.amazonaws.com'],
+  },
 })
 
 module.exports = nextConfig
