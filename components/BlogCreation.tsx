@@ -117,14 +117,14 @@ const BlogCreation = () => {
       const imgParams = {
         Bucket: 'gc-s3images',
         Key: imageName,
-        Expires: 60,
+        Expires: 360,
       }
 
-      const signedUrl = await S3.getSignedUrlPromise('getObject', imgParams);
-      console.log(signedUrl)
+      const signedUrl = await S3.getSignedUrlPromise('putObject', imgParams);
+      console.log(uploadedDataOnS3.Location)
 
       const up = blog;
-      up.coverImage = signedUrl;
+      up.coverImage = uploadedDataOnS3.Location;
       setBlog(up);
     } catch (err) {
       console.log('error', err)
