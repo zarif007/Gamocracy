@@ -12,8 +12,8 @@ import BlogContent from "./BlogContent";
 import AWS from 'aws-sdk'
 
 
-// S3 Buckect config
-const S3 = new AWS.S3({
+// s3 Buckect config
+const s3 = new AWS.S3({
   credentials: {
     accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID || '',
     secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY_ID || '',
@@ -96,7 +96,7 @@ const BlogCreation = () => {
   }
 
 
-  // Upload coverImage on S3 and upload the entire blog part on dynamoDB 
+  // Upload coverImage on s3 and upload the entire blog part on dynamoDB 
   const handleSubmit = async () => {
     if(isLoading) return;
 
@@ -113,7 +113,7 @@ const BlogCreation = () => {
     }
 
     try {
-      const uploadedDataOnS3 = await S3.upload(params).promise()
+      const uploadedDataOns3 = await s3.upload(params).promise()
       const imgParams = {
         Bucket: 'gc-s3images',
         Key: imageName,
@@ -121,7 +121,7 @@ const BlogCreation = () => {
         
       }
 
-      const signedUrl = await S3.getSignedUrlPromise('getObject', imgParams);
+      const signedUrl = await s3.getSignedUrlPromise('getObject', imgParams);
       console.log(signedUrl)
 
       const up = blog;

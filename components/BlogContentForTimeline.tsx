@@ -12,7 +12,7 @@ const BlogContentForTimeline = ({ blog }: any) => {
           router.push(`/write/blog/${blog.blogId}`);
         }}>
         <Image
-          src='https://gc-s3images.s3.amazonaws.com/blog/trt_1661894118731.jpg?AWSAccessKeyId=AKIASTA6D6TUKJ6NEHAN&Expires=1661894182&Signature=FDTFzqAkfvoKIQ%2FjSQrHqjLJonc%3D'
+          src={blog.coverImage}
           alt="Current Image"
           width={900}
           height={300}
