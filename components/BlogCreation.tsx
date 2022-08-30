@@ -20,7 +20,6 @@ const S3 = new AWS.S3({
   }
 })
 
-
 // Options of Rich text Editor
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
