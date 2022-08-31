@@ -85,6 +85,13 @@ const BlogCreation = () => {
   // Store both base64 and file format of the coverImage
   const handleImageUpload = (e: any) => {
     const file = e.target.files[0];
+
+    setError('')
+    if(file.size > 1024 * 1024 * 8){
+      setError('Over Sized Cover Image');
+      return;
+    }
+
     setCoverImageInUrl(e.target.files[0]);
     const reader = new FileReader();
 
@@ -96,15 +103,8 @@ const BlogCreation = () => {
     reader.readAsDataURL(file);
   }
 
-
-  // Upload coverImage on s3 and upload the entire blog part on dynamoDB 
-  const handleSubmit = async () => {
-    if(isLoading) return;
-
-    setIsLoading(true);
-
-    setError('');
-
+  // Upload Image on S3 and get the sign url
+  const uploadImageOnS3 = async () => {
     const imageName = `blog/${blog.title}_${Date.now()}.jpg`;
 
     const params = {
@@ -130,6 +130,18 @@ const BlogCreation = () => {
     } catch (err) {
       console.log('error', err)
     }
+  }
+
+
+  // Upload coverImage on s3 and upload the entire blog part on dynamoDB 
+  const handleSubmit = async () => {
+    if(isLoading) return;
+
+    setIsLoading(true);
+
+    setError('');
+
+    await uploadImageOnS3();
 
     try{
       await axios.post(apiEndpoints.blog, blog)
