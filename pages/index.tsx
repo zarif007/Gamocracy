@@ -58,7 +58,6 @@ const Home: NextPage = ({ blogs }: any) => {
             <SideBar />
           </div>
           <div className={styles.feedWrapper}>
-            <Feed name='Home' />
             <div className='m-2'>
               {
                 blogs.map((blog: any, index: number) => {
