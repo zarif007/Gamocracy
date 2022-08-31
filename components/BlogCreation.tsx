@@ -122,7 +122,6 @@ const BlogCreation = () => {
       }
 
       const signedUrl = await s3.getSignedUrlPromise('getObject', imgParams);
-      console.log(signedUrl)
 
       const up = blog;
       up.coverImage = signedUrl;
