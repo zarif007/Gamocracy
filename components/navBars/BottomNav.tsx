@@ -5,10 +5,10 @@ import { CgMenuCheese } from 'react-icons/cg';
 import { GiBatMask } from "react-icons/gi";
 import { IoMdNotifications } from 'react-icons/io';
 import { useRecoilState } from 'recoil';
-import { showMenu } from '../atoms/showMenuAtom';
-import { showProfileDropdown } from '../atoms/showProfileDropDownAtom';
+import { showMenu } from '../../atoms/showMenuAtom';
+import { showProfileDropdown } from '../../atoms/showProfileDropDownAtom';
 import { MdOutlineLogin } from "react-icons/md";
-import { creationModal } from '../atoms/creationModal';
+import { creationModal } from '../../atoms/creationModal';
 
 
 const BottomNav: React.FC = () => {

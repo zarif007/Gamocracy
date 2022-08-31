@@ -4,7 +4,7 @@ import { HomeIcon, BriefcaseIcon, VideoCameraIcon, MicrophoneIcon, FireIcon, Use
   ShoppingCartIcon, CashIcon, PencilAltIcon, QuestionMarkCircleIcon } from '@heroicons/react/outline'
 import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from "react-icons/ai";
 import { useRecoilState } from "recoil";
-import { sidebarOpen } from "../atoms/sidebarOpenAtom";
+import { sidebarOpen } from "../../atoms/sidebarOpenAtom";
 
 
 const SideBar = () => {

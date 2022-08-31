@@ -3,10 +3,10 @@ import Head from "next/head";
 import Image from "next/image";
 import { useRecoilState } from "recoil";
 import { sidebarOpen } from "../../atoms/sidebarOpenAtom";
-import ComponenetsForIndexes from "../../components/ComponenetsForIndexes";
+import ComponenetsForIndexes from "../../components/reusable/ComponenetsForIndexes";
 import Feed from "../../components/Feed";
-import NavBar from "../../components/NavBar";
-import SideBar from "../../components/SideBar";
+import NavBar from "../../components/navBars/NavBar";
+import SideBar from "../../components/navBars/SideBar";
 import Widgets from "../../components/Widgets";
 
 const data = [

@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import React, { useEffect, useRef, useState } from "react";
-import "../node_modules/react-quill/dist/quill.snow.css";
+import "../../node_modules/react-quill/dist/quill.snow.css";
 import DOMPurify from "isomorphic-dompurify";
 import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
@@ -10,6 +10,7 @@ import { FaGgCircle } from "react-icons/fa";
 import { useRouter } from 'next/router'
 import BlogContent from "./BlogContent";
 import AWS from 'aws-sdk'
+import { apiEndpoints } from "../../domain";
 
 
 // s3 Buckect config
@@ -131,10 +132,11 @@ const BlogCreation = () => {
     }
 
     try{
-      await axios.post('https://dacgzl9krh.execute-api.us-east-1.amazonaws.com/staging', blog)
+      await axios.post(apiEndpoints.blog, blog)
       .then(res => {
         if(res.status === 201){
           router.push(`/write/blog/${res.data.blogId}`);
+          setIsLoading(false);
         } else {
           setError('Over sized data')
           setIsLoading(false);
@@ -145,7 +147,6 @@ const BlogCreation = () => {
       setIsLoading(false);
     }
     
-    setIsLoading(false);
   }
 
   return (

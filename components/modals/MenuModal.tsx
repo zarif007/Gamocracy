@@ -2,7 +2,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { showMenu } from "../../atoms/showMenuAtom";
-import SideBarItems from "../SideBarItems";
+import SideBarItems from "../navBars/SideBarItems";
 import {
   HomeIcon,
   BriefcaseIcon,

@@ -6,7 +6,7 @@ import { signOut, useSession } from "next-auth/react";
 import { RiSettingsFill } from "react-icons/ri";
 import { MdOutlineLogout } from "react-icons/md";
 import { theme } from "../../atoms/themeAtom";
-import EscForModals from "../EscForModals";
+import EscForModals from "../reusable/EscForModals";
 
 const ProfileDropDownModal = () => {
 

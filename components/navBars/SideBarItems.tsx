@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import React from 'react'
 import { useRecoilState } from 'recoil';
-import { currentNavItem } from '../atoms/currentNavItemAtom';
-import { sidebarOpen } from '../atoms/sidebarOpenAtom';
+import { currentNavItem } from '../../atoms/currentNavItemAtom';
+import { sidebarOpen } from '../../atoms/sidebarOpenAtom';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { TbTrendingUp } from "react-icons/tb";
 import { HiOutlineLibrary } from "react-icons/hi";

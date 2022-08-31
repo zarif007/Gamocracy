@@ -4,7 +4,7 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil';
 import { theme } from '../../atoms/themeAtom';
 import { voiceNavModal } from '../../atoms/voiceNavigationModalAtom';
-import EscForModals from '../EscForModals';
+import EscForModals from '../reusable/EscForModals';
 
 
 

@@ -1,19 +1,19 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import logo from "../public/logo2.png";
+import logo from "../../public/logo2.png";
 import { BiListPlus } from "react-icons/bi";
 import { GiBatMask } from "react-icons/gi";
 import { IoMdNotifications } from "react-icons/io";
 import { FiMic } from "react-icons/fi";
 import { signIn, useSession } from "next-auth/react";
 import { useRecoilState } from "recoil";
-import { showProfileDropdown } from "../atoms/showProfileDropDownAtom";
-import { voiceNavModal } from "../atoms/voiceNavigationModalAtom";
+import { showProfileDropdown } from "../../atoms/showProfileDropDownAtom";
+import { voiceNavModal } from "../../atoms/voiceNavigationModalAtom";
 import { BsSearch } from "react-icons/bs";
-import { currentNavItem } from "../atoms/currentNavItemAtom";
+import { currentNavItem } from "../../atoms/currentNavItemAtom";
 import { MdOutlineLogin } from "react-icons/md";
-import { creationModal } from "../atoms/creationModal";
+import { creationModal } from "../../atoms/creationModal";
 
 
 const NavBar = () => {

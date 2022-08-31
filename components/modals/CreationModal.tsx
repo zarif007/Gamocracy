@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 import { theme } from "../../atoms/themeAtom";
 import { creationModal } from './../../atoms/creationModal';
 import { FcAnswers, FcBarChart, FcDocument, FcEditImage, FcIdea, FcQuestions } from "react-icons/fc";
-import BlogCreation from "../BlogCreation";
+import BlogCreation from "../blogComponents/BlogCreation";
 import { IoMdArrowBack } from "react-icons/io";
 
 const CreationModal = () => {
