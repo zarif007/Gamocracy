@@ -15,8 +15,8 @@ import AWS from 'aws-sdk'
 // s3 Buckect config
 const s3 = new AWS.S3({
   region: 'us-east-1',
-  accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID || '',
-  secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY_ID || '',
+  accessKeyId: 'AKIASTA6D6TUAEUPT6FB',
+  secretAccessKey: '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',
   signatureVersion: 'v4',
 })
 
