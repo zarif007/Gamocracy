@@ -18,7 +18,6 @@ const s3 = new AWS.S3({
   }
 })
 
-
 const BlogCreation = () => {
 
   const [blog, setBlog] = useState<{ blogId: string, coverImage: string, title: String; content: string }>({
