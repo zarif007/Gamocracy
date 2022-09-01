@@ -29,8 +29,8 @@ const Home: NextPage = ({ blogs }: any) => {
   const styles = {
     mainWrapper: `min-h-screen flex max-w-full mx-auto xl:mx-32`,
     sidebarWrapper: `${isSidebarOpen ? 'w-2/12' : 'w-1/12 ml-7'}  hidden md:flex pt-2 md:mt-12 md:mr-4 lg:mr-0`,
-    feedWrapper: `w-full md:w-6/12 lg:w-7/12 md:border-l md:border-r md:border-gray-800`,
-    widgetsWrapper: `md:w-4/12 ${isSidebarOpen ? 'lg:w-3/12' : 'lg:w-4/12'}  hidden md:flex pt-2 mt-2 border border-gray-800 ml-2 bg-black`,
+    feedWrapper: `w-full md:w-6/12 lg:w-7/12 md:border-l md:border-r md:border-gray-900`,
+    widgetsWrapper: `md:w-4/12 ${isSidebarOpen ? 'lg:w-3/12' : 'lg:w-4/12'}  hidden md:flex pt-2 mt-2 border border-gray-900 ml-2 bg-black`,
   }
 
   return (
@@ -53,6 +53,7 @@ const Home: NextPage = ({ blogs }: any) => {
       */}
 
       <NavBar />
+      
       <main className={styles.mainWrapper}>
           <div className={styles.sidebarWrapper}>
             <SideBar />
