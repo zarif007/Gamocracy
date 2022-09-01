@@ -58,14 +58,14 @@ const Blog = ({ blog }: any) => {
 
 const Comments = () => {
   return (
-    <div className='border-2 p-6 border-[#DC143C] rounded-md'>
+    <div className='border-2 p-4 border-[#DC143C] rounded-md'>
       <h1 className='font-bold text-xl text-gray-300'>Comments</h1>
       <label className="mt-2">Search</label>
         <div className='flex justify-center items-center space-x-2'>
           <div className="relative w-full">
-              <input type="text" className="border border-[#DC143C] bg-[#121212] text-gray-300 text-md font-semibold rounded-md block w-full p-4 " placeholder="Shoot" />
+              <input type="text" className="focus:outline-none border-2 border-[#DC143C] bg-[#121212] text-gray-300 text-md font-semibold rounded-md block w-full p-3" placeholder="Shoot" />
           </div>
-          <GiBulletBill className='p-1 bg-[#DC143C] w-12 h-14 rounded-md cursor-pointer' />
+          <GiBulletBill className='p-1 bg-[#DC143C] w-12 h-12 rounded-md cursor-pointer' />
         </div>
     </div>
   )
