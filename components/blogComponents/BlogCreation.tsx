@@ -78,8 +78,7 @@ const BlogCreation = () => {
       const imgParams = {
         Bucket: 'gc-s3images',
         Key: imageName,
-        Expires: 60,
-        
+        Expires: 360,
       }
 
       const signedUrl = await s3.getSignedUrlPromise('getObject', imgParams);

@@ -33,8 +33,6 @@ const NavBar = () => {
 
   const [openCreationModal, setOpenCreationModal] = useRecoilState(creationModal);
 
-  console.log(session)
-
   const styles = {
     nav: `pt-3 shadow-sm ${
       isDark ? "bg-black shadow-gray-800" : "bg-[#FFFAFA] shadow-gray-200"
