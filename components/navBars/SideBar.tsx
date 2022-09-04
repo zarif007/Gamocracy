@@ -26,7 +26,7 @@ const SideBar = () => {
   }
 
   return (
-    <div className="md:flex flex-col items-start w-full px-2 fixed h-full hidden z-0">
+    <div className="md:flex flex-col items-start w-full px-2 fixed h-full hidden z-0 ">
       <div className="space-y-1">
         <SideBarItems text='Home' Icon={HomeIcon} location="/" />
         <SideBarItems text='Write' Icon={PencilAltIcon} location="/write" />
