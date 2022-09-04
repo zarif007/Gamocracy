@@ -26,8 +26,8 @@ const SideBar = () => {
   }
 
   return (
-    <div className="md:flex flex-col items-start w-full px-2 fixed h-full hidden z-0 ">
-      <div className="space-y-1">
+    <div className="md:flex flex-col items-start w-full px-2 fixed h-full hidden z-0">
+      <div className="space-y-1 overflow-y-auto mb-40 scrollbar-hide">
         <SideBarItems text='Home' Icon={HomeIcon} location="/" />
         <SideBarItems text='Write' Icon={PencilAltIcon} location="/write" />
         <SideBarItems text='Clan' Icon={LibraryIcon} location="/clan" />
@@ -39,7 +39,6 @@ const SideBar = () => {
         <SideBarItems text='Sponsor' Icon={CashIcon} location="/sponsor" />
         <SideBarItems text='Vote' Icon={UserGroupIcon} location="/vote" />
 
-        
         {
           isSidebarOpen ? <AiOutlineDoubleLeft className="text-gray-600 h-8 w-8 m-1 cursor-pointer" 
             onClick={() => {
@@ -52,8 +51,6 @@ const SideBar = () => {
               setOnLocalStorage(true);
             }} />
         }
-
-        
       </div>
       
     </div>
