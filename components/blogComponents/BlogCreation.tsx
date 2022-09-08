@@ -142,7 +142,7 @@ const BlogCreation = () => {
                         <br />Try to follow 3:1 ratio
                       </p>
                     </div>
-                    <input type="file" accept="image/png" hidden onChange={(e: any) => handleImageUpload(e)} />
+                    <input type="file" accept="image/*" hidden onChange={(e: any) => handleImageUpload(e)} />
                   </label> : <Image src={coverImageInBase64} alt="Current Image" width={900} height={300} onClick={() => setCoverImageInBase64('')} />
                 }
               </div>
