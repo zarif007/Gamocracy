@@ -8,6 +8,7 @@ import BlogContent from "./BlogContent";
 import AWS from 'aws-sdk'
 import { apiEndpoints } from "../../domain";
 import TextEditor from "../TextEditor";
+import { useSession } from "next-auth/react";
 
 
 // S3 Buckect config
@@ -19,6 +20,8 @@ const s3 = new AWS.S3({
 })
 
 const BlogCreation = () => {
+
+  const {data: session} = useSession();
 
   const [blog, setBlog] = useState<{ blogId: string, coverImage: string, title: String; content: string }>({
     blogId: uuidv4(),
@@ -46,7 +49,14 @@ const BlogCreation = () => {
     const updated = blog;
     updated.blogId = `${updated.title.replaceAll(' ', '-')}-${Date.now()}`;
     setBlog(updated);
-  }, [blog.title])
+  }, [blog.title]);
+
+
+  // Getting  the user
+  useEffect(() => {
+    axios.get(`${apiEndpoints.user}/?email=${session?.user?.email}`)
+      .then(res => console.log(res));
+  }, [session])
 
 
   // Store both base64 and file format of the coverImage

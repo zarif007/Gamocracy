@@ -9,11 +9,12 @@ import BlogContent from '../../components/blogComponents/BlogContent';
 import BottomNav from '../../components/navBars/BottomNav';
 import ComponenetsForIndexes from '../../components/reusable/ComponenetsForIndexes';
 import NavBar from '../../components/navBars/NavBar';
+import { apiEndpoints } from '../../domain';
 
 
 export const getServerSideProps: GetServerSideProps = async ( { params } ) => {
 
-    const { data } = await axios.get(`https://dacgzl9krh.execute-api.us-east-1.amazonaws.com/staging/?blogId=${params?.id}`);
+    const { data } = await axios.get(`${apiEndpoints.blog}/?blogId=${params?.id}`);
   
     return {
       props: { 
