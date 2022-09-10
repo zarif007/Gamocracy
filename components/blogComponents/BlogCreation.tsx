@@ -23,11 +23,12 @@ const BlogCreation = () => {
 
   const {data: session} = useSession();
 
-  const [blog, setBlog] = useState<{ blogId: string, coverImage: string, title: String; content: string }>({
+  const [blog, setBlog] = useState<{ blogId: string, coverImage: string, title: String; content: string; author: string }>({
     blogId: uuidv4(),
     coverImage: "",
     title: "",
     content: "",
+    author: "",
   });
 
   const router = useRouter();
@@ -51,13 +52,14 @@ const BlogCreation = () => {
     setBlog(updated);
   }, [blog.title]);
 
-
-  // Getting  the user
+  // Getting author email for session
   useEffect(() => {
-    axios.get(`${apiEndpoints.user}/?email=${session?.user?.email}`)
-      .then(res => console.log(res));
-  }, [session])
 
+    const updated = blog;
+    updated.author = session?.user?.email || '';
+    setBlog(updated)
+
+  }, [session])
 
   // Store both base64 and file format of the coverImage
   const handleImageUpload = (e: any) => {
