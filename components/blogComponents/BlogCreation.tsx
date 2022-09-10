@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
 import Image from "next/image";
@@ -41,6 +41,13 @@ const BlogCreation = () => {
 
   const [error, setError] = useState<string>('');
 
+  // Updating blog name that will be used as imageName and id
+  useEffect(() => {
+    const updated = blog;
+    updated.blogId = `${updated.title.replaceAll(' ', '-')}-${Date.now()}`;
+    setBlog(updated);
+  }, [blog.title])
+
 
   // Store both base64 and file format of the coverImage
   const handleImageUpload = (e: any) => {
@@ -65,7 +72,7 @@ const BlogCreation = () => {
 
   // Upload Image on S3 and get the sign url
   const uploadImageOnS3 = async () => {
-    const imageName = `blog/${blog.title}_${Date.now()}.jpg`;
+    const imageName = `blog/${blog.blogId}.jpg`;
 
     const params = {
       Bucket: 'gc-s3images',
@@ -106,7 +113,7 @@ const BlogCreation = () => {
       await axios.post(apiEndpoints.blog, blog)
       .then(res => {
         if(res.status === 201){
-          router.push(`/write/blog/${res.data.blogId}`);
+          router.push(`/blog/${res.data.blogId}`);
           setIsLoading(false);
         } else {
           setError('Over sized data (400KB)')

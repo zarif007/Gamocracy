@@ -23,14 +23,14 @@ const BlogContent = ({ blog }: any) => {
           width={900}
           height={300}
           onClick={() => {
-            router.push(`/write/blog/${blog.blogId}`);
+            router.push(`/blog/${blog.blogId}`);
           }}
         />
         <div className="mx-4 mb-4">
           <h1 
             className="text-5xl md:text-6xl font-bold my-4 md:my-8 text-[#DC143C] cursor-pointer"
             onClick={() => {
-              router.push(`/write/blog/${blog.blogId}`);
+              router.push(`/blog/${blog.blogId}`);
             }}>
               {blog.title}
           </h1>

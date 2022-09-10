@@ -4,11 +4,11 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react'
 import { GiBulletBill, GiSilverBullet } from 'react-icons/gi';
 import { useRecoilState } from 'recoil';
-import { creationModal } from '../../../atoms/creationModal';
-import BlogContent from '../../../components/blogComponents/BlogContent';
-import BottomNav from '../../../components/navBars/BottomNav';
-import ComponenetsForIndexes from '../../../components/reusable/ComponenetsForIndexes';
-import NavBar from '../../../components/navBars/NavBar';
+import { creationModal } from '../../atoms/creationModal';
+import BlogContent from '../../components/blogComponents/BlogContent';
+import BottomNav from '../../components/navBars/BottomNav';
+import ComponenetsForIndexes from '../../components/reusable/ComponenetsForIndexes';
+import NavBar from '../../components/navBars/NavBar';
 
 
 export const getServerSideProps: GetServerSideProps = async ( { params } ) => {

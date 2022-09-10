@@ -9,7 +9,7 @@ const BlogContentForTimeline = ({ blog }: any) => {
     <div className="bg-black text-gray-200 mb-4">
       <div className="rounded-md flex justify-center font-semibold text-gray-300 flex-col border-2 border-[#DC143C] bg-[#121212]"
         onClick={() => {
-          router.push(`/write/blog/${blog.blogId}`);
+          router.push(`/blog/${blog.blogId}`);
         }}>
         <Image
           src={blog.coverImage}
@@ -24,7 +24,7 @@ const BlogContentForTimeline = ({ blog }: any) => {
         <div className="mx-4 mb-4">
           <h1 className="text-5xl md:text-6xl font-bold my-1 text-[#DC143C] cursor-pointer"
             onClick={() => {
-              router.push(`/write/blog/${blog.blogId}`);
+              router.push(`/blog/${blog.blogId}`);
             }}>
               {blog.title}
           </h1>
