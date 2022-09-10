@@ -1,6 +1,7 @@
 import axios from "axios";
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
+import { constSelector } from "recoil";
 import { apiEndpoints, domain } from './../../../domain';
 
 export default NextAuth({
@@ -17,7 +18,11 @@ export default NextAuth({
   callbacks: {
     async session({ session, token, user }) {
 
-      axios.post(`${apiEndpoints.user}`, session.user)
+      await axios.get(`${apiEndpoints.user}/?email=${session.user.email}`)
+        .then(res => {
+          if(res.data.email === '')
+            axios.post(`${apiEndpoints.user}`, session.user)
+        })
 
       return session
     }

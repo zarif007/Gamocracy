@@ -24,7 +24,7 @@ const SignIn: React.FC<{providers: any}> = ({ providers }) => {
         {Object.values(providers).map((provider: any) => (
           <div key={provider.name}>
             <button onClick={() => {
-                signIn(provider.id, { callbackUrl: '/' })    
+                signIn(provider.id, { callbackUrl: '/' })  
               }} className={styles.provider}>
               <FcGoogle className='h-8 w-8' />
               <span>Sign in with {provider.name}</span>
