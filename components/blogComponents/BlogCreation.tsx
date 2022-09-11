@@ -48,7 +48,7 @@ const BlogCreation = () => {
   // Updating blog name that will be used as imageName and id
   useEffect(() => {
     const updated = blog;
-    updated.blogId = `${updated.title.replaceAll(' ', '-')}-${Date.now()}`;
+    updated.blogId = `${updated.title.replaceAll(' ', '-').toLowerCase().replaceAll('?', '')}-${Date.now()}`;
     setBlog(updated);
   }, [blog.title]);
 
