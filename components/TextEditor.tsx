@@ -27,7 +27,8 @@ const TextEditor = ({ value, setValue, defaultValue }: any) => {
   useEffect(() => {
     setEditorState(EditorState.createWithContent(
       ContentState.createFromBlockArray(
-        convertFromHTML(value.content)
+        convertFromHTML(value.content).contentBlocks,
+        convertFromHTML(value.content).entityMap
       )
     ))
   }, [])
