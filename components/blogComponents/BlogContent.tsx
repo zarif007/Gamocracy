@@ -41,14 +41,22 @@ const BlogContent = ({ blog }: any) => {
           }}
         />
 
+        
+
         <div className="mx-4 flex mt-4 justify-between">
-          <div className="flex space-x-2">
-            <img src={author.image} alt="author dp" style={{ height: "45px" }} className="rounded-md" />
-            <div className="flex flex-col">
-              <h1>{author?.name}</h1>
-              <h2 className="text-sm text-gray-500">12th march, 2022</h2>
+          {
+            author.email ? <div className="flex space-x-2">
+              <img src={author.image} alt="author dp" style={{ height: "45px" }} className="rounded-md" />
+              <div className="flex flex-col">
+                <h1>{author?.name}</h1>
+                <h2 className="text-sm text-gray-500">12th march, 2022</h2>
+              </div>
+            </div> : 
+            <div className="animate-pulse">
+              <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-2"></div>
+              <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48"></div>
             </div>
-          </div>
+          }
           <button className="px-4 py-2 text-md font-semibold border-2 border-[#DC143C] rounded-md">Subscribe</button>
         </div>
 
