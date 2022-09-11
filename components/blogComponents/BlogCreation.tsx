@@ -54,11 +54,9 @@ const BlogCreation = () => {
 
   // Getting author email for session
   useEffect(() => {
-
     const updated = blog;
     updated.author = session?.user?.email || '';
     setBlog(updated)
-
   }, [session])
 
   // Store both base64 and file format of the coverImage
