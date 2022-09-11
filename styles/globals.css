@@ -11,6 +11,12 @@ body {
   background-color: black;
 }
 
+.rdw-option-wrapper, .rdw-dropdown-wrapper, .rdw-dropdown-optionwrapper {
+  background-color: #e2e8f0 !important;
+  border-color: #e2e8f0 !important;
+}
+
+
 a {
   color: inherit;
   text-decoration: none;

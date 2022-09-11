@@ -194,7 +194,7 @@ const BlogCreation = () => {
       <div className="mb-2 text-xl font-semibold text-red-500">{error}</div>
 
       {/* Button of preview and post */}
-      <div className="flex space-x-2 justify-end mt-2">
+      <div className="flex space-x-2 justify-end mt-2 mb-6">
         <button
           className="py-1 px-3 rounded-md border-2 border-[#DC143C] text-lg font-semibold text-[#DC143C]"
           onClick={() => setShowPreview(!showPreview)}
