@@ -33,7 +33,7 @@ const BlogCreation = () => {
 
   const router = useRouter();
 
-  const [showTitleBorder, setShowTitleBorder] = useState<boolean>(false);
+  const [showTitleBorder, setShowTitleBorder] = useState<boolean>(true);
 
   const [showPreview, setShowPreview] = useState<boolean>(false);
 
