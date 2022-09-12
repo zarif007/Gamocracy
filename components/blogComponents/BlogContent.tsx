@@ -30,18 +30,19 @@ const BlogContent = ({ blog }: any) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="mx-1 md:mx-0 rounded-md flex justify-center font-semibold text-gray-300 flex-col border-x-2 border-[#DC143C] bg-[#121212] border-b-2">
-        <Image
-          className="cursor-pointer rounded-md"
-          src={blog.coverImage}
-          alt="Current Image"
-          width={900}
-          height={300}
-          onClick={() => {
-            router.push(`/blog/${blog.blogId}`);
-          }}
-        />
 
-        
+        {
+          blog.coverImage !== '' && <Image
+            className="cursor-pointer rounded-md"
+            src={blog.coverImage}
+            alt="Current Image"
+            width={900}
+            height={300}
+            onClick={() => {
+              router.push(`/blog/${blog.blogId}`);
+            }}
+          />
+        }
 
         <div className="mx-4 flex mt-4 justify-between">
           {

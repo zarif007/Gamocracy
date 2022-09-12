@@ -113,9 +113,15 @@ const BlogCreation = () => {
   const handleSubmit = async () => {
     if(isLoading) return;
 
-    setIsLoading(true);
-
     setError('');
+
+    if(blog.title === '' || blog.coverImage === '' || blog.content === '') {
+      setError(`Add ${blog.title === '' ? 'Title' : blog.coverImage === '' ? 
+        'Cover Image' : 'Content'}`);
+      return
+    }
+
+    setIsLoading(true);
 
     await uploadImageOnS3();
 
