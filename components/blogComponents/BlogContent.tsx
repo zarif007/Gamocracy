@@ -19,6 +19,12 @@ const BlogContent = ({ blog }: any) => {
   useEffect(() => {
     axios.get(`${apiEndpoints.user}/?email=${blog.author}`)
       .then(res => setAuthor(res.data))
+
+    let cn = document.getElementById("content");
+    
+    cn?.textContent?.trim().split('.').map((ar: any) => {
+      console.log(ar)
+    })
   }, [])
 
 
@@ -53,7 +59,7 @@ const BlogContent = ({ blog }: any) => {
                 <h2 className="text-sm text-gray-500">12th march, 2022</h2>
               </div>
             </div> : 
-            <div className="animate-pulse">
+            <div className="animate-pulse mt-1">
               <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-2"></div>
               <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48"></div>
             </div>
@@ -71,6 +77,7 @@ const BlogContent = ({ blog }: any) => {
           </h1>
           {
             <div
+            id="content"
               className=""
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(blog.content),
