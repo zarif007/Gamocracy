@@ -55,7 +55,7 @@ const BlogContentForTimeline = ({ blog }: any) => {
         />
         
         {/* Blog info */}
-        <div className="mx-4 flex mt-4 justify-between items-center">
+        <div className="mx-4 flex mt-4 justify-between md:justify-start md:space-x-16 items-center">
           {
             author.email ? 
             <div className="flex space-x-2 justify-center items-center">
@@ -76,7 +76,7 @@ const BlogContentForTimeline = ({ blog }: any) => {
           }
           <div className="flex justify-center items-center space-x-1 text-gray-400">
             <BsSmartwatch className='h-12' />
-            <h1 className=''>{Math.trunc(contentInfo.wordCount / 200) + 1} min read</h1>
+            <h1 className=''>{Math.trunc(contentInfo.wordCount / 200) + 2} min read</h1>
           </div>
 
           <div className="flex justify-center items-center space-x-1 text-gray-400">
