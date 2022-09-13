@@ -6,6 +6,10 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { apiEndpoints } from "../../domain";
 import Moment from 'react-moment';
+import { GiPunchBlast, GiRank3, GiSelfLove } from "react-icons/gi";
+import { FaShareAltSquare } from "react-icons/fa";
+import { HiShare } from "react-icons/hi";
+import { MdShare } from "react-icons/md";
 
 const BlogContent = ({ blog }: any) => {
 
@@ -36,8 +40,16 @@ const BlogContent = ({ blog }: any) => {
         <meta name="description" content="Write About Games" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="mx-1 md:mx-0 rounded-md flex justify-center font-semibold text-gray-300 flex-col border-x-2 border-[#DC143C] bg-[#121212] border-b-2">
 
+      <div className="flex justify-center mt-1">
+        <div className="fixed z-50 bg-black shadow-lg shadow-gray-900 rounded-lg px-8 py-2 flex text-gary-500 space-x-4 md:space-x-12 mx-auto">
+            <GiSelfLove className="h-8 w-12 cursor-pointer hover:text-[#DC143C] transition duration-200 ease-out" />
+            <GiPunchBlast className="h-8 w-12 cursor-pointer hover:text-[#DC143C] transition duration-200 ease-out" />
+            <GiRank3 className="h-8 w-12 cursor-pointer hover:text-[#DC143C] transition duration-200 ease-out" />
+            <MdShare className="h-8 w-12 cursor-pointer hover:text-[#DC143C] transition duration-200 ease-out" />
+        </div>
+      </div>
+      <div className="mt-16 mx-1 md:mx-0 rounded-md flex justify-center font-semibold text-gray-300 flex-col border-x-2 border-[#DC143C] bg-[#121212] border-b-2">
         {
           blog.coverImage !== '' && <Image
             className="cursor-pointer rounded-md"
