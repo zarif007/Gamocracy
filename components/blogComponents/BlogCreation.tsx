@@ -23,12 +23,16 @@ const BlogCreation = () => {
 
   const {data: session} = useSession();
 
-  const [blog, setBlog] = useState<{ blogId: string, coverImage: string, title: String; content: string; author: string }>({
+  const [blog, setBlog] = useState<
+  { blogId: string, coverImage: string, title: String; 
+    content: string; author: string, createdAt: string, updatedAt: string }>({
     blogId: uuidv4(),
     coverImage: "",
     title: "",
     content: "",
     author: "",
+    createdAt: "",
+    updatedAt: "",
   });
 
   const router = useRouter();
@@ -122,6 +126,13 @@ const BlogCreation = () => {
     }
 
     setIsLoading(true);
+
+    let uploadingTime: string = new Date(Date.now()).toISOString();
+
+    const updated = blog;
+    updated.createdAt = uploadingTime;
+    updated.updatedAt = uploadingTime;
+    setBlog(updated);
 
     await uploadImageOnS3();
 

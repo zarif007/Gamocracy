@@ -5,6 +5,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { apiEndpoints } from "../../domain";
+import Moment from 'react-moment';
 
 const BlogContent = ({ blog }: any) => {
 
@@ -56,7 +57,11 @@ const BlogContent = ({ blog }: any) => {
               <img src={author.image} alt="author dp" style={{ height: "45px" }} className="rounded-md" />
               <div className="flex flex-col">
                 <h1>{author?.name}</h1>
-                <h2 className="text-sm text-gray-500">12th march, 2022</h2>
+                <h2 className="text-sm text-gray-500">
+                  <Moment toNow ago>
+                    {blog.createdAt} 
+                  </Moment> <span> ago</span>
+                </h2>
               </div>
             </div> : 
             <div className="animate-pulse mt-1">

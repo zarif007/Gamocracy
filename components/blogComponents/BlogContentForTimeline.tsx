@@ -5,8 +5,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { BsSmartwatch } from 'react-icons/bs';
-import { GiBeastEye, GiEyeTarget } from 'react-icons/gi';
+import { GiEyeTarget } from 'react-icons/gi';
 import { apiEndpoints } from '../../domain';
+import Moment from 'react-moment';
 
 const BlogContentForTimeline = ({ blog }: any) => {
 
@@ -33,7 +34,7 @@ const BlogContentForTimeline = ({ blog }: any) => {
 
     const up = contentInfo;
     up.wordCount = cn?.textContent?.trim().split(/\s+/).length || 0;
-    up.contentInString = cn?.textContent?.slice(0, Math.min(250, cn?.textContent?.length)) || '';
+    up.contentInString = cn?.textContent || '';
     
     setContentInfo(up);
   }, [blog])
@@ -61,7 +62,11 @@ const BlogContentForTimeline = ({ blog }: any) => {
               <img src={author.image} alt="author dp" style={{ height: "30px" }} className="rounded-md" />
               <div className="flex flex-col">
                 <h1 className="text-sm">{author?.name}</h1>
-                <h2 className="text-xs text-gray-500">12th march, 2022</h2>
+                <h2 className="text-xs text-gray-500">
+                <Moment toNow ago>
+                  {blog.createdAt} 
+                </Moment> <span> ago</span>
+                </h2>
               </div>
             </div> : 
             <div className="animate-pulse mt-1">
@@ -98,7 +103,8 @@ const BlogContentForTimeline = ({ blog }: any) => {
 
         {/* Content in short */}
         <div className='mx-4'>
-          {contentInfo.contentInString}
+          <span className='md:hidden'>{contentInfo.contentInString.slice(0, Math.min(100, contentInfo.contentInString.length))}</span>
+          <span className='hidden md:inline'>{contentInfo.contentInString.slice(0, Math.min(250, contentInfo.contentInString.length))}</span>
           <span
             className='text-[#DC143C] cursor-pointer'
             onClick={() => {
