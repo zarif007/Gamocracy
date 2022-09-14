@@ -9,7 +9,7 @@ import AWS from 'aws-sdk'
 import { apiEndpoints } from "../../domain";
 import { useSession } from "next-auth/react";
 import TextEditor from "../reusable/TextEditor";
-import Select from "../reusable/Select";
+import Selector from "../reusable/Selector";
 
 
 // S3 Buckect config
@@ -206,7 +206,7 @@ const BlogCreation = () => {
 
           {/* Game Selector */}
           <p className="my-2 text-xl font-bold text-gray-300">Selected related Games (Max.3)</p>
-          <Select />
+          <Selector />
         </>
       )}
 

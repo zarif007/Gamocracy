@@ -9,7 +9,7 @@ const people = [
     'Katelyn Rohan',
   ]
 
-const Select = () => {
+const Selector = () => {
     const [selectedPerson, setSelectedPerson] = useState<Array<String>>([])
     const [query, setQuery] = useState('')
   
@@ -43,4 +43,4 @@ const Select = () => {
     )
 }
 
-export default Select
+export default Selector
