@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Combobox } from '@headlessui/react'
-import { CheckCircleIcon } from '@heroicons/react/outline'
 
 const people = [
     'Durward Reynolds',
@@ -28,7 +27,7 @@ const Select = () => {
     return (
       <Combobox value={selectedPerson[0]}>
         <Combobox.Input onChange={(event) => setQuery(event.target.value)} className="py-2 bg-black border-2 rounded-md border-gray-300"/>
-        <Combobox.Options className="">
+        <Combobox.Options>
           {query !== '' && filteredPeople.map((person: any) => (
             <Combobox.Option key={person} value={person} className="cursor-pointer" onClick={() => {
                 const updated = selectedPerson;
