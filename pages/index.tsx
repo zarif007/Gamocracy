@@ -8,7 +8,7 @@ import ComponenetsForIndexes from '../components/reusable/ComponenetsForIndexes'
 import NavBar from '../components/navBars/NavBar'
 import SideBar from '../components/navBars/SideBar'
 import Widgets from '../components/Widgets'
-import SignInReminder from '../components/SignInReminder'
+import SignInReminder from '../components/reusable/SignInReminder'
 import { useSession } from 'next-auth/react'
 
 

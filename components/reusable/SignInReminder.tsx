@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import target from "../public/target.png";
+import target from "../../public/target.png";
 import { signIn } from "next-auth/react";
 
 const SignInReminder = () => {

@@ -8,7 +8,8 @@ import BlogContent from "./BlogContent";
 import AWS from 'aws-sdk'
 import { apiEndpoints } from "../../domain";
 import { useSession } from "next-auth/react";
-import TextEditor from "../TextEditor";
+import TextEditor from "../reusable/TextEditor";
+import Select from "../reusable/Select";
 
 
 // S3 Buckect config
@@ -168,7 +169,7 @@ const BlogCreation = () => {
               </label>
               <div className="flex items-center justify-center w-full">
                 {
-                  coverImageInBase64 === '' ? <label className="flex flex-col rounded-sm border-2 border-dashed border-white w-full h-20 md:h-40 p-10 group text-center">
+                  coverImageInBase64 === '' ? <label className="flex flex-col rounded-sm border-2 border-dashed border-gray-300 w-full h-20 md:h-40 p-10 group text-center">
                     <div className="h-full w-full text-center flex flex-col justify-center items-center  ">
                       <p className="pointer-none text-gray-500 text-sm md:text-lg">
                         <span className="">select a file from your computer</span>
@@ -183,9 +184,7 @@ const BlogCreation = () => {
           </div>
           <p className="mt-6 text-xl font-bold text-gray-300">Title</p>
           <input
-            className={`border ${!showTitleBorder && "border-black"} ${
-              blog.title === "" && "border-white"
-            } w-full py-3 bg-black text-3xl font-bold mb-4 mt-1 px-1`}
+            className={`border-2 rounded-md border-gray-300 w-full py-3 bg-black text-3xl font-bold mb-4 mt-1 px-1`}
             placeholder="Put a Killing Title"
             defaultValue={`${blog.title}`}
             onChange={(e: any) => {
@@ -197,12 +196,17 @@ const BlogCreation = () => {
             onClick={() => setShowTitleBorder(true)}
           />
 
-          <p className="my-2 text-xl font-bold text-gray-300">Content</p>
+          
 
           {/* Text Editor for content */}
-          <div className="mb-20 mt-2">
+          <p className="my-2 text-xl font-bold text-gray-300">Content</p>
+          <div className="mb-12 mt-2">
             <TextEditor value={blog} setValue={setBlog} defaultValue={blog.content} />
           </div>
+
+          {/* Game Selector */}
+          <p className="my-2 text-xl font-bold text-gray-300">Selected related Games (Max.3)</p>
+          <Select />
         </>
       )}
 
