@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^35.1.0",
-    "@headlessui/react": "^1.7.1",
+    "@headlessui/react": "^1.6.4",
     "@heroicons/react": "^1.0.6",
     "@tinymce/tinymce-react": "^4.2.0",
     "aws-sdk": "^2.1204.0",
