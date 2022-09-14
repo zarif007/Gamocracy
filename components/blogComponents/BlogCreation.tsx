@@ -206,7 +206,7 @@ const BlogCreation = () => {
 
           {/* Game Selector */}
           <p className="my-2 text-xl font-bold text-gray-300">Selected related Games (Max.3)</p>
-          <Selector />
+          {/* <Selector /> */}
         </>
       )}
 
