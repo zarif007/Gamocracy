@@ -1,241 +1,108 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { v4 as uuidv4 } from 'uuid';
+import DOMPurify from "isomorphic-dompurify";
 import Image from "next/image";
-import { FaGgCircle } from "react-icons/fa";
-import { useRouter } from 'next/router'
-import BlogContent from "./BlogContent";
-import AWS from 'aws-sdk'
+import Head from "next/head";
+import { useRouter } from "next/router";
+import axios from "axios";
 import { apiEndpoints } from "../../domain";
-import { useSession } from "next-auth/react";
-import TextEditor from "../TextEditor";
+import Moment from 'react-moment';
+import { GiPunchBlast, GiRank3, GiSelfLove } from "react-icons/gi";
+import { MdShare } from "react-icons/md";
 
-
-// S3 Buckect config
-const s3 = new AWS.S3({
-  credentials: {
-    accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEYID || '',
-    secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEYID || '',
-  }
-})
-
-const BlogCreation = () => {
-
-  const {data: session} = useSession();
-
-  const [blog, setBlog] = useState<
-  { blogId: string, coverImage: string, title: String; 
-    content: string; author: string, createdAt: string, updatedAt: string }>({
-    blogId: uuidv4(),
-    coverImage: "",
-    title: "",
-    content: "",
-    author: "",
-    createdAt: "",
-    updatedAt: "",
-  });
+const BlogContent = ({ blog }: any) => {
 
   const router = useRouter();
+  const [author, setAuthor] = useState<{name: string; email: string; image: string}>({
+    name: '', 
+    email: '',
+    image: '',
+  });
 
-  const [showTitleBorder, setShowTitleBorder] = useState<boolean>(true);
 
-  const [showPreview, setShowPreview] = useState<boolean>(false);
-
-  const [coverImageInBase64, setCoverImageInBase64] = useState<string>('');
-
-  const [coverImageInUrl, setCoverImageInUrl] = useState<string>('');
-
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const [error, setError] = useState<string>('');
-
-  // Updating blog name that will be used as imageName and id
   useEffect(() => {
-    const updated = blog;
-    updated.blogId = `${updated.title.replaceAll(' ', '-').toLowerCase().replaceAll('?', '')}-${Date.now()}`;
-    setBlog(updated);
-  }, [blog.title]);
+    axios.get(`${apiEndpoints.user}/?email=${blog.author}`)
+      .then(res => setAuthor(res.data))
 
-  // Getting author email for session
-  useEffect(() => {
-    const updated = blog;
-    updated.author = session?.user?.email || '';
-    setBlog(updated)
-  }, [session])
-
-  // Store both base64 and file format of the coverImage
-  const handleImageUpload = (e: any) => {
-    const file = e.target.files[0];
-
-    setError('')
-    if(file.size > 1024 * 1024 * 8){
-      setError('Over Sized Cover Image(8MB)');
-      return;
-    }
-
-    setCoverImageInUrl(e.target.files[0]);
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-      setCoverImageInBase64(reader.result?.toString() || ''); 
-      setBlog({...blog, coverImage: reader.result?.toString() || ''})     
-    }
-
-    reader.readAsDataURL(file);
-  }
-
-  // Upload Image on S3 and get the sign url
-  const uploadImageOnS3 = async () => {
-    const imageName = `blog/${blog.blogId}.jpg`;
-
-    const params = {
-      Bucket: 'gc-s3images',
-      Key: imageName,
-      Body: coverImageInUrl,
-    }
-
-    try {
-      const uploadedDataOns3 = await s3.upload(params).promise()
-      const imgParams = {
-        Bucket: 'gc-s3images',
-        Key: imageName,
-      }
-
-      const signedUrl = await s3.getSignedUrlPromise('getObject', imgParams);
-
-      const up = blog;
-      up.coverImage = signedUrl;
-      setBlog(up);
-    } catch (err) {
-      console.log('error', err)
-    }
-  }
-
-
-  // Upload coverImage on s3 and upload the entire blog part on dynamoDB 
-  const handleSubmit = async () => {
-    if(isLoading) return;
-
-    setError('');
-
-    if(blog.title === '' || blog.coverImage === '' || blog.content === '') {
-      setError(`Add ${blog.title === '' ? 'Title' : blog.coverImage === '' ? 
-        'Cover Image' : 'Content'}`);
-      return
-    }
-
-    setIsLoading(true);
-
-    let uploadingTime: string = new Date(Date.now()).toISOString();
-
-    const updated = blog;
-    updated.createdAt = uploadingTime;
-    updated.updatedAt = uploadingTime;
-    setBlog(updated);
-
-    await uploadImageOnS3();
-
-    try{
-      await axios.post(apiEndpoints.blog, blog)
-      .then(res => {
-        if(res.status === 201){
-          router.push(`/blog/${res.data.blogId}`);
-          setIsLoading(false);
-        } else {
-          setError('Over sized data (400KB)')
-          setIsLoading(false);
-        }
-      })
-    } catch {
-      setError('Over sized data')
-      setIsLoading(false);
-    }
+    let cn = document.getElementById("content");
     
-  }
+    cn?.textContent?.trim().split('.').map((ar: any) => {
+      console.log(ar)
+    })
+  }, [])
+
 
   return (
-    <div className="text-white text-2xl">
-      {showPreview ? (
-        // Preview before uploading part
-        <BlogContent blog={blog} />
-      ) : (
-        // Blog uploading part
-        <>
-          <div>
-            <div className="grid grid-cols-1 space-y-2 pt-4">
-              <label className="text-xl font-bold text-gray-300 tracking-wide">
-                Cover Image
-              </label>
-              <div className="flex items-center justify-center w-full">
-                {
-                  coverImageInBase64 === '' ? <label className="flex flex-col rounded-sm border-2 border-dashed border-gray-300 w-full h-20 md:h-40 p-10 group text-center">
-                    <div className="h-full w-full text-center flex flex-col justify-center items-center  ">
-                      <p className="pointer-none text-gray-500 text-sm md:text-lg">
-                        <span className="">select a file from your computer</span>
-                        <br />Try to follow 3:1 ratio
-                      </p>
-                    </div>
-                    <input type="file" accept="image/*" hidden onChange={(e: any) => handleImageUpload(e)} />
-                  </label> : <Image src={coverImageInBase64} alt="Current Image" width={900} height={300} onClick={() => setCoverImageInBase64('')} />
-                }
-              </div>
-            </div>
-          </div>
-          <p className="mt-6 text-xl font-bold text-gray-300">Title</p>
-          <input
-            className={`border-2 rounded-md border-gray-300 w-full py-3 bg-black text-3xl font-bold mb-4 mt-1 px-1`}
-            placeholder="Put a Killing Title"
-            defaultValue={`${blog.title}`}
-            onChange={(e: any) => {
-              const updated = blog;
-              updated.title = e.target.value;
-              setBlog(updated);
+    <div className="bg-black text-gray-200 mb-4">
+      <Head>
+        <title>{blog.title}</title>
+        <meta name="description" content="Write About Games" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <div className="flex justify-center mt-1">
+        <div className="fixed z-50 bg-black shadow-lg shadow-gray-900 rounded-lg px-8 py-2 flex text-gary-500 space-x-4 md:space-x-12 mx-auto">
+            <GiSelfLove className="h-8 w-12 cursor-pointer hover:text-[#DC143C] transition duration-200 ease-out" />
+            <GiPunchBlast className="h-8 w-12 cursor-pointer hover:text-[#DC143C] transition duration-200 ease-out" />
+            <GiRank3 className="h-8 w-12 cursor-pointer hover:text-[#DC143C] transition duration-200 ease-out" />
+            <MdShare className="h-8 w-12 cursor-pointer hover:text-[#DC143C] transition duration-200 ease-out" />
+        </div>
+      </div>
+      <div className="mt-16 mx-1 md:mx-0 rounded-md flex justify-center font-semibold text-gray-300 flex-col border-x-2 border-[#DC143C] bg-[#121212] border-b-2">
+        {
+          blog.coverImage !== '' && <Image
+            className="cursor-pointer rounded-md"
+            src={blog.coverImage}
+            alt="Current Image"
+            width={900}
+            height={300}
+            onClick={() => {
+              router.push(`/blog/${blog.blogId}`);
             }}
-            onMouseOut={() => setShowTitleBorder(false)}
-            onClick={() => setShowTitleBorder(true)}
           />
+        }
 
-          
+        <div className="mx-4 flex mt-4 justify-between">
+          {
+            author.email ? <div className="flex space-x-2">
+              <img src={author.image} alt="author dp" style={{ height: "45px" }} className="rounded-md" />
+              <div className="flex flex-col">
+                <h1>{author?.name}</h1>
+                <h2 className="text-sm text-gray-500">
+                  <Moment toNow ago>
+                    {blog.createdAt} 
+                  </Moment> <span> ago</span>
+                </h2>
+              </div>
+            </div> : 
+            <div className="animate-pulse mt-1">
+              <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-2"></div>
+              <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48"></div>
+            </div>
+          }
+          <button className="px-4 py-2 text-md font-semibold border-2 border-[#DC143C] rounded-md">Subscribe</button>
+        </div>
 
-          {/* Text Editor for content */}
-          <p className="my-2 text-xl font-bold text-gray-300">Content</p>
-          <div className="mb-12 mt-2">
-            <TextEditor value={blog} setValue={setBlog} defaultValue={blog.content} />
-          </div>
-
-          {/* Game Selector */}
-          <p className="my-2 text-xl font-bold text-gray-300">Selected related Games (Max.3)</p>
-          {/* <Selector /> */}
-        </>
-      )}
-
-      {/* Error */}
-      <div className="mb-2 text-xl font-semibold text-red-500">{error}</div>
-
-      {/* Button of preview and post */}
-      <div className="flex space-x-2 justify-end mt-2 mb-6">
-        <button
-          className="py-1 px-3 rounded-md border-2 border-[#DC143C] text-lg font-semibold text-[#DC143C]"
-          onClick={() => setShowPreview(!showPreview)}
-        >
-          {!showPreview ? "Preview" : "Keep Editing"}
-        </button>
-        <button 
-          disabled={isLoading}
-          className={`py-1 px-6 rounded-md bg-[#DC143C] text-lg font-semibold text-white ${isLoading && 'opacity-80 cursor-not-allowed'}`}
-          onClick={handleSubmit}>
-            {
-              isLoading ? <div className="flex justify-center items-center space-x-2">
-                <FaGgCircle className="animate-spin h-5 w-5" />
-                <p>Posting </p>
-              </div> : <p>
-                Post
-              </p>
-            }
-        </button>
+        <div className="mx-4 mb-4">
+          <h1 
+            className="text-5xl md:text-6xl font-bold my-4 md:my-8 text-[#DC143C] cursor-pointer"
+            onClick={() => {
+              router.push(`/blog/${blog.blogId}`);
+            }}>
+              {blog.title}
+          </h1>
+          {
+            <div
+            id="content"
+              className=""
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(blog.content),
+              }}
+            ></div>
+          }
+        </div>
       </div>
     </div>
   );
 };
 
-export default BlogCreation;
+export default BlogContent;
