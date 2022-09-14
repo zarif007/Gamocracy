@@ -9,6 +9,7 @@ import AWS from 'aws-sdk'
 import { apiEndpoints } from "../../domain";
 import { useSession } from "next-auth/react";
 import TextEditor from "../TextEditor";
+import Selector from "../Selector";
 
 
 // S3 Buckect config
@@ -36,8 +37,6 @@ const BlogCreation = () => {
   });
 
   const router = useRouter();
-
-  const [showTitleBorder, setShowTitleBorder] = useState<boolean>(true);
 
   const [showPreview, setShowPreview] = useState<boolean>(false);
 
@@ -96,13 +95,6 @@ const BlogCreation = () => {
 
     try {
       const uploadedDataOns3 = await s3.upload(params).promise()
-      // console.log('mmmm', uploadedDataOns3)
-      // const imgParams = {
-      //   Bucket: 'gc-s3images',
-      //   Key: imageName,
-      // }
-
-      // const signedUrl = await s3.getSignedUrlPromise('getObject', imgParams);
 
       const up = blog;
       up.coverImage = uploadedDataOns3.Location;
@@ -184,9 +176,7 @@ const BlogCreation = () => {
           </div>
           <p className="mt-6 text-xl font-bold text-gray-300">Title</p>
           <input
-            className={`border ${!showTitleBorder && "border-black"} ${
-              blog.title === "" && "border-white"
-            } w-full py-3 bg-black text-3xl font-bold mb-4 mt-1 px-1`}
+            className={`border-2 border-white w-full py-3 bg-black text-3xl font-bold mb-4 mt-1 px-1`}
             placeholder="Put a Killing Title"
             defaultValue={`${blog.title}`}
             onChange={(e: any) => {
@@ -194,16 +184,16 @@ const BlogCreation = () => {
               updated.title = e.target.value;
               setBlog(updated);
             }}
-            onMouseOut={() => setShowTitleBorder(false)}
-            onClick={() => setShowTitleBorder(true)}
           />
 
-          <p className="my-2 text-xl font-bold text-gray-300">Content</p>
-
           {/* Text Editor for content */}
+          <p className="my-2 text-xl font-bold text-gray-300">Content</p>
           <div className="mb-20 mt-2">
             <TextEditor value={blog} setValue={setBlog} defaultValue={blog.content} />
           </div>
+
+          <p className="my-2 text-xl font-bold text-gray-300">Select related Games (Max. 3)</p>
+          <Selector />
         </>
       )}
 

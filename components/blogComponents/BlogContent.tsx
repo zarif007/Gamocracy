@@ -7,6 +7,7 @@ import axios from "axios";
 import { apiEndpoints } from "../../domain";
 import Moment from 'react-moment';
 import BlogReactionIsland from "./BlogReactionIsland";
+import LoadingSkeleton from "../reusable/LoadingSkeleton";
 
 
 const BlogContent = ({ blog }: any) => {
@@ -68,10 +69,7 @@ const BlogContent = ({ blog }: any) => {
                 </h2>
               </div>
             </div> : 
-            <div className="animate-pulse mt-1">
-              <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-2"></div>
-              <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48"></div>
-            </div>
+            <LoadingSkeleton iteration={2}/>
           }
           <button className="px-4 py-2 text-md font-semibold border-2 border-[#DC143C] rounded-md">Subscribe</button>
         </div>
