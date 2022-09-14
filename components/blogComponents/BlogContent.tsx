@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { apiEndpoints } from "../../domain";
 import Moment from 'react-moment';
-import BlogReactionIsland from "./blogReactionIsland";
+import BlogReactionIsland from "./BlogReactionIsland";
 
 
 const BlogContent = ({ blog }: any) => {
