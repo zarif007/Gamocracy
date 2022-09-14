@@ -8,7 +8,7 @@ import BlogContent from "./BlogContent";
 import AWS from 'aws-sdk'
 import { apiEndpoints } from "../../domain";
 import { useSession } from "next-auth/react";
-import TextEditor from "../reusable/TextEditor";
+import TextEditor from "../TextEditor";
 
 
 // S3 Buckect config

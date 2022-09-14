@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_document.js", "components/reusable/TextEditor.tsx", "components/textEditor/CkEditor.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_document.js", "components/TextEditor.tsx", "components/textEditor/CkEditor.jsx"],
   "exclude": ["node_modules"]
 }
