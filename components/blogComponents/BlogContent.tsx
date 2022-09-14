@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { apiEndpoints } from "../../domain";
 import Moment from 'react-moment';
+import BlogReactionIsland from "./BlogReactionIsland";
 
 
 const BlogContent = ({ blog }: any) => {
@@ -37,6 +38,9 @@ const BlogContent = ({ blog }: any) => {
         <meta name="description" content="Write About Games" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      
+      <BlogReactionIsland />
+
       <div className="mt-16 mx-1 md:mx-0 rounded-md flex justify-center font-semibold text-gray-300 flex-col border-x-2 border-[#DC143C] bg-[#121212] border-b-2">
         {
           blog.coverImage !== '' && <Image
