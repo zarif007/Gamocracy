@@ -10,7 +10,7 @@ import { apiEndpoints } from "../../domain";
 import { useSession } from "next-auth/react";
 import TextEditor from "../TextEditor";
 import Selector from "../Selector";
-
+import { showNotification } from "../../pages/_app";
 
 // S3 Buckect config
 const s3 = new AWS.S3({
@@ -104,6 +104,7 @@ const BlogCreation = () => {
     }
   }
 
+  
 
   // Upload coverImage on s3 and upload the entire blog part on dynamoDB 
   const handleSubmit = async () => {
@@ -129,6 +130,7 @@ const BlogCreation = () => {
     await uploadImageOnS3();
 
     try{
+      showNotification()
       await axios.post(apiEndpoints.blog, blog)
       .then(res => {
         if(res.status === 201){

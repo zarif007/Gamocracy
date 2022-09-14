@@ -8,6 +8,7 @@ import { BsSmartwatch } from 'react-icons/bs';
 import { GiEyeTarget } from 'react-icons/gi';
 import { apiEndpoints } from '../../domain';
 import Moment from 'react-moment';
+import LoadingSkeleton from '../reusable/LoadingSkeleton';
 
 const BlogContentForTimeline = ({ blog }: any) => {
 
@@ -69,10 +70,7 @@ const BlogContentForTimeline = ({ blog }: any) => {
                 </h2>
               </div>
             </div> : 
-            <div className="animate-pulse mt-1">
-              <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-2"></div>
-              <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48"></div>
-            </div>
+            <LoadingSkeleton iteration={2} />
           }
           <div className="flex justify-center items-center space-x-1 text-gray-400">
             <BsSmartwatch className='h-12' />
