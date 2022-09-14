@@ -96,15 +96,16 @@ const BlogCreation = () => {
 
     try {
       const uploadedDataOns3 = await s3.upload(params).promise()
-      const imgParams = {
-        Bucket: 'gc-s3images',
-        Key: imageName,
-      }
+      // console.log('mmmm', uploadedDataOns3)
+      // const imgParams = {
+      //   Bucket: 'gc-s3images',
+      //   Key: imageName,
+      // }
 
-      const signedUrl = await s3.getSignedUrlPromise('getObject', imgParams);
+      // const signedUrl = await s3.getSignedUrlPromise('getObject', imgParams);
 
       const up = blog;
-      up.coverImage = signedUrl;
+      up.coverImage = uploadedDataOns3.Location;
       setBlog(up);
     } catch (err) {
       console.log('error', err)
