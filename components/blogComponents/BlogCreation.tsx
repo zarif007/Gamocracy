@@ -104,7 +104,6 @@ const BlogCreation = () => {
 
     try {
       const uploadedDataOns3 = await s3.upload(params).promise();
-
       const up = blog;
       up.coverImage = uploadedDataOns3.Location;
       setBlog(up);
@@ -144,9 +143,9 @@ const BlogCreation = () => {
     await uploadImageOnS3();
 
     try {
-      showNotification();
       await axios.post(apiEndpoints.blog, blog).then((res) => {
         if (res.status === 201) {
+          showNotification();
           router.push(`/blog/${res.data.blogId}`);
           setIsLoading(false);
         } else {
