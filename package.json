@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-classic": "^35.1.0",
     "@headlessui/react": "^1.6.4",
     "@heroicons/react": "^1.0.6",
     "@tinymce/tinymce-react": "^4.2.0",
@@ -27,7 +26,6 @@
     "react-file-base64": "^1.0.3",
     "react-icons": "^4.4.0",
     "react-moment": "^1.1.2",
-    "react-quill": "^2.0.0",
     "react-speech-recognition": "^3.6.0",
     "react-toastify": "^9.0.8",
     "recoil": "^0.7.3",

@@ -50,6 +50,7 @@ const BlogContent = ({ blog }: any) => {
             alt="Current Image"
             width={900}
             height={300}
+            placeholder='blur'
             onClick={() => {
               router.push(`/blog/${blog.blogId}`);
             }}

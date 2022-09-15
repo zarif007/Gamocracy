@@ -85,7 +85,7 @@ const BlogCreation = () => {
 
   // Upload Image on S3 and get the sign url
   const uploadImageOnS3 = async () => {
-    const imageName = `blog/${blog.blogId}.jpg`;
+    const imageName = `blog/${blog.blogId}.jpeg`;
 
     const params = {
       Bucket: 'gc-s3images',
