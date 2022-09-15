@@ -12,6 +12,7 @@ import { useSession } from "next-auth/react";
 const TextEditor = dynamic(() => import("../TextEditor"));
 const Selector = dynamic(() => import("../Selector"));
 import { showNotification } from "../../pages/_app";
+import gameForOptionInterface from "../../Interfaces/GameForOptionInterface";
 
 // S3 Buckect config
 const s3 = new AWS.S3({
@@ -25,18 +26,22 @@ const BlogCreation = () => {
   const { data: session } = useSession();
 
   const [blog, setBlog] = useState<{
+    type: string;
     blogId: string;
     coverImage: string;
     title: String;
     content: string;
+    selectedGames: gameForOptionInterface[];
     author: string;
     createdAt: string;
     updatedAt: string;
   }>({
+    type: "blog",
     blogId: uuidv4(),
     coverImage: "",
     title: "",
     content: "",
+    selectedGames: [],
     author: "",
     createdAt: "",
     updatedAt: "",
@@ -53,6 +58,40 @@ const BlogCreation = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [error, setError] = useState<string>("");
+
+  const [optionsForGames, setOptionsForGames] = useState<
+    gameForOptionInterface[]
+  >([]);
+
+  const addGame = (selectedGame: gameForOptionInterface) => {
+    setError("");
+    if (selectedGame.name === "") return;
+
+    if (blog.selectedGames.length === 3) {
+      setError("Select upto 3 Games");
+      return;
+    }
+
+    if (blog.selectedGames.length === 0 || !blog.selectedGames.includes(selectedGame)) {
+      setBlog({ ...blog, selectedGames: [...blog.selectedGames, selectedGame]});
+    }
+  };
+
+  const fetchGames = (query: string) => {
+    setOptionsForGames([]);
+    axios
+      .get(
+        `https://api.rawg.io/api/games?search=${query}&key=${process.env.NEXT_PUBLIC_RAWG_APIKEY}`
+      )
+      .then((res) => {
+        res.data.results.map((rs: any) => {
+          const newObj = { name: rs.name, image: rs.background_image };
+          const updated = optionsForGames;
+          updated.push(newObj);
+          setOptionsForGames(updated);
+        });
+      });
+  };
 
   // Updating blog name that will be used as imageName and id
   useEffect(() => {
@@ -225,10 +264,32 @@ const BlogCreation = () => {
             />
           </div>
 
+          {/* Related Game uploading part */}
           <p className="my-2 text-xl font-bold text-gray-300">
             Select related Games (Max. 3)
           </p>
-          <Selector />
+          <div className="flex items-center space-x-4 my-2">
+            {blog.selectedGames.length > 0 &&
+              blog.selectedGames.map((game: gameForOptionInterface) => {
+                return (
+                  <div
+                    className="flex items-center space-x-2 bg-black border py-1 px-2 rounded-md cursor-pointer"
+                    key={game.name}
+                    onClick={() => {
+                      setBlog({ ...blog, selectedGames: [...blog.selectedGames.filter((up) => up.name != game.name)] })
+                    }}
+                  >
+                    <img src={game.image} alt="bg" className="rounded-md h-6" />
+                    <p className="text-sm text-gray-300">{game.name}</p>
+                  </div>
+                );
+              })}
+          </div>
+          <Selector
+            fetchFunction={fetchGames}
+            propsOption={optionsForGames}
+            addFunction={addGame}
+          />
         </>
       )}
 
