@@ -1,9 +1,10 @@
 import React from 'react'
-import BottomNav from '../navBars/BottomNav'
-import CreationModal from '../modals/CreationModal';
-import MenuModal from '../modals/MenuModal';
-import ProfileDropDownModal from '../modals/ProfileDropdownModal';
-import VoiceNavigationModal from '../modals/VoiceNavigationModal';
+import dynamic from 'next/dynamic';
+const BottomNav = dynamic(() => import('../navBars/BottomNav'));
+const CreationModal = dynamic(() => import('../modals/CreationModal'));
+const MenuModal = dynamic(() => import('../modals/MenuModal'));
+const ProfileDropDownModal = dynamic(() => import('../modals/ProfileDropdownModal'));
+const VoiceNavigationModal = dynamic(() => import('../modals/VoiceNavigationModal'));
 
 const ComponenetsForIndexes = () => {
   return (

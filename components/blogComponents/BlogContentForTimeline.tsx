@@ -1,14 +1,14 @@
 import axios from 'axios';
 import DOMPurify from 'isomorphic-dompurify';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { BsSmartwatch } from 'react-icons/bs';
 import { GiEyeTarget } from 'react-icons/gi';
 import { apiEndpoints } from '../../domain';
 import Moment from 'react-moment';
-import LoadingSkeleton from '../reusable/LoadingSkeleton';
+import dynamic from 'next/dynamic';
+const LoadingSkeleton = dynamic(() => import('../reusable/LoadingSkeleton'));
 
 const BlogContentForTimeline = ({ blog }: any) => {
 
@@ -52,6 +52,7 @@ const BlogContentForTimeline = ({ blog }: any) => {
           alt="Current Image"
           width={900}
           height={300}
+          blurDataURL="URL"
           placeholder='blur'
           className="rounded-md cursor-pointer"
         />

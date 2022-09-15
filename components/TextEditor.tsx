@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
-import dynamic from "next/dynamic";
+import React, { useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
 const TextEditor = ({ value, setValue, defaultValue }: any) => {

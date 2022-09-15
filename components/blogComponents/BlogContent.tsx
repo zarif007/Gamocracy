@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic"
 import DOMPurify from "isomorphic-dompurify";
 import Image from "next/image";
 import Head from "next/head";
@@ -6,8 +7,8 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { apiEndpoints } from "../../domain";
 import Moment from 'react-moment';
-import BlogReactionIsland from "./BlogReactionIsland";
-import LoadingSkeleton from "../reusable/LoadingSkeleton";
+const BlogReactionIsland = dynamic(() => import("./BlogReactionIsland"));
+const LoadingSkeleton = dynamic(() => import("../reusable/LoadingSkeleton"));
 
 
 const BlogContent = ({ blog }: any) => {
@@ -50,6 +51,7 @@ const BlogContent = ({ blog }: any) => {
             alt="Current Image"
             width={900}
             height={300}
+            blurDataURL="URL"
             placeholder='blur'
             onClick={() => {
               router.push(`/blog/${blog.blogId}`);
