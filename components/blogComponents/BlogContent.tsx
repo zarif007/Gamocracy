@@ -38,7 +38,7 @@ const BlogContent = ({ blog }: any) => {
       <Head>
         <title>{blog.title}</title>
         <meta name="description" content={`${blog.title}`} />
-        <link rel="icon" href={`${blog.coverImage}`} />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       
       <BlogReactionIsland />
