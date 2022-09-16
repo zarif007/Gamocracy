@@ -83,7 +83,7 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
         </div>
 
         <div className="flex justify-center">
-          <SummaryAudio text={`Auto Generated voice, Title: ${title}, Content: ${content}`} />
+          <SummaryAudio blog={blog} />
         </div>
 
         <div className="mx-4 mb-4">

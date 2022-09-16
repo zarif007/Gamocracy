@@ -4,7 +4,7 @@ export default interface blogInterface {
     type: string;
     blogId: string;
     coverImage: string;
-    title: String;
+    title: string;
     content: string;
     selectedGames: gameForOptionInterface[];
     author: string;
