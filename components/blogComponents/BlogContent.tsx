@@ -74,24 +74,24 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
             </div> : 
             <LoadingSkeleton iteration={2}/>
           }
-          <button className="px-4 py-2 text-md font-semibold border-2 border-[#DC143C] rounded-md">Subscribe</button>
+          <button className="px-4 py-2 text-md font-semibold border-2 hover:bg-[#DC143C] border-[#DC143C] rounded-md">Subscribe</button>
         </div>
         
         {/* Related games */}
-        <div className="mt-4 flex justify-evenly">
+        <div className="mt-4 flex sapce-x-3 md:space-x-6 flex-col md:flex-row">
           <ShowRelatedGames selectedGames={selectedGames} />
-          <div className="flex space-x-2">
+          <div className="flex space-x-2 mx-4 my-1 md:my-0 text-xs md:text-lg">
             {
               selectedCategories.map((sc: any) => {
                 return (
-                  <p className="px-2 py-2 bg-gray-900 rounded-md">{sc}</p>
+                  <p key={sc} className="border-2 hover:bg-[#DC143C] cursor-pointer border-[#DC143C] px-2 py-1 bg-gray-900 rounded-md">{sc}</p>
                 )
               }) 
             }
           </div>
         </div>
 
-        <div className="flex justify-center">
+        <div className="flex justify-center mt-6">
           <SummaryAudio blog={blog} />
         </div>
 

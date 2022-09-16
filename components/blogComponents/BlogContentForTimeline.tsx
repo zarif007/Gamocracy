@@ -15,7 +15,7 @@ import userInterface from './../../Interfaces/UserInterface';
 
 const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => {
 
-  const { author, title, coverImage, blogId, createdAt, content, selectedGames } = blog;
+  const { author, title, coverImage, blogId, createdAt, content, selectedGames, selectedCategories } = blog;
 
   const router = useRouter();
 
@@ -47,10 +47,7 @@ const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => 
 
   return (
     <div className="bg-black text-gray-200 mb-4">
-      <div className="rounded-md flex justify-center font-semibold text-gray-300 flex-col border-2 border-[#DC143C] bg-[#121212]"
-        onClick={() => {
-          router.push(`/blog/${blogId}`);
-        }}>
+      <div className="rounded-md flex justify-center font-semibold text-gray-300 flex-col border-2 border-[#DC143C] bg-[#121212]">
         {/* Cover Image */}
         <Image
           src={coverImage}
@@ -60,6 +57,9 @@ const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => 
           blurDataURL="URL"
           placeholder='blur'
           className="rounded-md cursor-pointer"
+          onClick={() => {
+            router.push(`/blog/${blogId}`);
+          }}
         />
         
         {/* Blog info */}
@@ -107,12 +107,13 @@ const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => 
         </div>
         
         {/* Related Games */}
-        <div className='mb-2'>
+        <div className='mb-2 flex sapce-x-3 md:space-x-6 flex-col md:flex-row'>
           <ShowRelatedGames selectedGames={selectedGames} />
+          
         </div>
         
         {/* Content in short */}
-        <div className='mx-4'>
+        <div className='mx-4 mb-1'>
           <span className='md:hidden'>{contentInfo.contentInString.slice(0, Math.min(100, contentInfo.contentInString.length))}</span>
           <span className='hidden md:inline'>{contentInfo.contentInString.slice(0, Math.min(250, contentInfo.contentInString.length))}</span>
           <span
@@ -121,6 +122,17 @@ const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => 
               router.push(`/blog/${blogId}`);
             }}> ...more</span>
         </div>
+        
+        {/* Category */}
+        <div className="flex space-x-2 mx-4 my-4 text-xs md:text-lg">
+            {
+              selectedCategories.map((sc: any) => {
+                return (
+                  <p key={sc} className="border-2 hover:bg-[#DC143C] cursor-pointer border-[#DC143C] px-2 py-1 bg-gray-900 rounded-md">{sc}</p>
+                )
+              }) 
+            }
+          </div>
       </div>
     </div>
   )
