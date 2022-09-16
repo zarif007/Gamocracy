@@ -7,13 +7,6 @@ const SummaryAudio: React.FC<{ blog: blogInterface }> = ({ blog }) => {
 
   const [isPlaying, setIsPlaying] = useState(false);
 
-
-  useEffect(() => {
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-    }
-  }, [window])
-
   const handleVoice = () => {
     if ('speechSynthesis' in window) {
       var msg = new SpeechSynthesisUtterance();
