@@ -79,10 +79,10 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
 
         <div className="flex space-x-1 mx-4 mt-4">
           {
-            selectedGames.length > 0 && selectedGames.map((game: gameForOptionInterface) => {
+            selectedGames && selectedGames.map((game: gameForOptionInterface) => {
               return (
-                <Tooltip content={`${game.name}`} placement="bottom-start">
-                  <img key={game.image} src={game.image} className="h-9 w-9 border-2 border-[#DC143C] rounded-full" />
+                <Tooltip key={game.image} content={`${game.name}`} placement="bottom-start">
+                  <img  src={game.image} className="h-9 w-9 border-2 border-[#DC143C] rounded-full" />
                 </Tooltip>
               )
             })
