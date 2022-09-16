@@ -10,8 +10,7 @@ import Moment from 'react-moment';
 import dynamic from 'next/dynamic';
 import blogInterface from '../../Interfaces/BlogInterface';
 const LoadingSkeleton = dynamic(() => import('../reusable/LoadingSkeleton'));
-import { Tooltip } from '@material-tailwind/react';
-import gameForOptionInterface from '../../Interfaces/GameForOptionInterface';
+const ShowRelatedGames = dynamic(() => import('../ShowRelatedGames'));
 import userInterface from './../../Interfaces/UserInterface';
 
 const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => {
@@ -108,18 +107,10 @@ const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => 
         </div>
         
         {/* Related Games */}
-        <div className="flex space-x-1 mx-4 mb-2">
-          {
-            selectedGames && selectedGames.map((game: gameForOptionInterface) => {
-              return (
-                <Tooltip key={game.image} content={`${game.name}`} placement="bottom-start">
-                  <img  src={game.image} className="h-8 w-8 border-2 border-[#DC143C] rounded-full" />
-                </Tooltip>
-              )
-            })
-          }
+        <div className='mb-2'>
+          <ShowRelatedGames selectedGames={selectedGames} />
         </div>
-
+        
         {/* Content in short */}
         <div className='mx-4'>
           <span className='md:hidden'>{contentInfo.contentInString.slice(0, Math.min(100, contentInfo.contentInString.length))}</span>

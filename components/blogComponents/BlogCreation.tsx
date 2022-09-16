@@ -247,7 +247,7 @@ const BlogCreation = () => {
 
           {/* Text Editor for content */}
           <p className="my-2 text-xl font-bold text-gray-300">Content</p>
-          <div className="mb-20 mt-2">
+          <div className="mb-8 mt-2">
             <TextEditor
               value={blog}
               setValue={setBlog}

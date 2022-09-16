@@ -11,8 +11,7 @@ import blogInterface from "../../Interfaces/BlogInterface";
 const BlogReactionIsland = dynamic(() => import("./BlogReactionIsland"));
 const LoadingSkeleton = dynamic(() => import("../reusable/LoadingSkeleton"));
 import userInterface from './../../Interfaces/UserInterface';
-import gameForOptionInterface from "../../Interfaces/GameForOptionInterface";
-import { Tooltip } from "@material-tailwind/react";
+const ShowRelatedGames = dynamic(() => import('../ShowRelatedGames'));
 
 
 const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
@@ -76,17 +75,10 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
           }
           <button className="px-4 py-2 text-md font-semibold border-2 border-[#DC143C] rounded-md">Subscribe</button>
         </div>
-
-        <div className="flex space-x-1 mx-4 mt-4">
-          {
-            selectedGames && selectedGames.map((game: gameForOptionInterface) => {
-              return (
-                <Tooltip key={game.image} content={`${game.name}`} placement="bottom-start">
-                  <img  src={game.image} className="h-9 w-9 border-2 border-[#DC143C] rounded-full" />
-                </Tooltip>
-              )
-            })
-          }
+        
+        {/* Related games */}
+        <div className="mt-4">
+          <ShowRelatedGames selectedGames={selectedGames} />
         </div>
 
         <div className="mx-4 mb-4">
