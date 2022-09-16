@@ -9,7 +9,7 @@ const ShowRelatedGames: React.FC<{ selectedGames : gameForOptionInterface[]}> = 
         selectedGames && selectedGames.map((game: gameForOptionInterface) => {
             return (
             <Tooltip key={game.image} content={`${game.name}`} placement="bottom-start">
-                <img  src={game.image} className="h-8 w-8 border-2 border-[#DC143C] rounded-full" />
+                <img  src={game.image} className="h-10 w-10 border-2 border-[#DC143C] rounded-full" />
             </Tooltip>
             )
         })

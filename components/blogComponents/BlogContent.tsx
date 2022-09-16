@@ -81,6 +81,13 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
           <ShowRelatedGames selectedGames={selectedGames} />
         </div>
 
+        <div className="flex justify-center">
+          <audio controls className="!rounded-md !bg-black">
+              <source src="https://www.youtube.com/watch?v=6BddYaxkfu4&list=RDzVwDzhLp8Bs&index=16&ab_channel=PettyNeverGrew" type="audio/mp3" />
+              <source src="test.ogg" type="audio/ogg" />
+          </audio>
+        </div>
+
         <div className="mx-4 mb-4">
           <h1 
             className="text-3xl md:text-6xl font-bold my-4 md:my-8 text-[#DC143C] cursor-pointer"
