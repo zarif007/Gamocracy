@@ -11,8 +11,8 @@ const Selector = ({
   addFunction
 }: any) => {
   
-  const [options, setOptions] = useState<gameForOptionInterface[]>([]);
-  const [currentlySelected, setCurrentlySelected] = useState<gameForOptionInterface[]>([]);
+  const [options, setOptions] = useState<gameForOptionInterface[] | string[]>([]);
+  const [currentlySelected, setCurrentlySelected] = useState<gameForOptionInterface[] | string[]>([]);
 
   useEffect(() => {
     setOptions(propsOption);
@@ -29,15 +29,17 @@ const Selector = ({
         />
         <Combobox.Options className={`h-48 overflow-y-auto mb-12`}>
           {options.length > 0 ? (
-            options.map((option: gameForOptionInterface, index) => (
+            options.map((option: gameForOptionInterface | string, index) => (
               <Combobox.Option
                 key={index}
-                value={option.name}
-                className="cursor-pointer flex items-center space-x-2"
+                value={typeof option === 'string' ? option : option.name}
+                className="cursor-pointer flex items-center space-x-2 px-2 py-1 rounded-md bg-gray-900 hover:bg-[#DC143C]"
                 onClick={() => addFunction(option)}
               >
-                <img src={option.image} alt="bg" className="rounded-md h-6" />
-                <p className="text-md font-semibold">{option.name}</p>
+                {
+                  typeof option !== 'string' && <img src={option.image} alt="bg" className="rounded-md h-6" />
+                }
+                <p className="text-md font-semibold">{typeof option === 'string' ? option : option.name}</p>
               </Combobox.Option>
             ))
           ) : (

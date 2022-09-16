@@ -7,6 +7,7 @@ export default interface blogInterface {
     title: string;
     content: string;
     selectedGames: gameForOptionInterface[];
+    selectedCategories: string[];
     author: string;
     createdAt: string;
     updatedAt: string;

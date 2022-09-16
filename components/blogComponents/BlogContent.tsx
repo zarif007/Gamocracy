@@ -17,7 +17,7 @@ import SummaryAudio from './../SummaryAudio';
 
 const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
 
-  const { author, title, coverImage, blogId, createdAt, content, selectedGames } = blog;
+  const { author, title, coverImage, blogId, createdAt, content, selectedGames, selectedCategories } = blog;
 
   const router = useRouter();
   const [authorInfo, setAuthorInfo] = useState<userInterface>({
@@ -78,8 +78,17 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
         </div>
         
         {/* Related games */}
-        <div className="mt-4">
+        <div className="mt-4 flex justify-evenly">
           <ShowRelatedGames selectedGames={selectedGames} />
+          <div className="flex space-x-2">
+            {
+              selectedCategories.map((sc: any) => {
+                return (
+                  <p className="px-2 py-2 bg-gray-900 rounded-md">{sc}</p>
+                )
+              }) 
+            }
+          </div>
         </div>
 
         <div className="flex justify-center">

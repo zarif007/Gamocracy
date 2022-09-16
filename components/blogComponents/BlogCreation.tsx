@@ -15,6 +15,17 @@ import { showNotification } from "../../pages/_app";
 import gameForOptionInterface from "../../Interfaces/GameForOptionInterface";
 import blogInterface from "../../Interfaces/BlogInterface";
 
+
+// Category
+const category: string[] = [
+  "Review ⭐",
+  "Patch Note/Update 🆙",
+  "Leaks 💧",
+  "Tutorial ✍️",
+  "News 📰",
+  "Upcoming ⏭️"
+]
+
 // S3 Buckect config
 const s3 = new AWS.S3({
   credentials: {
@@ -33,6 +44,7 @@ const BlogCreation = () => {
     title: "",
     content: "",
     selectedGames: [],
+    selectedCategories: [],
     author: "",
     createdAt: "",
     updatedAt: "",
@@ -54,6 +66,9 @@ const BlogCreation = () => {
     gameForOptionInterface[]
   >([]);
 
+  const [optionsForCategories, setOptionsForCategories] = useState<string[]>(category);
+
+  // Adding Games to blog obj
   const addGame = (selectedGame: gameForOptionInterface) => {
     setError("");
     if (selectedGame.name === "") return;
@@ -68,6 +83,7 @@ const BlogCreation = () => {
     }
   };
 
+  // Fetch games from db
   const fetchGames = (query: string) => {
     setOptionsForGames([]);
     axios
@@ -83,6 +99,28 @@ const BlogCreation = () => {
         });
       });
   };
+
+  const addCategory = (selectedCategory: string) => {
+    setError("");
+    if (selectedCategory === "") return;
+
+    if (blog.selectedCategories.length === 3) {
+      setError("Select upto 3 Category");
+      return;
+    }
+
+    if (blog.selectedCategories.length === 0 || !blog.selectedCategories.includes(selectedCategory)) {
+      setBlog({ ...blog, selectedCategories: [...blog.selectedCategories, selectedCategory]});
+    }
+  }
+
+  const queryCategory = (query: string) => {
+    setOptionsForCategories([]);
+
+    const formatedQuery = query.trim().replace(' ', '').toLocaleLowerCase();
+
+    setOptionsForCategories([...category.filter(op => op.toLocaleLowerCase().includes(formatedQuery))])
+  }
 
   // Updating blog name that will be used as imageName and id
   useEffect(() => {
@@ -280,6 +318,32 @@ const BlogCreation = () => {
             fetchFunction={fetchGames}
             propsOption={optionsForGames}
             addFunction={addGame}
+          />
+
+          {/* Related tags uploading part */}
+          <p className="my-2 text-xl font-bold text-gray-300">
+            Select related Category (Max. 3)
+          </p>
+          <div className="flex items-center space-x-4 my-2">
+            {blog.selectedCategories.length > 0 &&
+              blog.selectedCategories.map((category: string) => {
+                return (
+                  <div
+                    className="flex items-center space-x-2 bg-black border py-1 px-2 rounded-md cursor-pointer"
+                    key={category}
+                    onClick={() => {
+                      setBlog({ ...blog, selectedCategories: [...blog.selectedCategories.filter((up) => up != category)] })
+                    }}
+                  >
+                    <p className="text-sm text-gray-300">{category}</p>
+                  </div>
+                );
+              })}
+          </div>
+          <Selector
+            fetchFunction={queryCategory}
+            propsOption={optionsForCategories}
+            addFunction={addCategory}
           />
         </>
       )}
