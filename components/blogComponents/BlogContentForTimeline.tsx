@@ -92,7 +92,7 @@ const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => 
         
         {/* Title */}
         <div className="mx-4 mb-4">
-          <h1 className="text-5xl md:text-6xl font-bold my-1 text-[#DC143C] cursor-pointer"
+          <h1 className="text-3xl md:text-6xl font-bold my-1 text-[#DC143C] cursor-pointer"
             onClick={() => {
               router.push(`/blog/${blogId}`);
             }}>
