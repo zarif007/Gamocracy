@@ -42,7 +42,7 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
       
       <BlogReactionIsland />
 
-      <div className="mt-16 mx-1 md:mx-0 rounded-md flex justify-center font-semibold text-gray-300 flex-col border-x-2 border-[#DC143C] bg-[#121212] border-b-2">
+      <div className="mt-16 mx-1 md:mx-0 rounded-md flex justify-center font-semibold text-gray-300 flex-col border-x-2 border-[#DC143C] bg-[#121212] border-y-2">
         {
           coverImage !== '' && <Image
             className="cursor-pointer rounded-md"
