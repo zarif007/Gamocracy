@@ -8,9 +8,15 @@ import { GiEyeTarget } from 'react-icons/gi';
 import { apiEndpoints } from '../../domain';
 import Moment from 'react-moment';
 import dynamic from 'next/dynamic';
+import blogInterface from '../../Interfaces/BlogInterface';
 const LoadingSkeleton = dynamic(() => import('../reusable/LoadingSkeleton'));
+import { Tooltip } from '@material-tailwind/react';
+import gameForOptionInterface from '../../Interfaces/GameForOptionInterface';
+import userInterface from './../../Interfaces/UserInterface';
 
-const BlogContentForTimeline = ({ blog }: any) => {
+const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => {
+
+  const { author, title, coverImage, blogId, createdAt, content, selectedGames } = blog;
 
   const router = useRouter();
 
@@ -19,19 +25,19 @@ const BlogContentForTimeline = ({ blog }: any) => {
     wordCount: 0,
   });
 
-  const [author, setAuthor] = useState<{name: string; email: string; image: string}>({
+  const [authorInfo, setAuthorInfo] = useState<userInterface>({
     name: '', 
     email: '',
     image: '',
   });
 
   useEffect(() => {
-    axios.get(`${apiEndpoints.user}/?email=${blog.author}`)
-      .then(res => setAuthor(res.data))
+    axios.get(`${apiEndpoints.user}/?email=${author}`)
+      .then(res => setAuthorInfo(res.data))
   }, [])
 
   useEffect(() => {
-    let cn = document.getElementById(`content-${blog.coverImage}`);
+    let cn = document.getElementById(`content-${coverImage}`);
 
     const up = contentInfo;
     up.wordCount = cn?.textContent?.trim().split(/\s+/).length || 0;
@@ -44,11 +50,11 @@ const BlogContentForTimeline = ({ blog }: any) => {
     <div className="bg-black text-gray-200 mb-4">
       <div className="rounded-md flex justify-center font-semibold text-gray-300 flex-col border-2 border-[#DC143C] bg-[#121212]"
         onClick={() => {
-          router.push(`/blog/${blog.blogId}`);
+          router.push(`/blog/${blogId}`);
         }}>
         {/* Cover Image */}
         <Image
-          src={blog.coverImage}
+          src={coverImage}
           alt="Current Image"
           width={900}
           height={300}
@@ -60,14 +66,14 @@ const BlogContentForTimeline = ({ blog }: any) => {
         {/* Blog info */}
         <div className="mx-4 flex mt-4 justify-between md:justify-start md:space-x-16 items-center">
           {
-            author.email ? 
+            authorInfo.email ? 
             <div className="flex space-x-2 justify-center items-center">
-              <img src={author.image} alt="author dp" style={{ height: "30px" }} className="rounded-md" />
+              <img src={authorInfo.image} alt="author dp" style={{ height: "30px" }} className="rounded-md" />
               <div className="flex flex-col">
-                <h1 className="text-sm">{author?.name}</h1>
+                <h1 className="text-sm">{authorInfo?.name}</h1>
                 <h2 className="text-xs text-gray-500">
                 <Moment toNow ago>
-                  {blog.createdAt} 
+                  {createdAt} 
                 </Moment> <span> ago</span>
                 </h2>
               </div>
@@ -89,16 +95,29 @@ const BlogContentForTimeline = ({ blog }: any) => {
         <div className="mx-4 mb-4">
           <h1 className="text-5xl md:text-6xl font-bold my-1 text-[#DC143C] cursor-pointer"
             onClick={() => {
-              router.push(`/blog/${blog.blogId}`);
+              router.push(`/blog/${blogId}`);
             }}>
-              {blog.title}
+              {title}
           </h1>
         </div>
 
-        <div id={`content-${blog.coverImage}`} dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(blog.content),
+        <div id={`content-${coverImage}`} dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(content),
               }}
               className="hidden">
+        </div>
+        
+        {/* Related Games */}
+        <div className="flex space-x-1 mx-4 mb-2">
+          {
+            selectedGames && selectedGames.map((game: gameForOptionInterface) => {
+              return (
+                <Tooltip key={game.image} content={`${game.name}`} placement="bottom-start">
+                  <img  src={game.image} className="h-8 w-8 border-2 border-[#DC143C] rounded-full" />
+                </Tooltip>
+              )
+            })
+          }
         </div>
 
         {/* Content in short */}
@@ -108,7 +127,7 @@ const BlogContentForTimeline = ({ blog }: any) => {
           <span
             className='text-[#DC143C] cursor-pointer'
             onClick={() => {
-              router.push(`/blog/${blog.blogId}`);
+              router.push(`/blog/${blogId}`);
             }}> ...more</span>
         </div>
       </div>

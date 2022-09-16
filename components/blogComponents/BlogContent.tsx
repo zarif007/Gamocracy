@@ -51,7 +51,7 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
             alt="Current Image"
             width={900}
             height={300}
-            blurDataURL="URL"
+            blurDataURL={coverImage}
             placeholder='blur'
             onClick={() => {
               router.push(`/blog/${blogId}`);
