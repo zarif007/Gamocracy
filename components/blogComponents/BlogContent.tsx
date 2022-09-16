@@ -7,14 +7,20 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { apiEndpoints } from "../../domain";
 import Moment from 'react-moment';
+import blogInterface from "../../Interfaces/BlogInterface";
 const BlogReactionIsland = dynamic(() => import("./BlogReactionIsland"));
 const LoadingSkeleton = dynamic(() => import("../reusable/LoadingSkeleton"));
+import userInterface from './../../Interfaces/UserInterface';
+import gameForOptionInterface from "../../Interfaces/GameForOptionInterface";
+import { Tooltip } from "@material-tailwind/react";
 
 
-const BlogContent = ({ blog }: any) => {
+const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
+
+  const { author, title, coverImage, blogId, createdAt, content, selectedGames } = blog;
 
   const router = useRouter();
-  const [authorInfo, setAuthorInfo] = useState<{name: string; email: string; image: string}>({
+  const [authorInfo, setAuthorInfo] = useState<userInterface>({
     name: '', 
     email: '',
     image: '',
@@ -22,22 +28,16 @@ const BlogContent = ({ blog }: any) => {
 
 
   useEffect(() => {
-    axios.get(`${apiEndpoints.user}/?email=${blog.author}`)
+    axios.get(`${apiEndpoints.user}/?email=${author}`)
       .then(res => setAuthorInfo(res.data))
-
-    let cn = document.getElementById("content");
-    
-    cn?.textContent?.trim().split('.').map((ar: any) => {
-      console.log(ar)
-    })
   }, [])
 
 
   return (
     <div className="bg-black text-gray-200 mb-4">
       <Head>
-        <title>{blog.title}</title>
-        <meta name="description" content={`${blog.title}`} />
+        <title>{title}</title>
+        <meta name="description" content={`${title}`} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
@@ -45,16 +45,16 @@ const BlogContent = ({ blog }: any) => {
 
       <div className="mt-16 mx-1 md:mx-0 rounded-md flex justify-center font-semibold text-gray-300 flex-col border-x-2 border-[#DC143C] bg-[#121212] border-b-2">
         {
-          blog.coverImage !== '' && <Image
+          coverImage !== '' && <Image
             className="cursor-pointer rounded-md"
-            src={blog.coverImage}
+            src={coverImage}
             alt="Current Image"
             width={900}
             height={300}
             blurDataURL="URL"
             placeholder='blur'
             onClick={() => {
-              router.push(`/blog/${blog.blogId}`);
+              router.push(`/blog/${blogId}`);
             }}
           />
         }
@@ -67,7 +67,7 @@ const BlogContent = ({ blog }: any) => {
                 <h1>{authorInfo?.name}</h1>
                 <h2 className="text-sm text-gray-500">
                   <Moment toNow ago>
-                    {blog.createdAt} 
+                    {createdAt} 
                   </Moment> <span> ago</span>
                 </h2>
               </div>
@@ -77,20 +77,32 @@ const BlogContent = ({ blog }: any) => {
           <button className="px-4 py-2 text-md font-semibold border-2 border-[#DC143C] rounded-md">Subscribe</button>
         </div>
 
+        <div className="flex space-x-1 mx-4 mt-4">
+          {
+            selectedGames.length > 0 && selectedGames.map((game: gameForOptionInterface) => {
+              return (
+                <Tooltip content={`${game.name}`} placement="bottom-start">
+                  <img key={game.image} src={game.image} className="h-9 w-9 border-2 border-[#DC143C] rounded-full" />
+                </Tooltip>
+              )
+            })
+          }
+        </div>
+
         <div className="mx-4 mb-4">
           <h1 
             className="text-5xl md:text-6xl font-bold my-4 md:my-8 text-[#DC143C] cursor-pointer"
             onClick={() => {
-              router.push(`/blog/${blog.blogId}`);
+              router.push(`/blog/${blogId}`);
             }}>
-              {blog.title}
+              {title}
           </h1>
           {
             <div
             id="content"
               className=""
               dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(blog.content),
+                __html: DOMPurify.sanitize(content),
               }}
             ></div>
           }

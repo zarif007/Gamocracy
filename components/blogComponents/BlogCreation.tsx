@@ -13,6 +13,7 @@ const TextEditor = dynamic(() => import("../TextEditor"));
 const Selector = dynamic(() => import("../Selector"));
 import { showNotification } from "../../pages/_app";
 import gameForOptionInterface from "../../Interfaces/GameForOptionInterface";
+import blogInterface from "../../Interfaces/BlogInterface";
 
 // S3 Buckect config
 const s3 = new AWS.S3({
@@ -25,17 +26,7 @@ const s3 = new AWS.S3({
 const BlogCreation = () => {
   const { data: session } = useSession();
 
-  const [blog, setBlog] = useState<{
-    type: string;
-    blogId: string;
-    coverImage: string;
-    title: String;
-    content: string;
-    selectedGames: gameForOptionInterface[];
-    author: string;
-    createdAt: string;
-    updatedAt: string;
-  }>({
+  const [blog, setBlog] = useState<blogInterface>({
     type: "blog",
     blogId: uuidv4(),
     coverImage: "",
