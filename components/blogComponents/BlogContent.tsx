@@ -12,6 +12,7 @@ const BlogReactionIsland = dynamic(() => import("./BlogReactionIsland"));
 const LoadingSkeleton = dynamic(() => import("../reusable/LoadingSkeleton"));
 import userInterface from './../../Interfaces/UserInterface';
 const ShowRelatedGames = dynamic(() => import('../ShowRelatedGames'));
+import SummaryAudio from './../SummaryAudio';
 
 
 const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
@@ -82,10 +83,7 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
         </div>
 
         <div className="flex justify-center">
-          <audio controls className="!rounded-md !bg-black">
-              <source src="https://www.youtube.com/watch?v=6BddYaxkfu4&list=RDzVwDzhLp8Bs&index=16&ab_channel=PettyNeverGrew" type="audio/mp3" />
-              <source src="test.ogg" type="audio/ogg" />
-          </audio>
+          <SummaryAudio text={`Auto Generated voice, Title: ${title}, Content: ${content}`} />
         </div>
 
         <div className="mx-4 mb-4">
