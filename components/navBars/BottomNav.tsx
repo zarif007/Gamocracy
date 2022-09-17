@@ -7,7 +7,7 @@ import { IoMdNotifications } from 'react-icons/io';
 import { useRecoilState } from 'recoil';
 import { showMenu } from '../../atoms/showMenuAtom';
 import { showProfileDropdown } from '../../atoms/showProfileDropDownAtom';
-import { MdOutlineLogin } from "react-icons/md";
+import { MdOutlineLogin, MdWidgets } from "react-icons/md";
 import { creationModal } from '../../atoms/creationModal';
 
 
@@ -66,6 +66,10 @@ const BottomNav: React.FC = () => {
                                 <span className={styles.iconText}>Login</span>
                             </div>
                         }
+                        <div className={styles.iconsWrapper}>
+                            <MdWidgets className={styles.icon} onClick={() => setOpenMenu(true)} />
+                            <span className={styles.iconText}>Widgets</span>
+                        </div>
                     </div>
                 </section>
             </div>
