@@ -49,3 +49,35 @@ a {
       flex items-center justify-center transition ease-out;
   }
 }
+
+h1{
+  font-size: 60px;
+  font-weight: 900;
+}
+h2{
+  font-size: 50px;
+  font-weight: 900;
+}
+h3{
+  font-size: 40px;
+  font-weight: 900;
+}
+h4{
+  font-size: 30px;
+  font-weight: 900;
+}
+h5{
+  font-size: 20px;
+  font-weight: 900;
+}
+h6{
+  font-size: 10px;
+  font-weight: 900;
+}
+h6{
+  font-size: 10px;
+  font-weight: 900;
+}
+p{
+  font-size: 15px;
+}

@@ -80,18 +80,18 @@ const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => 
           }
           <div className="flex justify-center items-center space-x-1 text-gray-400">
             <BsSmartwatch className='h-12' />
-            <h1 className=''>{Math.trunc(contentInfo.wordCount / 200) + 1} min read</h1>
+            <h1 className='text-xs font-semibold'>{Math.trunc(contentInfo.wordCount / 200) + 1} min read</h1>
           </div>
 
           <div className="flex justify-center items-center space-x-1 text-gray-400">
             <GiEyeTarget className='h-12' />
-            <h1 className=''>7.5K</h1>
+            <h1 className='text-xs font-semibold'>7.5K</h1>
           </div>
         </div>
         
         {/* Title */}
         <div className="mx-4 mb-4">
-          <h1 className="text-3xl md:text-6xl font-bold my-1 text-[#DC143C] cursor-pointer"
+          <h1 className="text-3xl md:text-5xl font-bold my-1 text-[#DC143C] cursor-pointer"
             onClick={() => {
               router.push(`/blog/${blogId}`);
             }}>

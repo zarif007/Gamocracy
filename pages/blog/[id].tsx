@@ -10,6 +10,7 @@ import BottomNav from '../../components/navBars/BottomNav';
 import ComponenetsForIndexes from '../../components/reusable/ComponenetsForIndexes';
 import NavBar from '../../components/navBars/NavBar';
 import { apiEndpoints } from '../../domain';
+import blogInterface from '../../Interfaces/BlogInterface';
 
 
 export const getServerSideProps: GetServerSideProps = async ( { params } ) => {
@@ -23,7 +24,7 @@ export const getServerSideProps: GetServerSideProps = async ( { params } ) => {
     };
   };
 
-const Blog = ({ blog }: any) => {
+const Blog: React.FC<{ blog: blogInterface }> = ({ blog }) => {
 
   const [openCreationModal, setOpenCreationModal] =
     useRecoilState(creationModal);
@@ -44,13 +45,16 @@ const Blog = ({ blog }: any) => {
   return (
     <div className='bg-black min-h-screen'>
       <NavBar />
-      <div className='flex max-w-5xl mx-auto justify-center flex-col'>
-        <BlogContent blog={blog} />
+      {
+        blog?.author === ''  ? <div className='text-white'>Not Found</div> : 
+        <div className='flex max-w-5xl mx-auto justify-center flex-col'>
+          <BlogContent blog={blog} />
 
-        <div className='my-6'>
-          <Comments />
+          <div className='my-6'>
+            <Comments />
+          </div>
         </div>
-      </div>
+      }
       <BottomNav />
       <ComponenetsForIndexes />
     </div>

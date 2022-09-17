@@ -14,7 +14,6 @@ import userInterface from './../../Interfaces/UserInterface';
 const ShowRelatedGames = dynamic(() => import('../ShowRelatedGames'));
 import SummaryAudio from './../SummaryAudio';
 
-
 const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
 
   const { author, title, coverImage, blogId, createdAt, content, selectedGames, selectedCategories } = blog;
@@ -64,7 +63,7 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
             authorInfo.email ? <div className="flex space-x-2">
               <img src={authorInfo.image} alt="Dp" style={{ height: "45px" }} className="rounded-md" />
               <div className="flex flex-col">
-                <h1>{authorInfo?.name}</h1>
+                <h1 className="text-sm">{authorInfo?.name}</h1>
                 <h2 className="text-sm text-gray-500">
                   <Moment toNow ago>
                     {createdAt} 
@@ -94,7 +93,8 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
         <div className="flex justify-center mt-6">
           <SummaryAudio blog={blog} />
         </div>
-
+        
+        {/* Title */}
         <div className="mx-4 mb-4">
           <h1 
             className="text-3xl md:text-6xl font-bold my-4 md:my-8 text-[#DC143C] cursor-pointer"
@@ -103,15 +103,15 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
             }}>
               {title}
           </h1>
-          {
-            <div
+
+          {/* Content */}
+          <div
             id="content"
-              className=""
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(content),
-              }}
-            ></div>
-          }
+            className=""
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(content),
+            }}
+          ></div>
         </div>
       </div>
     </div>
