@@ -19,7 +19,7 @@ const Widgets = () => {
   }, [currentBlog]);
 
   return (
-    <div className="text-white font-bold text-lg">
+    <div className="text-white font-bold text-lg rounded-md">
       {isPlaying && (
         <div className="flex flex-col justify-center items-center rounded-md border-2 border-[#DC143C]">
           {currentBlog.image && (
@@ -27,8 +27,8 @@ const Widgets = () => {
               src={currentBlog.image}
               blurDataURL={currentBlog.image}
               placeholder="blur"
-              height={100}
-              width={300}
+              height={135}
+              width={400}
               className="rounded-md"
             />
           )}

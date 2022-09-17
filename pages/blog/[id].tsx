@@ -59,7 +59,7 @@ const Blog = ({ blog }: any) => {
 
 const Comments = () => {
   return (
-    <div className='mx-1 md:mx-0 border-2 p-4 border-[#DC143C] rounded-md'>
+    <div className='mx-1 md:mx-0 border-2 p-4 border-[#DC143C] rounded-md mb-12'>
       <h1 className='font-bold text-xl text-gray-300'>Comments</h1>
       <label className="mt-2">Search</label>
         <div className='flex justify-center items-center space-x-2'>
