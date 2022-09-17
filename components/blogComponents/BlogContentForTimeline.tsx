@@ -41,7 +41,6 @@ const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => 
     const up = contentInfo;
     up.wordCount = cn?.textContent?.trim().split(/\s+/).length || 0;
     up.contentInString = cn?.textContent || '';
-    
     setContentInfo(up);
   }, [blog])
 

@@ -2,23 +2,30 @@ import React, { useState } from 'react'
 import { BsFillPlayCircleFill, BsStopCircleFill } from 'react-icons/bs';
 import blogInterface from '../Interfaces/BlogInterface';
 import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { currentPlayingBlog } from '../atoms/currentPlayingBlog';
+import DOMPurify from 'isomorphic-dompurify';
 
 const SummaryAudio: React.FC<{ blog: blogInterface }> = ({ blog }) => {
 
   const [isPlaying, setIsPlaying] = useState(false);
+  const [currentBlog, setCurrentBlog] = useRecoilState(currentPlayingBlog);
 
   const handleVoice = () => {
     if ('speechSynthesis' in window) {
       var msg = new SpeechSynthesisUtterance();
-      msg.text = `Auto Generated: Title: ${blog.title} 
-                  Content: ${document.getElementById(`content`)?.textContent}`;
+      msg.text = `Auto Generated. Title: ${blog.title}.
+                  Content: ${document.getElementById(`content-${blog.coverImage}`)?.textContent}`;
 
       setIsPlaying(!isPlaying)
 
       if(isPlaying) {
         window.speechSynthesis.cancel();
+        setCurrentBlog({ title: '', image: '' })
       } else {
+        window.speechSynthesis.cancel();
         window.speechSynthesis.speak(msg);
+        setCurrentBlog({ title: blog.title, image: blog.coverImage })
       }
 
      }else{
@@ -34,7 +41,11 @@ const SummaryAudio: React.FC<{ blog: blogInterface }> = ({ blog }) => {
             <BsFillPlayCircleFill className='h-8 w-12' /> } 
         </button>
 
-        <div className='hidden' id="content">{blog.content}</div>
+        <div id={`content-${blog.coverImage}`} dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(blog.content),
+              }}
+              className="hidden">
+        </div>
       </div>
     </>
   )

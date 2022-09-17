@@ -12,6 +12,9 @@ const nextConfig = withPWA({
   images: {
     domains: ['gc-s3images.s3.amazonaws.com'],
   },
+  experimental: {
+    scrollRestoration: true
+  }
 })
 
 module.exports = nextConfig

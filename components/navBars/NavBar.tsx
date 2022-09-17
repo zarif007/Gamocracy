@@ -66,7 +66,7 @@ const NavBar = () => {
         {/* Logo  */}
         <div className={styles.logo} onClick={() => {
           setCurrentNav('Home')
-          router.push('/');
+          router.push('/', undefined, { scroll: false });
         }}>
           <div className="">
             <Image src={logo} objectFit="contain" />
