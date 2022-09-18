@@ -12,6 +12,7 @@ import blogInterface from '../../Interfaces/BlogInterface';
 const LoadingSkeleton = dynamic(() => import('../reusable/LoadingSkeleton'));
 const ShowRelatedGames = dynamic(() => import('../ShowRelatedGames'));
 import userInterface from './../../Interfaces/UserInterface';
+import { Tooltip } from '@material-tailwind/react';
 
 const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => {
 
@@ -69,10 +70,14 @@ const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => 
               <img src={authorInfo.image} alt="author dp" style={{ height: "30px" }} className="rounded-md" />
               <div className="flex flex-col">
                 <h1 className="text-sm">{authorInfo?.name}</h1>
-                <h2 className="text-xs text-gray-500">
-                <Moment toNow ago>
-                  {createdAt} 
-                </Moment> <span> ago</span>
+                <h2 className="text-xs text-gray-500 font-semibold">
+                  <Tooltip content={`${createdAt.toString()}`} placement="bottom-start">
+                    <div>
+                      <Moment toNow ago>
+                        {createdAt} 
+                      </Moment> <span> ago</span>
+                    </div>
+                  </Tooltip>
                 </h2>
               </div>
             </div> : 

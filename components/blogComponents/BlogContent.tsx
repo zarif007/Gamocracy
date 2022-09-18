@@ -64,7 +64,7 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
               <img src={authorInfo.image} alt="Dp" style={{ height: "45px" }} className="rounded-md" />
               <div className="flex flex-col">
                 <h1 className="text-sm">{authorInfo?.name}</h1>
-                <h2 className="text-sm text-gray-500">
+                <h2 className="text-sm text-gray-500 font-semibold">
                   <Moment toNow ago>
                     {createdAt} 
                   </Moment> <span> ago</span>

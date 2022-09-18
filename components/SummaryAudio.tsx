@@ -20,8 +20,6 @@ const SummaryAudio: React.FC<{ blog: blogInterface }> = ({ blog }) => {
       setIsPlaying(!isPlaying)
       window.speechSynthesis.cancel();
 
-      msg.voice = window.speechSynthesis.getVoices()[2];
-
       if(isPlaying) {
         setCurrentBlog({ title: '', image: '' })
       } else {
