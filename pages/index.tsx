@@ -10,12 +10,13 @@ import SideBar from "../components/navBars/SideBar";
 import Widgets from "../components/Widgets";
 import SignInReminder from "../components/SignInReminder";
 import { useSession } from "next-auth/react";
+import { apiEndpoints } from "../domain";
 
 
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const { data } = await axios.get(
-    `https://dacgzl9krh.execute-api.us-east-1.amazonaws.com/staging`
+    apiEndpoints.blog
   );
 
   return {

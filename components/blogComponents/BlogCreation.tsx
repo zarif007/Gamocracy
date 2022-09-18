@@ -104,8 +104,8 @@ const BlogCreation = () => {
     setError("");
     if (selectedCategory === "") return;
 
-    if (blog.selectedCategories.length === 3) {
-      setError("Select upto 3 Category");
+    if (blog.selectedCategories.length === 2) {
+      setError("Select upto 2 Category");
       return;
     }
 
@@ -322,7 +322,7 @@ const BlogCreation = () => {
 
           {/* Related tags uploading part */}
           <p className="my-2 text-xl font-bold text-gray-300">
-            Select related Category (Max. 3)
+            Select related Category (Max. 2)
           </p>
           <div className="flex items-center space-x-4 my-2">
             {blog.selectedCategories.length > 0 &&

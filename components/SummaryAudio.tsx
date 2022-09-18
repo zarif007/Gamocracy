@@ -18,12 +18,13 @@ const SummaryAudio: React.FC<{ blog: blogInterface }> = ({ blog }) => {
                   Content: ${document.getElementById(`content-${blog.coverImage}`)?.textContent}`;
 
       setIsPlaying(!isPlaying)
+      window.speechSynthesis.cancel();
+
+      msg.voice = window.speechSynthesis.getVoices()[2];
 
       if(isPlaying) {
-        window.speechSynthesis.cancel();
         setCurrentBlog({ title: '', image: '' })
       } else {
-        window.speechSynthesis.cancel();
         window.speechSynthesis.speak(msg);
         setCurrentBlog({ title: blog.title, image: blog.coverImage })
       }
