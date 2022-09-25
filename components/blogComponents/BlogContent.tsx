@@ -13,10 +13,11 @@ const LoadingSkeleton = dynamic(() => import("../reusable/LoadingSkeleton"));
 import userInterface from './../../Interfaces/UserInterface';
 const ShowRelatedGames = dynamic(() => import('../ShowRelatedGames'));
 import SummaryAudio from './../SummaryAudio';
+import ShowSelectedCategories from "../ShowSelectedCategories";
 
 const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
 
-  const { author, title, coverImage, blogId, createdAt, content, selectedGames, selectedCategories } = blog;
+  const { author, title, coverImage, blogId, createdAt, content, selectedGames, selectedCategories, views } = blog;
 
   const router = useRouter();
   const [authorInfo, setAuthorInfo] = useState<userInterface>({
@@ -29,6 +30,14 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
   useEffect(() => {
     axios.get(`${apiEndpoints.user}/?email=${author}`)
       .then(res => setAuthorInfo(res.data))
+
+    const countView = () => {
+      console.log({ ...blog, views: views + 1 })
+    }
+
+    setTimeout(() => {
+      countView()
+    }, 1000 * 60);
   }, [])
 
 
@@ -77,16 +86,10 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
         </div>
         
         {/* Related games */}
-        <div className="mt-4 flex sapce-x-3 md:space-x-6">
+        <div className="mt-4 flex sapce-x-3 md:space-x-6 items-center">
           <ShowRelatedGames selectedGames={selectedGames} />
           <div className="flex space-x-2 mx-4 my-1 md:my-0 text-xs md:text-lg mt-2">
-            {
-              selectedCategories.map((sc: any) => {
-                return (
-                  <p key={sc} className="border-2 hover:bg-[#DC143C] cursor-pointer border-[#DC143C] px-2 py-1 bg-gray-900 rounded-md">{sc}</p>
-                )
-              }) 
-            }
+            <ShowSelectedCategories selectedCategories={selectedCategories} />
           </div>
         </div>
 

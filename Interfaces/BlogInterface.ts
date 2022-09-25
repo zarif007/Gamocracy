@@ -11,4 +11,5 @@ export default interface blogInterface {
     author: string;
     createdAt: string;
     updatedAt: string;
+    views: number;
 }

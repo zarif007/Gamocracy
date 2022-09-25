@@ -13,20 +13,21 @@ const LoadingSkeleton = dynamic(() => import('../reusable/LoadingSkeleton'));
 const ShowRelatedGames = dynamic(() => import('../ShowRelatedGames'));
 import userInterface from './../../Interfaces/UserInterface';
 import { Tooltip } from '@material-tailwind/react';
+const ShowSelectedCategories = dynamic(() => import('../ShowSelectedCategories'));
 
 const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => {
 
-  const { author, title, coverImage, blogId, createdAt, content, selectedGames, selectedCategories } = blog;
+  const { author, title, coverImage, blogId, createdAt, content, selectedGames, selectedCategories, views } = blog;
 
   const router = useRouter();
 
-  const [contentInfo, setContentInfo] = useState<{contentInString: string, wordCount: number}>({
+  const [contentInfo, setContentInfo] = useState<{ contentInString: string, wordCount: number }>({
     contentInString: '',
     wordCount: 0,
   });
 
   const [authorInfo, setAuthorInfo] = useState<userInterface>({
-    name: '', 
+    name: '',
     email: '',
     image: '',
   });
@@ -61,27 +62,27 @@ const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => 
             router.push(`/blog/${blogId}`);
           }}
         />
-        
+
         {/* Blog info */}
         <div className="mx-4 flex mt-4 justify-between md:justify-start md:space-x-16 items-center">
           {
-            authorInfo.email ? 
-            <div className="flex space-x-2 justify-center items-center">
-              <img src={authorInfo.image} alt="author dp" style={{ height: "30px" }} className="rounded-md" />
-              <div className="flex flex-col">
-                <h1 className="text-sm">{authorInfo?.name}</h1>
-                <h2 className="text-xs text-gray-500 font-semibold">
-                  <Tooltip content={`${createdAt.toString()}`} placement="bottom-start">
-                    <div>
-                      <Moment toNow ago>
-                        {createdAt} 
-                      </Moment> <span> ago</span>
-                    </div>
-                  </Tooltip>
-                </h2>
-              </div>
-            </div> : 
-            <LoadingSkeleton iteration={2} />
+            authorInfo.email ?
+              <div className="flex space-x-2 justify-center items-center">
+                <img src={authorInfo.image} alt="author dp" style={{ height: "30px" }} className="rounded-md" />
+                <div className="flex flex-col">
+                  <h1 className="text-sm">{authorInfo?.name}</h1>
+                  <h2 className="text-xs text-gray-500 font-semibold">
+                    <Tooltip content={`${createdAt.toString()}`} placement="bottom-start">
+                      <div>
+                        <Moment toNow ago>
+                          {createdAt}
+                        </Moment> <span> ago</span>
+                      </div>
+                    </Tooltip>
+                  </h2>
+                </div>
+              </div> :
+              <LoadingSkeleton iteration={2} />
           }
           <div className="flex justify-center items-center space-x-1 text-gray-400">
             <BsSmartwatch className='h-12' />
@@ -90,32 +91,31 @@ const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => 
 
           <div className="flex justify-center items-center space-x-1 text-gray-400">
             <GiEyeTarget className='h-12' />
-            <h1 className='text-xs font-semibold'>7.5K</h1>
+            <h1 className='text-xs font-semibold'>{views}</h1>
           </div>
         </div>
-        
+
         {/* Title */}
         <div className="mx-4 mb-4">
           <h1 className="text-3xl md:text-5xl font-bold my-1 text-[#DC143C] cursor-pointer"
             onClick={() => {
               router.push(`/blog/${blogId}`);
             }}>
-              {title}
+            {title}
           </h1>
         </div>
 
         <div id={`content-${coverImage}`} dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(content),
-              }}
-              className="hidden">
+          __html: DOMPurify.sanitize(content),
+        }}
+          className="hidden">
         </div>
-        
+
         {/* Related Games */}
         <div className='mb-2 flex sapce-x-3 md:space-x-6 flex-col md:flex-row'>
           <ShowRelatedGames selectedGames={selectedGames} />
-          
         </div>
-        
+
         {/* Content in short */}
         <div className='mx-4 mb-1'>
           <span className='md:hidden'>{contentInfo.contentInString.slice(0, Math.min(100, contentInfo.contentInString.length))}</span>
@@ -126,17 +126,11 @@ const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => 
               router.push(`/blog/${blogId}`);
             }}> ...more</span>
         </div>
-        
+
         {/* Category */}
         <div className="flex space-x-2 mx-4 my-4 text-xs md:text-lg">
-            {
-              selectedCategories.map((sc: any) => {
-                return (
-                  <p key={sc} className="border-2 hover:bg-[#DC143C] cursor-pointer border-[#DC143C] px-2 py-1 bg-gray-900 rounded-md">{sc}</p>
-                )
-              }) 
-            }
-          </div>
+          <ShowSelectedCategories selectedCategories={selectedCategories} />
+        </div>
       </div>
     </div>
   )

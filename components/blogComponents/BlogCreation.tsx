@@ -48,6 +48,7 @@ const BlogCreation = () => {
     author: "",
     createdAt: "",
     updatedAt: "",
+    views: 0,
   });
 
   const router = useRouter();
@@ -122,13 +123,24 @@ const BlogCreation = () => {
     setOptionsForCategories([...category.filter(op => op.toLocaleLowerCase().includes(formatedQuery))])
   }
 
-  // Updating blog name that will be used as imageName and id
+
+  // Updating blog title that will be used as imageName and id
   useEffect(() => {
+    setError('');
+
+    if(blog.title === '') return;
+    
     const updated = blog;
     updated.blogId = `${updated.title
       .replaceAll(" ", "-")
       .toLowerCase()
       .replaceAll("?", "")}-${Date.now()}`;
+
+    if(!(/\d/.test(updated.title) || /[a-zA-Z]/.test(updated.title))){
+      setError('Title must contain a-z or A-Z or 0-9')
+      return;
+    } 
+
     setBlog(updated);
   }, [blog.title]);
 
@@ -160,7 +172,7 @@ const BlogCreation = () => {
     reader.readAsDataURL(file);
   };
 
-  // Upload Image on S3 and get the sign url
+  // Upload Image on S3
   const uploadImageOnS3 = async () => {
     const imageName = `blog/${blog.blogId}.jpeg`;
 
@@ -277,9 +289,7 @@ const BlogCreation = () => {
             placeholder="Put a Killing Title"
             defaultValue={`${blog.title}`}
             onChange={(e: any) => {
-              const updated = blog;
-              updated.title = e.target.value;
-              setBlog(updated);
+              setBlog({ ...blog, title: e.target.value });
             }}
           />
 
