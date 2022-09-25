@@ -130,18 +130,21 @@ const BlogCreation = () => {
 
     if(blog.title === '') return;
     
-    const updated = blog;
-    updated.blogId = `${updated.title
-      .replaceAll(" ", "-")
-      .toLowerCase()
-      .replaceAll("?", "")}-${Date.now()}`;
+    let updatedTitle2 = '';
 
-    if(!(/\d/.test(updated.title) || /[a-zA-Z]/.test(updated.title))){
+    for(let i = 0; i < blog.title.length; i++) {
+      if(/\d/.test(blog.title[i]) || /[a-zA-Z]/.test(blog.title[i])) {
+          updatedTitle2 = updatedTitle2 + blog.title[i];
+        }
+    }
+      
+    if(updatedTitle2 === ''){
       setError('Title must contain a-z or A-Z or 0-9')
       return;
     } 
 
-    setBlog(updated);
+    setBlog({ ...blog, 
+      blogId: `${updatedTitle2.replaceAll(" ", "-").toLowerCase()}-${Date.now()}`});
   }, [blog.title]);
 
   // Getting author email for session

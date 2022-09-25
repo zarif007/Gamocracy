@@ -26,18 +26,34 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
     image: '',
   });
 
+  // Count and save view count
+  const countView = () => {
+    let cn = document.getElementById(`content-${coverImage}`);
+
+    const wordCount = cn?.textContent?.trim().split(/\s+/).length || 0;
+
+    const saveToDB = () => {
+      axios.put(`${apiEndpoints.blog}/?blogId=${blogId}`, { ...blog, views: views + 1 })
+    }
+
+    // 1000 => milisecond - second
+    // 60 => second - min
+    // (wordCount / 100 + 1) => 1 min for per 200 words
+    // 1 / 3 => 1 / 3 of the total reading time
+    const reuiredTimeToCountAView = Math.trunc(1000 * 60 * (wordCount / 100 + 1) * (1 / 3))
+
+    console.log(reuiredTimeToCountAView)
+    setTimeout(() => {
+      saveToDB()
+    }, reuiredTimeToCountAView);
+  }
+
 
   useEffect(() => {
     axios.get(`${apiEndpoints.user}/?email=${author}`)
       .then(res => setAuthorInfo(res.data))
 
-    const countView = () => {
-      console.log({ ...blog, views: views + 1 })
-    }
-
-    setTimeout(() => {
-      countView()
-    }, 1000 * 60);
+    countView()
   }, [])
 
 
@@ -109,7 +125,7 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
 
           {/* Content */}
           <div
-            id="content"
+            id={`content-${coverImage}`}
             className=""
             dangerouslySetInnerHTML={{
               __html: DOMPurify.sanitize(content),

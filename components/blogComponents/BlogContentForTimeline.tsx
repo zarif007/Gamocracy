@@ -86,7 +86,7 @@ const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => 
           }
           <div className="flex justify-center items-center space-x-1 text-gray-400">
             <BsSmartwatch className='h-12' />
-            <h1 className='text-xs font-semibold'>{Math.trunc(contentInfo.wordCount / 200) + 1} min read</h1>
+            <h1 className='text-xs font-semibold'>{Math.trunc(contentInfo.wordCount / 100) + 1} min read</h1>
           </div>
 
           <div className="flex justify-center items-center space-x-1 text-gray-400">
