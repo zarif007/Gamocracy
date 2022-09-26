@@ -102,7 +102,7 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
         </div>
         
         {/* Related games */}
-        <div className="mt-4 flex sapce-x-3 md:space-x-6 items-center">
+        <div className={`mt-4 flex sapce-x-3 md:space-x-6 items-center ${selectedCategories.length + selectedGames.length > 4 && 'flex-col md:flex-row'}`}>
           <ShowRelatedGames selectedGames={selectedGames} />
           <div className="flex space-x-2 mx-4 my-1 md:my-0 text-xs md:text-lg mt-2">
             <ShowSelectedCategories selectedCategories={selectedCategories} />

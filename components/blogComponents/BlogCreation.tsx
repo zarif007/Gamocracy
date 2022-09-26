@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import Image from "next/image";
-import { FaGgCircle } from "react-icons/fa";
+import { FaCircle, FaGgCircle } from "react-icons/fa";
 import { useRouter } from "next/router";
 const BlogContent = dynamic(() => import("./BlogContent"));
 import AWS from "aws-sdk";
@@ -14,7 +14,8 @@ const Selector = dynamic(() => import("../Selector"));
 import { showNotification } from "../../pages/_app";
 import gameForOptionInterface from "../../Interfaces/GameForOptionInterface";
 import blogInterface from "../../Interfaces/BlogInterface";
-
+import { GiCheckMark } from "react-icons/gi";
+import { BsFillCheckCircleFill } from "react-icons/bs";
 
 // Category
 const category: string[] = [
@@ -23,8 +24,8 @@ const category: string[] = [
   "Leaks 💧",
   "Tutorial ✍️",
   "News 📰",
-  "Upcoming ⏭️"
-]
+  "Upcoming ⏭️",
+];
 
 // S3 Buckect config
 const s3 = new AWS.S3({
@@ -67,7 +68,8 @@ const BlogCreation = () => {
     gameForOptionInterface[]
   >([]);
 
-  const [optionsForCategories, setOptionsForCategories] = useState<string[]>(category);
+  const [optionsForCategories, setOptionsForCategories] =
+    useState<string[]>(category);
 
   // Adding Games to blog obj
   const addGame = (selectedGame: gameForOptionInterface) => {
@@ -79,8 +81,14 @@ const BlogCreation = () => {
       return;
     }
 
-    if (blog.selectedGames.length === 0 || !blog.selectedGames.includes(selectedGame)) {
-      setBlog({ ...blog, selectedGames: [...blog.selectedGames, selectedGame]});
+    if (
+      blog.selectedGames.length === 0 ||
+      !blog.selectedGames.includes(selectedGame)
+    ) {
+      setBlog({
+        ...blog,
+        selectedGames: [...blog.selectedGames, selectedGame],
+      });
     }
   };
 
@@ -110,41 +118,54 @@ const BlogCreation = () => {
       return;
     }
 
-    if (blog.selectedCategories.length === 0 || !blog.selectedCategories.includes(selectedCategory)) {
-      setBlog({ ...blog, selectedCategories: [...blog.selectedCategories, selectedCategory]});
+    if (
+      blog.selectedCategories.length === 0 ||
+      !blog.selectedCategories.includes(selectedCategory)
+    ) {
+      setBlog({
+        ...blog,
+        selectedCategories: [...blog.selectedCategories, selectedCategory],
+      });
     }
-  }
+  };
 
   const queryCategory = (query: string) => {
     setOptionsForCategories([]);
 
-    const formatedQuery = query.trim().replace(' ', '').toLocaleLowerCase();
+    const formatedQuery = query.trim().replace(" ", "").toLocaleLowerCase();
 
-    setOptionsForCategories([...category.filter(op => op.toLocaleLowerCase().includes(formatedQuery))])
-  }
-
+    setOptionsForCategories([
+      ...category.filter((op) =>
+        op.toLocaleLowerCase().includes(formatedQuery)
+      ),
+    ]);
+  };
 
   // Updating blog title that will be used as imageName and id
   useEffect(() => {
-    setError('');
+    setError("");
 
-    if(blog.title === '') return;
-    
-    let updatedTitle2 = '';
+    if (blog.title === "") return;
 
-    for(let i = 0; i < blog.title.length; i++) {
-      if(/\d/.test(blog.title[i]) || /[a-zA-Z]/.test(blog.title[i])) {
-          updatedTitle2 = updatedTitle2 + blog.title[i];
-        }
+    let updatedTitle2 = "";
+
+    for (let i = 0; i < blog.title.length; i++) {
+      if (/\d/.test(blog.title[i]) || /[a-zA-Z]/.test(blog.title[i])) {
+        updatedTitle2 = updatedTitle2 + blog.title[i];
+      }
     }
-      
-    if(updatedTitle2 === ''){
-      setError('Title must contain a-z or A-Z or 0-9')
-      return;
-    } 
 
-    setBlog({ ...blog, 
-      blogId: `${updatedTitle2.replaceAll(" ", "-").toLowerCase()}-${Date.now()}`});
+    if (updatedTitle2 === "") {
+      setError("Title must contain a-z or A-Z or 0-9");
+      return;
+    }
+
+    setBlog({
+      ...blog,
+      blogId: `${updatedTitle2
+        .replaceAll(" ", "-")
+        .toLowerCase()}-${Date.now()}`,
+    });
   }, [blog.title]);
 
   // Getting author email for session
@@ -318,7 +339,14 @@ const BlogCreation = () => {
                     className="flex items-center space-x-2 bg-black border py-1 px-2 rounded-md cursor-pointer"
                     key={game.name}
                     onClick={() => {
-                      setBlog({ ...blog, selectedGames: [...blog.selectedGames.filter((up) => up.name != game.name)] })
+                      setBlog({
+                        ...blog,
+                        selectedGames: [
+                          ...blog.selectedGames.filter(
+                            (up) => up.name != game.name
+                          ),
+                        ],
+                      });
                     }}
                   >
                     <img src={game.image} alt="bg" className="rounded-md h-6" />
@@ -345,7 +373,14 @@ const BlogCreation = () => {
                     className="flex items-center space-x-2 bg-black border py-1 px-2 rounded-md cursor-pointer"
                     key={category}
                     onClick={() => {
-                      setBlog({ ...blog, selectedCategories: [...blog.selectedCategories.filter((up) => up != category)] })
+                      setBlog({
+                        ...blog,
+                        selectedCategories: [
+                          ...blog.selectedCategories.filter(
+                            (up) => up != category
+                          ),
+                        ],
+                      });
                     }}
                   >
                     <p className="text-sm text-gray-300">{category}</p>
