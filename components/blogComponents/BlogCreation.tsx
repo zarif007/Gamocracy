@@ -3,19 +3,17 @@ import dynamic from "next/dynamic";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import Image from "next/image";
-import { FaCircle, FaGgCircle } from "react-icons/fa";
+import { FaGgCircle } from "react-icons/fa";
 import { useRouter } from "next/router";
 const BlogContent = dynamic(() => import("./BlogContent"));
 import AWS from "aws-sdk";
 import { apiEndpoints } from "../../domain";
 import { useSession } from "next-auth/react";
-const TextEditor = dynamic(() => import("../TextEditor"));
 const Selector = dynamic(() => import("../Selector"));
 import { showNotification } from "../../pages/_app";
 import gameForOptionInterface from "../../Interfaces/GameForOptionInterface";
 import blogInterface from "../../Interfaces/BlogInterface";
-import { GiCheckMark } from "react-icons/gi";
-import { BsFillCheckCircleFill } from "react-icons/bs";
+const CustomTextEditor = dynamic(() => import('./../reusable/CustomTextEditor'));
 
 // Category
 const category: string[] = [
@@ -67,6 +65,7 @@ const BlogCreation = () => {
   const [optionsForGames, setOptionsForGames] = useState<
     gameForOptionInterface[]
   >([]);
+
 
   const [optionsForCategories, setOptionsForCategories] =
     useState<string[]>(category);
@@ -320,11 +319,16 @@ const BlogCreation = () => {
           {/* Text Editor for content */}
           <p className="my-2 text-xl font-bold text-gray-300">Content</p>
           <div className="mb-8 mt-2">
-            <TextEditor
+            {/* <TextEditor
               value={blog}
               setValue={setBlog}
               defaultValue={blog.content}
-            />
+            /> */}
+
+            <CustomTextEditor value={blog}
+              setValue={setBlog}
+              defaultValue={blog.content} />
+            
           </div>
 
           {/* Related Game uploading part */}

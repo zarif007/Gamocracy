@@ -82,3 +82,12 @@ h6{
 p{
   font-size: 15px;
 }
+
+
+.jodit-toolbar__box, .jodit-status-bar {
+  background-color: black !important;
+}
+
+.jodit-toolbar-button__button {
+  background-color: antiquewhite !important;
+}
