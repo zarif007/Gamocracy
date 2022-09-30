@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import dynamic from "next/dynamic";
 const JoditEditor = dynamic(() => import("jodit-react"), {
   ssr: false
@@ -7,7 +7,7 @@ const JoditEditor = dynamic(() => import("jodit-react"), {
 const CustomTextEditor = ({ value, setValue, defaultValue }) => {
 
   const config = {
-    readonly: false // all options from https://xdsoft.net/jodit/doc/
+    readonly: false 
   };
 
   const updateContent = (content) => {
@@ -16,7 +16,7 @@ const CustomTextEditor = ({ value, setValue, defaultValue }) => {
     setValue(updated)
   }
 
-  const editor = useRef(null);
+  const editor = useRef(defaultValue);
   return (
     <JoditEditor
         ref={editor}
@@ -24,7 +24,7 @@ const CustomTextEditor = ({ value, setValue, defaultValue }) => {
         config={config || false}
         defaultValue={defaultValue}
         tabIndex={1} // tabIndex of textarea
-        onBlur={newContent => updateContent(newContent)} // preferred to use only this option to update the content for performance reasons
+        onBlur={newContent => updateContent(newContent)} 
         onChange={newContent => updateContent(newContent)}
       />
   );
