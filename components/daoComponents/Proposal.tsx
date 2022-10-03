@@ -40,13 +40,31 @@ const Proposal = ({ proposal }: any) => {
   }, [statusText, statusColor, proposal.state])
 
   return (
-    <div className="text-white">
+    <div className="text-gray-200 border-2 border-gray-900 bg-[#121212] rounded-md my-4 font-semibold mx-4">
       
       {/* Proposer */}
-      <div>
-        Proposer: {truncateEthAddress(proposal.proposer)}
+      <div className="m-4">
+        <span className={`rounded-lg py-1 px-2 my-2`} style={{ backgroundColor: statusColor }}>{statusText}</span> <br />
+        <span className="my-2">Proposer: {proposal.proposer}</span> <br />
+        <div className='font-bold text-lg'>Propose: <span className="text-[#DC143C]">{proposal.description}</span></div>
+
+        {proposal.votes.map((vote: any) => {
+          return (
+            <div key={Math.random()} className="my-1 p-2 border-2 border-gray-900 rounded-md">
+              <button
+                className=''
+                key={Math.random()}
+                onClick={() => {
+                  voteFor(proposal.proposalId, vote.label, '')
+                }}
+              >
+                {vote.label}
+              </button>
+            </div>
+          )
+        })}
       </div>
-      <div>{proposal.state}</div>
+
     </div>
   )
 }
