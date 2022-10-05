@@ -51,13 +51,15 @@ const Proposal = ({ proposal }: any) => {
 
         {proposal.votes.map((vote: any) => {
           return (
-            <div key={Math.random()} className="my-1 p-2 border-2 border-gray-800 hover:border-[#DC143C] rounded-md cursor-pointer bg-black"
+            <div key={Math.random()} className={`my-1 p-2 border-2 border-gray-800 hover:border-[#DC143C] rounded-md cursor-pointer bg-black ${!currentUserAddress && 'cursor-not-allowed'}`}
               onClick={() => {
+                if(!currentUserAddress) return;
                 voteFor(proposal.proposalId, vote.label, '')
               }}>
               <button
-                className=''
+                className='disabled:cursor-not-allowed'
                 key={Math.random()}
+                disabled={!currentUserAddress}
               >
                 {vote.label}
               </button>
