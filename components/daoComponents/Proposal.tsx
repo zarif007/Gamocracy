@@ -49,7 +49,7 @@ const Proposal = ({ proposal }: any) => {
         <span className="my-2">Proposer: {proposal.proposer}</span> <br />
         <div className='font-bold text-lg'>Propose: <span className="text-[#DC143C]">{proposal.description}</span></div>
 
-        {proposal.votes.map((vote: any, index: number) => {
+        {proposal.state === 2 && proposal.votes.map((vote: any, index: number) => {
           return (
             <div key={index} className={`my-1 p-2 border-2 border-gray-800 hover:border-[#DC143C] rounded-md cursor-pointer bg-black ${!currentUserAddress && 'cursor-not-allowed'}`}
               onClick={() => {
@@ -80,6 +80,20 @@ const Proposal = ({ proposal }: any) => {
               )
             })
           }
+        </div>
+
+        <div>
+        {
+          (proposal.state === 4 && currentUserAddress === '0xE3166AB0DBc258da2F99F589D4a8467A0fF08e5E') && (
+            <button
+              className='py-2 px-4 mt-3 bg-[#DC143C] text-white font-semibold rounded-md'
+              onClick={() => {
+                executeProposal(proposal.proposalId)
+              }}
+            >
+              Execute
+            </button>
+          )}
         </div>
       </div>
 
