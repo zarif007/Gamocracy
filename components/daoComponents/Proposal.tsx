@@ -66,7 +66,7 @@ const Proposal = ({ proposal }: any) => {
           )
         })}
 
-        {/* <div className='flex space-x-2 md:space-x-4 text-gray-300 text-sm font-semibolds'>
+        <div className='flex space-x-2 md:space-x-4 text-gray-300 text-sm font-semibolds'>
           {
             proposal.votes.map((vote: any, index: number) => {
               const voteCount = ethers.utils.formatEther(vote.count)
@@ -74,13 +74,13 @@ const Proposal = ({ proposal }: any) => {
               return (
                 <div key={index}>
                   <div>
-                    {vote.label}: {Math.trunc(parseFloat(voteCount))} GC Token
+                    {vote.label}: {Math.trunc(parseFloat(voteCount || '0'))} GC Token
                   </div>
                 </div>
               )
             })
           }
-        </div> */}
+        </div>
       </div>
 
     </div>
