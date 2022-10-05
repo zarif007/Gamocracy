@@ -49,16 +49,15 @@ const Proposal = ({ proposal }: any) => {
         <span className="my-2">Proposer: {proposal.proposer}</span> <br />
         <div className='font-bold text-lg'>Propose: <span className="text-[#DC143C]">{proposal.description}</span></div>
 
-        {proposal.votes.map((vote: any) => {
+        {/* {proposal.votes.map((vote: any, index: number) => {
           return (
-            <div key={Math.random()} className={`my-1 p-2 border-2 border-gray-800 hover:border-[#DC143C] rounded-md cursor-pointer bg-black ${!currentUserAddress && 'cursor-not-allowed'}`}
+            <div key={index} className={`my-1 p-2 border-2 border-gray-800 hover:border-[#DC143C] rounded-md cursor-pointer bg-black ${!currentUserAddress && 'cursor-not-allowed'}`}
               onClick={() => {
                 if(!currentUserAddress) return;
                 voteFor(proposal.proposalId, vote.label, '')
               }}>
               <button
                 className='disabled:cursor-not-allowed'
-                key={Math.random()}
                 disabled={!currentUserAddress}
               >
                 {vote.label}
@@ -69,11 +68,11 @@ const Proposal = ({ proposal }: any) => {
 
         <div className='flex space-x-2 md:space-x-4 text-gray-300 text-sm font-semibolds'>
           {
-            proposal.votes.map((vote: any) => {
+            proposal.votes.map((vote: any, index: number) => {
               const voteCount = ethers.utils.formatEther(vote.count)
 
               return (
-                <div key={Math.random()}>
+                <div key={index}>
                   <div>
                     {vote.label}: {Math.trunc(parseFloat(voteCount))} GC Token
                   </div>
@@ -81,7 +80,7 @@ const Proposal = ({ proposal }: any) => {
               )
             })
           }
-        </div>
+        </div> */}
       </div>
 
     </div>

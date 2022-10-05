@@ -65,7 +65,7 @@ const Vote: NextPage = () => {
             <DaoLogin />
 
             {/* Proposal Input */}
-            {/* <div className='flex flex-col bg-[#121212] border-2 border-gray-800 rounded-md m-4'>
+            <div className='flex flex-col bg-[#121212] border-2 border-gray-800 rounded-md m-4'>
                 <input
                   className="m-4 border-2 border-gray-800 bg-black text-gray-300 py-2 rounded-md px-1 text-md font-semibold"
                   placeholder='Make a Proposal'
@@ -82,7 +82,7 @@ const Vote: NextPage = () => {
                       showNotification("Pending.....")
                     }}>Submit</button>
                 </div>
-            </div> */}
+            </div>
             {
               proposals && 
               proposals.map((proposal, index) => {
