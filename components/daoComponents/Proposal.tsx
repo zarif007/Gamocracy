@@ -49,7 +49,7 @@ const Proposal = ({ proposal }: any) => {
         <span className="my-2">Proposer: {proposal.proposer}</span> <br />
         <div className='font-bold text-lg'>Propose: <span className="text-[#DC143C]">{proposal.description}</span></div>
 
-        {/* {proposal.votes.map((vote: any, index: number) => {
+        {proposal.votes.map((vote: any, index: number) => {
           return (
             <div key={index} className={`my-1 p-2 border-2 border-gray-800 hover:border-[#DC143C] rounded-md cursor-pointer bg-black ${!currentUserAddress && 'cursor-not-allowed'}`}
               onClick={() => {
@@ -66,7 +66,7 @@ const Proposal = ({ proposal }: any) => {
           )
         })}
 
-        <div className='flex space-x-2 md:space-x-4 text-gray-300 text-sm font-semibolds'>
+        {/* <div className='flex space-x-2 md:space-x-4 text-gray-300 text-sm font-semibolds'>
           {
             proposal.votes.map((vote: any, index: number) => {
               const voteCount = ethers.utils.formatEther(vote.count)
