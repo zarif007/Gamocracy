@@ -1,4 +1,4 @@
-import { createContext } from 'react'
+import { createContext, useEffect } from 'react'
 import {
   useAddress,
   useMetamask,
@@ -17,6 +17,20 @@ export const GcDaoProvider = ({ children }) => {
   const vote = useVote('0x8D7F6abdf25743cA9603c9671dAf65c338b9ce93')
   const token = useToken('0xafeaf690D4d076b5FF46b8B1e44a74Dbfb95ad60')
 
+  useEffect(() => {
+
+    (async () => {
+      try {
+        const delegation = await token.getDelegationOf(currentUserAddress)
+        if (delegation === ethers.constants.AddressZero) {
+          await token.delegateTo(currentUserAddress)
+        }
+      } catch (error) {
+        console.log(error.message)
+      }
+    })()
+  }, [])
+
   const getAllProposals = async () => {
     const proposals = await vote.getAll()
     return proposals
@@ -27,7 +41,6 @@ export const GcDaoProvider = ({ children }) => {
   }
   const checkIfVoted = async id => {
     const res = await vote.hasVoted(id, currentUserAddress)
-    console.log(res, 'hasVoted')
     return res
   }
 
@@ -44,7 +57,6 @@ export const GcDaoProvider = ({ children }) => {
       },
     ]
     const proposal = await vote.propose(description, executions)
-    console.log(proposal)
   }
 
 
