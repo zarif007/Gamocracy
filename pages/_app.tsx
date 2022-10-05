@@ -14,8 +14,8 @@ Router.events.on("routeChangeStart", nProgress.start);
 Router.events.on("routeChangeError", nProgress.done);
 Router.events.on("routeChangeComplete", nProgress.done);
 
-export const showNotification = () =>
-  toast.success("Blog Uploaded 😎", {
+export const showNotification = message =>
+  toast.success(message, {
     position: "bottom-right",
     autoClose: 5000,
     hideProgressBar: false,

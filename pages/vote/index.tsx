@@ -10,15 +10,19 @@ import DaoLogin from '../../components/daoComponents/DaoLogin'
 import { useContext, useState, useEffect } from 'react'
 import { GcDaoContext } from '../../context/context'
 import Proposal from '../../components/daoComponents/Proposal'
+import { showNotification } from '../_app'
 
 
 const Vote: NextPage = () => {
 
   const [isSidebarOpen] = useRecoilState<boolean>(sidebarOpen);
-  const [proposals, setProposals] = useState([])
+  const [proposals, setProposals] = useState([]);
+  const [proposalInput, setProposalInput] = useState('')
+
   const { getAllProposals,
     isExecutable,
     vote,
+    createProposal,
   } = useContext(GcDaoContext)
 
     useEffect(() => {
@@ -58,6 +62,26 @@ const Vote: NextPage = () => {
           <div className={styles.feedWrapper}>
             <Feed name='Vote' />
             <DaoLogin />
+
+            {/* Proposal Input */}
+            <div className='flex flex-col bg-[#121212] border-2 border-gray-800 rounded-md m-4'>
+                <input
+                  className="m-4 border-2 border-gray-800 bg-black text-gray-300 py-2 rounded-md px-1 text-md font-semibold"
+                  placeholder='Make a Proposal'
+                  value={proposalInput}
+                  onChange={e => {
+                      setProposalInput(e.target.value)
+                  }} />
+                <div>
+                  <button className="mx-4 mb-2 rounded-md bg-[#DC143C] py-2 px-4  font-semibold text-white"
+                  onClick={() => {
+                    createProposal(proposalInput)
+                    setProposalInput('')
+                    showNotification("Pending.....")
+                    
+                  }}>Submit</button>
+                </div>
+            </div>
             {
               proposals && 
               proposals.map((proposal, index) => {

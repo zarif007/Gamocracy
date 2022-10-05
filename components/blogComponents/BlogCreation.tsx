@@ -248,7 +248,7 @@ const BlogCreation = () => {
     try {
       await axios.post(apiEndpoints.blog, blog).then((res) => {
         if (res.status === 201) {
-          showNotification();
+          showNotification("Blog Uploaded 😎");
           router.push(`/blog/${res.data.blogId}`);
           setIsLoading(false);
         } else {

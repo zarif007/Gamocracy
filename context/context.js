@@ -15,7 +15,7 @@ export const GcDaoProvider = ({ children }) => {
   const connectWithMetamask = useMetamask()
   const disconnectWallet = useDisconnect()
   const vote = useVote('0x8D7F6abdf25743cA9603c9671dAf65c338b9ce93')
-  const token = useToken('')
+  const token = useToken('0xafeaf690D4d076b5FF46b8B1e44a74Dbfb95ad60')
 
   const getAllProposals = async () => {
     const proposals = await vote.getAll()
@@ -26,7 +26,7 @@ export const GcDaoProvider = ({ children }) => {
     return canExecute
   }
   const checkIfVoted = async id => {
-    const res = await vote.hasVoted(id, address)
+    const res = await vote.hasVoted(id, currentUserAddress)
     console.log(res, 'hasVoted')
     return res
   }
@@ -60,9 +60,9 @@ export const GcDaoProvider = ({ children }) => {
 
   const voteFor = async (id, type, reason) => {
     try {
-      const delegation = await token.getDelegationOf(address)
+      const delegation = await token.getDelegationOf(currentUserAddress)
       if (delegation === ethers.constants.AddressZero) {
-        await token.delegateTo(address)
+        await token.delegateTo(currentUserAddress)
       }
       let voteType
       if (type === 'Against') {

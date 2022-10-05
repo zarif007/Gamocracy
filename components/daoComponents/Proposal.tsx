@@ -1,3 +1,4 @@
+import { ethers } from 'ethers'
 import React, { useState, useMemo, useContext } from 'react'
 import truncateEthAddress from 'truncate-eth-address'
 import { GcDaoContext } from '../../context/context'
@@ -40,29 +41,45 @@ const Proposal = ({ proposal }: any) => {
   }, [statusText, statusColor, proposal.state])
 
   return (
-    <div className="text-gray-200 border-2 border-gray-900 bg-[#121212] rounded-md my-4 font-semibold mx-4">
+    <div className="text-gray-200 border-2 border-gray-800 bg-[#121212] rounded-md my-4 font-semibold mx-4">
       
       {/* Proposer */}
       <div className="m-4">
-        <span className={`rounded-lg py-1 px-2 my-2`} style={{ backgroundColor: statusColor }}>{statusText}</span> <br />
+        <span className={`rounded-lg py-1 px-2 my-2 mb-4`} style={{ backgroundColor: statusColor }}>{statusText}</span> <br />
         <span className="my-2">Proposer: {proposal.proposer}</span> <br />
         <div className='font-bold text-lg'>Propose: <span className="text-[#DC143C]">{proposal.description}</span></div>
 
         {proposal.votes.map((vote: any) => {
           return (
-            <div key={Math.random()} className="my-1 p-2 border-2 border-gray-900 rounded-md">
+            <div key={Math.random()} className="my-1 p-2 border-2 border-gray-800 hover:border-[#DC143C] rounded-md cursor-pointer bg-black"
+              onClick={() => {
+                voteFor(proposal.proposalId, vote.label, '')
+              }}>
               <button
                 className=''
                 key={Math.random()}
-                onClick={() => {
-                  voteFor(proposal.proposalId, vote.label, '')
-                }}
               >
                 {vote.label}
               </button>
             </div>
           )
         })}
+
+        <div className='flex space-x-2 md:space-x-4 text-gray-300 text-sm font-semibolds'>
+          {
+            proposal.votes.map((vote: any) => {
+              const voteCount = ethers.utils.formatEther(vote.count)
+
+              return (
+                <div key={Math.random()}>
+                  <div>
+                    {vote.label}: {Math.trunc(parseFloat(voteCount))} GC Token
+                  </div>
+                </div>
+              )
+            })
+          }
+        </div>
       </div>
 
     </div>
