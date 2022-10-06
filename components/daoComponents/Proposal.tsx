@@ -49,7 +49,7 @@ const Proposal = ({ proposal }: any) => {
         <span className="my-2">Proposer: {proposal.proposer}</span> <br />
         <div className='font-bold text-lg'>Propose: <span className="text-[#DC143C]">{proposal.description}</span></div>
 
-        {proposal.state === 2 && proposal.votes.map((vote: any, index: number) => {
+        {statusText === 'Active' && proposal.votes.map((vote: any, index: number) => {
           return (
             <div key={index} className={`my-1 p-2 border-2 border-gray-800 hover:border-[#DC143C] rounded-md cursor-pointer bg-black ${!currentUserAddress && 'cursor-not-allowed'}`}
               onClick={() => {

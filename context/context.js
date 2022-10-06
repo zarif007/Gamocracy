@@ -18,7 +18,6 @@ export const GcDaoProvider = ({ children }) => {
   const token = useToken('0xafeaf690D4d076b5FF46b8B1e44a74Dbfb95ad60')
 
   useEffect(() => {
-
     (async () => {
       try {
         const delegation = await token.getDelegationOf(currentUserAddress)
