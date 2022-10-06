@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { GcDaoContext } from '../../context/context'
 
 const DaoLogin = () => {
-  const { connectWithMetamask, currentUserAddress, disconnectWallet } = useContext(GcDaoContext)
+  const { connectWithMetamask, currentUserAddress, disconnectWallet, delegateToken, isDelegated } = useContext(GcDaoContext)
 
   return (
     <div className='text-white flex'>
@@ -14,6 +14,9 @@ const DaoLogin = () => {
           <button className="py-2 px-6  bg-[#DC143C] font-semibold rounded-md" onClick={disconnectWallet}>
             Disconnet Wallet
           </button> 
+          {/* <button className="py-2 px-6  bg-[#DC143C] font-semibold rounded-md" onClick={delegateToken}>
+            Delegate Token First
+          </button> */}
           <p className='py-2 px-6 bg-[#DC143C] font-semibold rounded-md'>{currentUserAddress}</p>
         </div>
       }

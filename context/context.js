@@ -30,6 +30,13 @@ export const GcDaoProvider = ({ children }) => {
     })()
   }, [])
 
+  const delegateToken = async () => {
+    const delegation = await token.getDelegationOf(currentUserAddress)
+    if (delegation === ethers.constants.AddressZero) {
+      await token.delegateTo(currentUserAddress)
+    }
+  }
+
   const getAllProposals = async () => {
     const proposals = await vote.getAll()
     return proposals
@@ -45,6 +52,9 @@ export const GcDaoProvider = ({ children }) => {
 
   const createProposal = async description => {
     const amount = 100_000
+
+    delegateToken()
+
     const executions = [
       {
         toAddress: token.getAddress(),
@@ -105,7 +115,7 @@ export const GcDaoProvider = ({ children }) => {
         disconnectWallet,
         executeProposal,
         vote,
-
+        delegateToken,
       }}
     >
       {children}
