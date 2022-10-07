@@ -82,7 +82,7 @@ const PostCreation = () => {
       <p className="mt-6 text-xl font-bold text-gray-300">Content</p>
       <TextareaAutosize
         className={`border-2 border-white w-full py-3 bg-black text-3xl font-bold mb-4 mt-1 px-1`}
-        minRows={2}
+        minRows={1}
         placeholder="An Awesome Content"
         defaultValue={`${post.content}`}
         onChange={(e: any) => {
@@ -92,7 +92,7 @@ const PostCreation = () => {
        
        <div className="flex space-x-2">
         <label className="cursor-pointer">
-            <BiImageAdd className="h-8 w-8 hover:animate-spin" />
+            <BiImageAdd className="h-8 w-8" />
             
             <input
                 type="file"
@@ -101,7 +101,7 @@ const PostCreation = () => {
                 onChange={(e: any) => handleImageUpload(e)}
             />
         </label>
-        <BsEmojiSunglassesFill className="h-8 w-6 hover:animate-spin cursor-pointer" />
+        <BsEmojiSunglassesFill className="h-8 w-6 cursor-pointer" />
        </div>
         
         {/* Displaying Added image */}
