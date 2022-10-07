@@ -9,6 +9,9 @@
 
 .env.local
 
+NFT/cache
+NFT/hardhat.config.js
+NFT/artifacts
 # testing
 /coverage
 

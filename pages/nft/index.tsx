@@ -69,16 +69,13 @@ const Nft: NextPage = () => {
     sidebarWrapper: `${
       isSidebarOpen ? "w-2/12" : "w-1/12 ml-7"
     }  hidden md:flex pt-2 md:mt-12 md:mr-4 lg:mr-0`,
-    feedWrapper: `w-full md:w-6/12 lg:w-7/12 md:border-l md:border-r md:border-gray-800`,
-    widgetsWrapper: `md:w-4/12 ${
-      isSidebarOpen ? "lg:w-3/12" : "lg:w-4/12"
-    }  hidden md:flex pt-2 mt-2 border border-gray-800 ml-2 bg-black`,
+    feedWrapper: `w-full md:border-l md:border-r md:border-gray-800`,
   };
   return (
     <div className="bg-black">
       <Head>
         <title>Gamocracy</title>
-        <meta name="description" content="Nft About Games" />
+        <meta name="description" content="Mint And Buy Gaming NFTs" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -91,9 +88,6 @@ const Nft: NextPage = () => {
           <Feed name="Nft" />
           <RenderNFT data={data} />
         </div>
-        <div className={styles.widgetsWrapper}>
-          <Widgets />
-        </div>
       </main>
 
       <ComponenetsForIndexes />
@@ -103,7 +97,7 @@ const Nft: NextPage = () => {
 
 const RenderNFT = ({ data }: any) => {
   return (
-    <div className="m-2 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-1">
+    <div className="m-2 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-1">
       {data.map((nft: any) => {
         return (
           <div key={nft.img} className="flex flex-col mx-auto my-2 cursor-pointer">

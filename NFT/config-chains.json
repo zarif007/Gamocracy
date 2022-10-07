@@ -1,0 +1,37 @@
+{
+    "4": {
+        "NETWORK_NAME": "Rinkeby",
+        "CHAIN_NAME": "Ethereum",
+        "CURRENCY_SYMBOL": "ETH",
+        "NFT_MARKETPLACE_ADDRESS": "0x359f6a8cf6da9b1a886965ce9eb5352bb7913eb4",
+        "NFT_ADDRESS": "0x06c6a25884c36156b3d0105283d9724018b034b0",
+        "IS_MAIN_NET": false,
+        "LOGO_URL": "https://styles.redditmedia.com/t5_2zf9m/styles/communityIcon_hebckbd64w811.png",
+        "CHAIN_ID": "4",
+        "BLOCK_EXPLORER_URL": "https://rinkeby.etherscan.io",
+        "RPC_PROVIDER_URL": "https://rinkeby.infura.io/v3/59b59e23bb7c44d799b5db4a1b83e4ee"
+    },
+    "97": {
+        "NETWORK_NAME": "Testnet",
+        "CHAIN_NAME": "Binance Smart Chain",
+        "CURRENCY_SYMBOL": "BNB",
+        "NFT_MARKETPLACE_ADDRESS": "0xc219B570Efe3a74620F89D884F3DA51e8ebcFfD4",
+        "NFT_ADDRESS": "0xa94EC56924E2E4dcCb48e4987fEadA4B646637a3",
+        "IS_MAIN_NET": false,
+        "LOGO_URL": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Binance-coin-bnb-logo.png/800px-Binance-coin-bnb-logo.png",
+        "CHAIN_ID": "97",
+        "BLOCK_EXPLORER_URL": "https://testnet.bscscan.com",
+        "RPC_PROVIDER_URL": "https://data-seed-prebsc-1-s1.binance.org:8545"
+    },
+    "localhost": {
+        "NETWORK_NAME": "Localhost",
+        "CHAIN_NAME": "Ethereum",
+        "NFT_MARKETPLACE_ADDRESS": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+        "NFT_ADDRESS": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+        "IS_MAIN_NET": false,
+        "LOGO_URL": "https://styles.redditmedia.com/t5_2zf9m/styles/communityIcon_hebckbd64w811.png",
+        "CHAIN_ID": "localhost",
+        "BLOCK_EXPLORER_URL": "https://rinkeby.etherscan.io",
+        "RPC_PROVIDER_URL": ""
+    }
+}
