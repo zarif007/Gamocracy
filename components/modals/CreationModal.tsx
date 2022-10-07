@@ -6,6 +6,7 @@ import { creationModal } from './../../atoms/creationModal';
 import { FcAnswers, FcBarChart, FcDocument, FcEditImage, FcIdea, FcQuestions } from "react-icons/fc";
 import BlogCreation from "../blogComponents/BlogCreation";
 import { IoMdArrowBack } from "react-icons/io";
+import PostCreation from "../postComponents/PostCreation";
 
 const CreationModal = () => {
 
@@ -140,7 +141,10 @@ const CreationModal = () => {
                   }
 
                   {
-                    post && <h1 className="text-white">Post</h1>
+                    post && <div>
+                      <BackToModal open={open} setOpen={setOpen} />
+                      <PostCreation />
+                    </div>
                   }
                   {
                     ask && <h1 className="text-white">ask</h1>

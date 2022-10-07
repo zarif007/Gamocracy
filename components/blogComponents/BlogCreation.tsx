@@ -264,6 +264,7 @@ const BlogCreation = () => {
 
   return (
     <div className="text-white text-2xl">
+      <h1 className="text-4xl my-2 font-bold text-[#DC143C]">Blog Creation</h1>
       {showPreview ? (
         // Preview before uploading part
         <BlogContent blog={blog} />
@@ -309,7 +310,7 @@ const BlogCreation = () => {
           <p className="mt-6 text-xl font-bold text-gray-300">Title</p>
           <input
             className={`border-2 border-white w-full py-3 bg-black text-3xl font-bold mb-4 mt-1 px-1`}
-            placeholder="Put a Killing Title"
+            placeholder="A Killing Title"
             defaultValue={`${blog.title}`}
             onChange={(e: any) => {
               setBlog({ ...blog, title: e.target.value });
