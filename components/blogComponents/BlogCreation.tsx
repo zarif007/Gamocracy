@@ -250,16 +250,15 @@ const BlogCreation = () => {
         if (res.status === 201) {
           showNotification("Blog Uploaded 😎");
           router.push(`/blog/${res.data.blogId}`);
-          setIsLoading(false);
         } else {
           setError("Over sized data (400KB)");
-          setIsLoading(false);
         }
       });
     } catch {
       setError("Over sized data");
-      setIsLoading(false);
     }
+
+    setIsLoading(false);
   };
 
   return (

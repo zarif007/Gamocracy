@@ -1,21 +1,86 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import postInterface from "../../Interfaces/PostInterface";
 import TextareaAutosize from 'react-textarea-autosize';
 import { BiImageAdd } from "react-icons/bi";
 import { BsEmojiSunglassesFill } from "react-icons/bs";
 import { FaGgCircle } from "react-icons/fa";
+import AWS from "aws-sdk";
+import axios from "axios";
+import { apiEndpoints } from "../../domain";
+import { useRouter } from "next/router";
+
+const s3 = new AWS.S3({
+  credentials: {
+    accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEYID || "",
+    secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEYID || "",
+  },
+});
 
 const PostCreation = () => {
   const [post, setPost] = useState<postInterface>({
+    postId: "",
     title: "",
     content: "",
     images: [],
   });
 
   const [imagesInBase64, setImagesInBase64] = useState<string[]>([]);
+  const [imagesInFileFormat, setImagesInFileFormat] = useState<string[]>([]);
+
   const [error, setError] = useState<string>('');
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const router = useRouter();
+
+  // Updating post title that will be used as imageName and id
+  useEffect(() => {
+    setError("");
+
+    if (post.title === "") return;
+
+    let updatedTitle2 = "";
+
+    for (let i = 0; i < post.title.length; i++) {
+      if (/\d/.test(post.title[i]) || /[a-zA-Z]/.test(post.title[i])) {
+        updatedTitle2 = updatedTitle2 + post.title[i];
+      }
+    }
+
+    if (updatedTitle2 === "") {
+      setError("Title must contain a-z or A-Z or 0-9");
+      return;
+    }
+
+    setPost({
+      ...post,
+      postId: `${updatedTitle2
+        .replaceAll(" ", "-")
+        .toLowerCase()}-${Date.now()}`,
+    });
+  }, [post.title]);
+
+  // Upload Image on S3
+  const uploadImageOnS3 = async () => {
+    await Promise.all(imagesInFileFormat.map(async (image: string, index: number) => {
+      const imageName = `post/${post.postId + index}.jpeg`;
+
+      const params = {
+        Bucket: "gc-s3images",
+        Key: imageName,
+        Body: image,
+      };
+  
+      try {
+        const uploadedDataOns3 = await s3.upload(params).promise();
+        const up = post;
+        up.images = [ ...up.images, uploadedDataOns3.Location ];
+        setPost(up);
+      } catch (err) {
+        console.log("error", err);
+      }
+    }))
+  };
 
   const handleImageUpload = (e: any) => {
     setError("");
@@ -30,8 +95,7 @@ const PostCreation = () => {
       return;
     }
 
-    // setCoverImageInUrl();
-    setPost( { ...post, images: [ ...post.images, e.target.files[0] ]} )
+    setImagesInFileFormat([ ...imagesInFileFormat, e.target.files[0]])
     const reader = new FileReader();
 
     reader.onloadend = () => {
@@ -45,26 +109,29 @@ const PostCreation = () => {
 
     const updatedBase64: string[] = [];
 
-    const updatedImages: string[] = [];
+    const updatedFile: string[] = [];
 
-    imagesInBase64.map((image: string, i: number) => {
-        if(i !== index) {
-            updatedBase64.push(image);
-        } 
-    })
-
-    post.images.map((image: string, i: number) => {
-        if(i !== index) {
-            updatedImages.push(image);
-        } 
-    })
+    for(let i = 0; i < imagesInBase64.length; i++) {
+      if(i !== index) {
+        updatedBase64.push(imagesInBase64[i]);
+        updatedFile.push(imagesInFileFormat[i]);
+      }
+    }
 
     setImagesInBase64(updatedBase64);
-    setPost({ ...post, images: updatedImages })
+    setImagesInFileFormat(updatedFile);
   }
 
-  const handleSubmit = () => {
-    console.log(post);
+  const handleSubmit = async () => {
+
+    if(isLoading) return;
+
+    setIsLoading(true);
+
+    await uploadImageOnS3();
+
+    console.log(post)
+    setIsLoading(false);
   }
 
   return (

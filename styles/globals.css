@@ -91,3 +91,7 @@ p{
 .jodit-toolbar-button__button {
   background-color: #d1d5db !important;
 }
+
+.awssld__bullets {
+  display: none !important;
+}
