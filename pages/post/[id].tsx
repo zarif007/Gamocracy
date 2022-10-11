@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
+import NavBar from "../../components/navBars/NavBar";
 
 const post: postInterface = {
   content: `Today, zekken has already made a name for himself as one of the brightest spots on the XSET roster that came from behind to become arguably the second-best team in North America. At Valorant Champions 2022, they also showed up against some of the strongest international competition, taking down FunPlus Phoenix and Fnatic.
@@ -24,31 +25,32 @@ const post: postInterface = {
 
 const Post = () => {
 
-  const [imageCount, setImageCount] = useState(0);
   return (
-    <div className="max-w-full md:max-w-7xl  mx-auto mt-12">
-      <div className="bg-[#121212]">
+    <div className="">
+      <NavBar />
+      <div className="bg-[#121212] mt-4 rounded-md mb-20 md:mb-4 border-2 border-[#DC143C] max-w-5xl mx-auto">
         <Swiper
-          className=""
+          className="bg-black rounded-md"
           spaceBetween={50}
           slidesPerView={1}
-          onSlideChange={() => setImageCount(imageCount + 1)}
+          onSlideChange={() => {}}
           onSwiper={(swiper) => console.log(swiper)}
         >
           {
             post.images.map((image: string, index: number) => {
               return (
-                <SwiperSlide className="my-auto" key={index}>
-                  <img src={image} className="h-[600px] w-full object-contain" />
+                <SwiperSlide className="my-auto grid" key={index}>
+                  <div className="text-sm text-gray-300 bg-gray-900 justify-self-end py-1 px-1 rounded-md mt-1 -mb-8 mr-1 z-20">{index + 1}/{post.images.length}</div>
+                  <img src={image} className="sm:h-[400px] md:h-[600px] w-full object-contain" />
                 </SwiperSlide>
               )
             })
           }
         </Swiper>
-      </div>
 
-      <div className="my-4 text-5xl font-bold text-[#DC143C]">{post.title}</div>
-      <div className="my-4 text-xl font-semibold text-gray-300">{post.content}</div>
+        <div className="my-4 text-3xl md:text-5xl font-bold text-[#DC143C] mx-2">{post.title}</div>
+        <div className="my-4 text-lg md:text-xl font-semibold text-gray-300 mx-2">{post.content}</div>
+      </div>
     </div>
   );
 };

@@ -11,6 +11,7 @@ import { useContext, useState, useEffect } from 'react'
 import { GcDaoContext } from '../../context/context'
 import Proposal from '../../components/daoComponents/Proposal'
 import { showNotification } from '../_app'
+import Spinner from '../../components/reusable/Spinner'
 
 
 const Vote: NextPage = () => {
@@ -84,10 +85,10 @@ const Vote: NextPage = () => {
                 </div>
             </div>
             {
-              proposals && 
+              proposals.length > 0 ? 
               proposals.map((proposal, index) => {
                 return <Proposal key={index} proposal={proposal} />
-              })
+              }) : <Spinner />
             }
           </div>
       </main>
