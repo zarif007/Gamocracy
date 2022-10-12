@@ -5,9 +5,8 @@ import { BiImageAdd } from "react-icons/bi";
 import { BsEmojiSunglassesFill } from "react-icons/bs";
 import { FaGgCircle } from "react-icons/fa";
 import AWS from "aws-sdk";
-import axios from "axios";
-import { apiEndpoints } from "../../domain";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 const s3 = new AWS.S3({
   credentials: {
@@ -17,10 +16,16 @@ const s3 = new AWS.S3({
 });
 
 const PostCreation = () => {
+  const { data: session } = useSession();
+
   const [post, setPost] = useState<postInterface>({
+    type: "post",
     postId: "",
     title: "",
     content: "",
+    author: "",
+    createdAt: "",
+    updatedAt: "",
     images: [],
   });
 
@@ -59,6 +64,13 @@ const PostCreation = () => {
         .toLowerCase()}-${Date.now()}`,
     });
   }, [post.title]);
+
+  // Getting author email from session
+  useEffect(() => {
+    const updated = post;
+    updated.author = session?.user?.email || "";
+    setPost(updated);
+  }, [session]);
 
   // Upload Image on S3
   const uploadImageOnS3 = async () => {
@@ -127,6 +139,13 @@ const PostCreation = () => {
     if(isLoading) return;
 
     setIsLoading(true);
+
+    let uploadingTime: string = new Date(Date.now()).toISOString();
+
+    const updated = post;
+    updated.createdAt = uploadingTime;
+    updated.updatedAt = uploadingTime;
+    setPost(updated);
 
     await uploadImageOnS3();
 

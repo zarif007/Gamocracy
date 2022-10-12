@@ -167,7 +167,7 @@ const BlogCreation = () => {
     });
   }, [blog.title]);
 
-  // Getting author email for session
+  // Getting author email from session
   useEffect(() => {
     const updated = blog;
     updated.author = session?.user?.email || "";
