@@ -29,9 +29,9 @@ const Post = () => {
 
   const addEmoji = (e: any) => {
     const updated = selectedEmojies;
-    updated[`${e.emoji}`] = updated[`${e.emoji}`] === undefined ? 1 : updated[`${e.emoji}`] + 1;
+    updated[`${e}`] = updated[`${e}`] === undefined ? 1 : selectedEmojies[`${e}`] + 1;
+    !emojiesArrayfied.includes(e) && setEmojiesArrayfied([ ...emojiesArrayfied, e ]);
     setSelectedEmojies(updated);
-    !emojiesArrayfied.includes(e.emoji) && setEmojiesArrayfied([ ...emojiesArrayfied, e.emoji ]);
   }
 
   return (
@@ -50,8 +50,8 @@ const Post = () => {
             emojiesArrayfied.map((emoji: any, index: number) => {
                 return (
                   <span key={index} className="">
-                    <p className="w-10 h-10 text-3xl cursor-pointer rounded-full bg-red-500">{ emoji }</p>
-                    <p>{ selectedEmojies[emoji] }</p>
+                    <p className="w-10 h-10 text-3xl cursor-pointer rounded-full bg-red-500" onClick={() => addEmoji(emoji)}>{ emoji }</p>
+                    <p className="text-white">{ selectedEmojies[emoji] }</p>
                   </span>
                 )
               })
@@ -60,7 +60,7 @@ const Post = () => {
           <div>
             <MdOutlineAddCircle className="text-gray-200 bg-zinc-800 rounded-full w-10 h-10 p-1 cursor-pointer" onClick={() => setShowEmojiPicker(!showEmojiPicker)} />
             {
-              showEmojiPicker && <EmojiPicker onEmojiClick={(e) => addEmoji(e)} theme={Theme.DARK} />
+              showEmojiPicker && <EmojiPicker onEmojiClick={(e) => addEmoji(e.emoji)} theme={Theme.DARK} />
             }
           </div>
         </div>
