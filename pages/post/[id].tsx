@@ -4,6 +4,7 @@ import NavBar from "../../components/navBars/NavBar";
 import Slider from "../../components/reusable/Slider";
 import { Theme } from 'emoji-picker-react';
 import { MdOutlineAddCircle } from "react-icons/md";
+import { useSession } from "next-auth/react";
 
 const post: any = {
   content: `Today, zekken has already made a name for himself as one of the brightest spots on the XSET roster that came from behind to become arguably the second-best team in North America. At Valorant Champions 2022, they also showed up against some of the strongest international competition, taking down FunPlus Phoenix and Fnatic.
@@ -19,19 +20,44 @@ const post: any = {
   title: "How zekken went from Silver 1 to Sentinels’ main duelist",
 };
 
+interface reactionInterface {
+  emoji: string,
+  reactors: string[],
+}
+
 const Post = () => {
+
+  const { data: session } = useSession();
 
   const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
 
-  const [selectedEmojies, setSelectedEmojies] = useState<any>({});
+  const [reactions, setReactions] = useState<reactionInterface[]>([{ emoji: '😁', reactors: ['eee'] }]);
 
-  const [emojiesArrayfied, setEmojiesArrayfied] = useState<any>([]);
+  const addEmoji = (e: string) => {
+    if(!session?.user?.email) return;
 
-  const addEmoji = (e: any) => {
-    const updated = selectedEmojies;
-    updated[`${e}`] = updated[`${e}`] === undefined ? 1 : selectedEmojies[`${e}`] + 1;
-    !emojiesArrayfied.includes(e) && setEmojiesArrayfied([ ...emojiesArrayfied, e ]);
-    setSelectedEmojies(updated);
+    const updated: reactionInterface[] = reactions;
+
+    let alreadyReacted = false;
+    let storedReactors: string[] = [];
+
+    updated.map((reaction: reactionInterface, index: number) => {
+      if(reaction.emoji === e) {
+        if(reaction.reactors.includes(session?.user?.email || '')) {
+          alreadyReacted = true;
+          return;
+        }
+        storedReactors = reaction.reactors;
+        updated.splice(index, 1);
+        setReactions(updated);
+        return;
+      }
+    })
+
+    if(alreadyReacted) return;
+
+    storedReactors.length ? setReactions([ ...reactions, { emoji: e, reactors: [ ...storedReactors, session?.user?.email || ''] }]) :
+      setReactions([ ...reactions, { emoji: e, reactors: [session?.user?.email || ''] }]);
   }
 
   return (
@@ -47,24 +73,24 @@ const Post = () => {
 
         <div className="flex space-x-2 -mt-6 ml-2">
           {
-            emojiesArrayfied.map((emoji: any, index: number) => {
-                return (
-                  <span key={index} className="">
-                    <p className="w-10 h-10 text-3xl cursor-pointer rounded-full bg-red-500" onClick={() => addEmoji(emoji)}>{ emoji }</p>
-                    <p className="text-white">{ selectedEmojies[emoji] }</p>
-                  </span>
-                )
-              })
+            reactions.map((reaction: reactionInterface, index: number) => {
+              return (
+                <span key={index} className="flex justify-center items-center flex-col">
+                  <p className="w-10 h-10 text-3xl cursor-pointer rounded-full bg-red-500 mx-auto" onClick={() => addEmoji(reaction.emoji)}>{ reaction.emoji }</p>
+                  <p className="text-white">{ reaction.reactors.length }</p>
+                </span>
+              )
+            })
           }
-
-          <div>
-            <MdOutlineAddCircle className="text-gray-200 bg-zinc-800 rounded-full w-10 h-10 p-1 cursor-pointer" onClick={() => setShowEmojiPicker(!showEmojiPicker)} />
+          <MdOutlineAddCircle className="text-gray-200 bg-zinc-800 rounded-full w-10 h-10 p-1 cursor-pointer" onClick={() => setShowEmojiPicker(!showEmojiPicker)} />
+        </div>
+        <div>
             {
               showEmojiPicker && <EmojiPicker onEmojiClick={(e) => addEmoji(e.emoji)} theme={Theme.DARK} />
             }
-          </div>
-        </div>
-      </div>      
+          </div> 
+      </div>
+           
     </div>
   );
 };
