@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
-import EmojiPicker from 'emoji-picker-react';
+import React, { useState } from "react";
 import NavBar from "../../components/navBars/NavBar";
 import Slider from "../../components/reusable/Slider";
-import { Theme } from 'emoji-picker-react';
 import { MdOutlineAddCircle } from "react-icons/md";
 import { useSession } from "next-auth/react";
+import EmojiPickerModal from "../../components/modals/EmojiPickerModal";
+import { useRecoilState } from "recoil";
+import { emojiPickerModal } from "../../atoms/emojiPickerAtom";
 
 const post: any = {
   content: `Today, zekken has already made a name for himself as one of the brightest spots on the XSET roster that came from behind to become arguably the second-best team in North America. At Valorant Champions 2022, they also showed up against some of the strongest international competition, taking down FunPlus Phoenix and Fnatic.
@@ -29,11 +30,12 @@ const Post = () => {
 
   const { data: session } = useSession();
 
-  const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
+  const [showEmojiPicker, setShowEmojiPicker] = useRecoilState(emojiPickerModal);
 
   const [reactions, setReactions] = useState<reactionInterface[]>([{ emoji: '😁', reactors: ['eee'] }]);
 
   const addEmoji = (e: string) => {
+    console.log(e)
     if(!session?.user?.email) return;
 
     const updated: reactionInterface[] = reactions;
@@ -76,18 +78,18 @@ const Post = () => {
             reactions.map((reaction: reactionInterface, index: number) => {
               return (
                 <span key={index} className="flex justify-center items-center flex-col">
-                  <p className="w-10 h-10 text-3xl cursor-pointer rounded-full bg-red-500 mx-auto" onClick={() => addEmoji(reaction.emoji)}>{ reaction.emoji }</p>
+                  <div className="w-10 h-10 text-3xl cursor-pointer rounded-md bg-[#DC143C] mx-auto" onClick={() => addEmoji(reaction.emoji)}>
+                    { reaction.emoji }
+                  </div>
                   <p className="text-white">{ reaction.reactors.length }</p>
                 </span>
               )
             })
           }
-          <MdOutlineAddCircle className="text-gray-200 bg-zinc-800 rounded-full w-10 h-10 p-1 cursor-pointer" onClick={() => setShowEmojiPicker(!showEmojiPicker)} />
+          <MdOutlineAddCircle className="text-gray-200 bg-zinc-800 rounded-full w-10 h-10 p-1 cursor-pointer" onClick={() => setShowEmojiPicker(true)} />
         </div>
         <div>
-            {
-              showEmojiPicker && <EmojiPicker onEmojiClick={(e) => addEmoji(e.emoji)} theme={Theme.DARK} />
-            }
+            <EmojiPickerModal addEmoji={addEmoji} />
           </div> 
       </div>
            
