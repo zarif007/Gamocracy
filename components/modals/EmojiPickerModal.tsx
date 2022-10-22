@@ -11,7 +11,7 @@ const EmojiPickerModal = ({ addEmoji }: any) => {
     const [currentTheme] = useRecoilState(theme);
 
     const styles = {
-        secondWrapper: ` bg-${currentTheme.background} border-[${currentTheme.crimson}]  border-2 rounded-lg px-4 pt-5 pb-4 sm:p-6 `,
+        secondWrapper: ` bg-${currentTheme.background} border-[${currentTheme.crimson}]  border-2 rounded-lg sm:p-6 `,
     };
     return (
         <Transition.Root show={open} as={Fragment}>
@@ -43,9 +43,9 @@ const EmojiPickerModal = ({ addEmoji }: any) => {
                         >
                             {/* Content Goes here */}
                             <Dialog.Panel
-                                className={`relative bg-[${currentTheme.wrapper}] rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full`}>
+                                className={`relative bg-[${currentTheme.wrapper}] rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8`}>
                                 <div className={styles.secondWrapper}>
-                                    <EmojiPicker width={425} onEmojiClick={(e) => addEmoji(e.emoji)} theme={Theme.DARK} />
+                                    <EmojiPicker width="320px" onEmojiClick={(e) => addEmoji(e.emoji)} theme={Theme.DARK} />
                                 </div>
                             </Dialog.Panel>
                         </Transition.Child>

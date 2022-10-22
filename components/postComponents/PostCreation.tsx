@@ -18,6 +18,8 @@ const s3 = new AWS.S3({
 const PostCreation = () => {
   const { data: session } = useSession();
 
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false)
+
   const [post, setPost] = useState<postInterface>({
     type: "post",
     postId: "",
@@ -187,7 +189,9 @@ const PostCreation = () => {
                 onChange={(e: any) => handleImageUpload(e)}
             />
         </label>
-        <BsEmojiSunglassesFill className="h-8 w-6 cursor-pointer" />
+        <BsEmojiSunglassesFill className="h-8 w-6 cursor-pointer" onClick={() => {}} />
+        <div>
+        </div>
        </div>
         
         {/* Displaying Added image */}
