@@ -93,7 +93,7 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
         </div>
       </div>
 
-      <div className="flex space-x-2 -mt-6 ml-2">
+      <div className="flex space-x-2 -mt-6 ml-2 flex-wrap">
         {reactions && reactions
           .sort((a, b) => {
             if (a.reactors.length > b.reactors.length) return -1;
