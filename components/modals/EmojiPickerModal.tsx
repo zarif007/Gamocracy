@@ -45,7 +45,10 @@ const EmojiPickerModal = ({ addEmoji }: any) => {
                             <Dialog.Panel
                                 className={`relative bg-[${currentTheme.wrapper}] rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8`}>
                                 <div className={styles.secondWrapper}>
-                                    <EmojiPicker width="320px" onEmojiClick={(e) => addEmoji(e.emoji)} theme={Theme.DARK} />
+                                    <p className={`text-lg font-bold text-[${currentTheme.crimson}] mb-2`}>Pick Emoji</p>
+                                    <div>
+                                        <EmojiPicker width="320px" onEmojiClick={(e) => addEmoji(e.emoji)} theme={Theme.DARK} />
+                                    </div>
                                 </div>
                             </Dialog.Panel>
                         </Transition.Child>

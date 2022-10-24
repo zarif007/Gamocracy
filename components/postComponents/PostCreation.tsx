@@ -7,6 +7,10 @@ import { FaGgCircle } from "react-icons/fa";
 import AWS from "aws-sdk";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+import axios from "axios";
+import { apiEndpoints } from "../../domain";
+import { showNotification } from "../../pages/_app";
+import postReactionInterface from './../../Interfaces/PostReactionInterface';
 
 const s3 = new AWS.S3({
   credentials: {
@@ -29,6 +33,7 @@ const PostCreation = () => {
     createdAt: "",
     updatedAt: "",
     images: [],
+    reactions: [],
   });
 
   const [imagesInBase64, setImagesInBase64] = useState<string[]>([]);
@@ -152,6 +157,19 @@ const PostCreation = () => {
     await uploadImageOnS3();
 
     console.log(post)
+
+    try {
+      await axios.post(apiEndpoints.post, post).then((res) => {
+        if (res.status === 201) {
+          showNotification("Post Uploaded 😎");
+          router.push(`/post/${res.data.postId}`);
+        } else {
+          setError("Failed to Upload, try again later");
+        }
+      });
+    } catch {
+      setError("Failed to Upload, try again later");
+    }
     setIsLoading(false);
   }
 

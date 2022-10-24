@@ -1,3 +1,5 @@
+import postReactionInterface from "./PostReactionInterface";
+
 export default interface postInterface {
     type: string;
     postId: string;
@@ -6,6 +8,7 @@ export default interface postInterface {
     author: string;
     createdAt: string;
     updatedAt: string;
-    images: string[]
+    images: string[];
+    reactions: postReactionInterface[];
   }
   
