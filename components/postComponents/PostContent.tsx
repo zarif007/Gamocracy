@@ -1,10 +1,13 @@
+import axios from "axios";
 import { useSession } from "next-auth/react";
 import React, { useState, useEffect } from "react";
 import { MdOutlineAddCircle } from "react-icons/md";
 import { useRecoilState } from "recoil";
 import { emojiPickerModal } from "../../atoms/emojiPickerAtom";
+import { apiEndpoints } from "../../domain";
 import postInterface from "../../Interfaces/PostInterface";
 import postReactionInterface from "../../Interfaces/PostReactionInterface";
+import { showNotification } from "../../pages/_app";
 import EmojiPickerModal from "../modals/EmojiPickerModal";
 import Slider from "../reusable/Slider";
 
@@ -22,7 +25,10 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
   }, [post])
 
   const addEmoji = (e: string) => {
-    if (!session?.user?.email) return;
+    if (!session?.user?.email) {
+      showNotification("Login to react 😐");
+      return;
+    }
 
     const updated: postReactionInterface[] = reactions;
 
@@ -45,26 +51,29 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
       ? storedReactors.length === 1
         ? setReactions([...reactions])
         : setReactions([
-            ...reactions,
-            {
-              emoji: e,
-              reactors: [
-                ...storedReactors.filter((x) => x !== session.user?.email),
-              ],
-            },
-          ])
+          ...reactions,
+          {
+            emoji: e,
+            reactors: [
+              ...storedReactors.filter((x) => x !== session.user?.email),
+            ],
+          },
+        ])
       : storedReactors.length
-      ? setReactions([
+        ? setReactions([
           ...reactions,
           {
             emoji: e,
             reactors: [...storedReactors, session?.user?.email || ""],
           },
         ])
-      : setReactions([
+        : setReactions([
           ...reactions,
           { emoji: e, reactors: [session?.user?.email || ""] },
         ]);
+    console.log({ ...post, reactions })
+    axios.put(`${apiEndpoints.post}/?postId=${post.postId}`, { ...post, reactions })
+        .then(res => console.log(res))
   };
   return (
     <div>
@@ -76,9 +85,9 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
         <div className="my-4 text-lg md:text-xl font-semibold text-gray-300 mx-2 mb-8">
           {
             post.content.split('\n').map((ps: string, index) => {
-                return(
-                    <div key={index}>{ps}</div>
-                )
+              return (
+                <div key={index}>{ps}</div>
+              )
             })
           }
         </div>
@@ -90,7 +99,7 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
             if (a.reactors.length > b.reactors.length) return -1;
             else if (a.reactors.length < b.reactors.length) return 1;
             return 0;
-          })
+          }).slice(0, Math.max(5, reactions.length))
           .map((reaction: postReactionInterface, index: number) => {
             return (
               <span
@@ -98,11 +107,10 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
                 className="flex justify-center items-center flex-col"
               >
                 <div
-                  className={`w-10 h-10 text-3xl cursor-pointer rounded-md  mx-auto hover:bg-[#DC143C] ${
-                    reaction.reactors.includes(session?.user?.email || "")
+                  className={`w-10 h-10 text-3xl cursor-pointer rounded-md  mx-auto hover:bg-[#DC143C] ${reaction.reactors.includes(session?.user?.email || "")
                       ? " bg-[#DC143C]"
                       : "bg-gray-800"
-                  }`}
+                    }`}
                   onClick={() => addEmoji(reaction.emoji)}
                 >
                   {reaction.emoji}
