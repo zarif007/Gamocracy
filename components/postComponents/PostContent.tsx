@@ -82,7 +82,7 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
       .then((res) => console.log(res));
   };
   return (
-    <div>
+    <div className="mx-2 md:mx-0">
       <div className="bg-[#121212] border-2 border-[#DC143C] rounded-md">
         <Slider images={post.images} />
         <div className="my-4 text-3xl md:text-5xl font-bold text-[#DC143C] mx-2">
