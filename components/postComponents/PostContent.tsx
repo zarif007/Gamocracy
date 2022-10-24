@@ -23,7 +23,7 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
     post.reactions !== null && setReactions(post.reactions);
   }, [post]);
 
-  const addEmoji = (e: string) => {
+  const addEmoji = async (e: string) => {
     if (!session?.user?.email) {
       showNotification("Login to react 😐");
       return;
@@ -46,35 +46,38 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
       }
     });
 
+    let updatedReactions = [];
+
     alreadyReacted
       ? storedReactors.length === 1
-        ? setReactions([...reactions])
-        : setReactions([
-            ...reactions,
-            {
-              emoji: e,
-              reactors: [
-                ...storedReactors.filter((x) => x !== session.user?.email),
-              ],
-            },
-          ])
-      : storedReactors.length
-      ? setReactions([
+        ? updatedReactions = [...reactions]
+        : updatedReactions = [
           ...reactions,
           {
             emoji: e,
-            reactors: [...storedReactors, session?.user?.email || ""],
+            reactors: [
+              ...storedReactors.filter((x) => x !== session.user?.email),
+            ],
           },
-        ])
-      : setReactions([
-          ...reactions,
-          { emoji: e, reactors: [session?.user?.email || ""] },
-        ]);
-    console.log({ ...post, reactions });
-    axios
+        ]
+      : storedReactors.length
+      ? updatedReactions = [
+        ...reactions,
+        {
+          emoji: e,
+          reactors: [...storedReactors, session?.user?.email || ""],
+        },
+      ]
+      : updatedReactions = [
+        ...reactions,
+        { emoji: e, reactors: [session?.user?.email || ""] },
+      ]
+    setReactions(updatedReactions)
+
+    await axios
       .put(`${apiEndpoints.post}/?postId=${post.postId}`, {
         ...post,
-        reactions,
+        reactions: updatedReactions,
       })
       .then((res) => console.log(res));
   };
