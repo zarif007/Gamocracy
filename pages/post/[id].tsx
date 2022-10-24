@@ -35,7 +35,6 @@ const Post = () => {
   const [reactions, setReactions] = useState<reactionInterface[]>([{ emoji: '😁', reactors: ['eee'] }]);
 
   const addEmoji = (e: string) => {
-    console.log(e)
     if (!session?.user?.email) return;
 
     const updated: reactionInterface[] = reactions;
@@ -44,11 +43,10 @@ const Post = () => {
     let storedReactors: string[] = [];
 
     updated.map((reaction: reactionInterface, index: number) => {
+      
       if (reaction.emoji === e) {
-        if (reaction.reactors.includes(session?.user?.email || '')) {
-          alreadyReacted = true;
-          return;
-        }
+        if (reaction.reactors.includes(session?.user?.email || '')) alreadyReacted = true;
+
         storedReactors = reaction.reactors;
         updated.splice(index, 1);
         setReactions(updated);
@@ -56,10 +54,10 @@ const Post = () => {
       }
     })
 
-    if (alreadyReacted) return;
-
-    storedReactors.length ? setReactions([...reactions, { emoji: e, reactors: [...storedReactors, session?.user?.email || ''] }]) :
-      setReactions([...reactions, { emoji: e, reactors: [session?.user?.email || ''] }]);
+    alreadyReacted ? (storedReactors.length === 1 ? setReactions([...reactions ]) :
+    setReactions([...reactions, { emoji: e, reactors: [...storedReactors.filter(x => x !== session.user?.email)] }])) : 
+    (storedReactors.length ? setReactions([...reactions, { emoji: e, reactors: [...storedReactors, session?.user?.email || ''] }]) :
+      setReactions([...reactions, { emoji: e, reactors: [session?.user?.email || ''] }]));
   }
 
   return (
@@ -84,7 +82,7 @@ const Post = () => {
             }).map((reaction: reactionInterface, index: number) => {
               return (
                 <span key={index} className="flex justify-center items-center flex-col">
-                  <div className={`w-10 h-10 text-3xl cursor-pointer rounded-md  mx-auto ${reaction.reactors.includes(session?.user?.email || '') ? ' bg-[#DC143C]' : 'bg-gray-800'}`} onClick={() => addEmoji(reaction.emoji)}>
+                  <div className={`w-10 h-10 text-3xl cursor-pointer rounded-md  mx-auto hover:bg-[#DC143C] ${reaction.reactors.includes(session?.user?.email || '') ? ' bg-[#DC143C]' : 'bg-gray-800'}`} onClick={() => addEmoji(reaction.emoji)}>
                     {reaction.emoji}
                   </div>
                   <p className="text-white -mt-3 ml-6">{reaction.reactors.length}</p>
