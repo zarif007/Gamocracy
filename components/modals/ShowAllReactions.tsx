@@ -13,11 +13,11 @@ const ShowAllReactions: React.FC<{ reactions: postReactionInterface[], addEmoji:
     const [currentTheme] = useRecoilState(theme);
 
     const styles = {
-        secondWrapper: ` bg-${currentTheme.background} border-[${currentTheme.crimson}]  border-2 rounded-lg p-6 flex space-x-3 flex-wrap`,
+        secondWrapper: ` bg-${currentTheme.background} border-[${currentTheme.crimson}]  border-2 rounded-lg p-6 flex flex-wrap`,
     };
     return (
         <Transition.Root show={open} as={Fragment}>
-            <Dialog as="div" className="relative z-10" onClose={setOpen}>
+            <Dialog as="div" className="relative z-10 " onClose={setOpen}>
                 <Transition.Child
                     as={Fragment}
                     enter="ease-out duration-300"
@@ -45,7 +45,7 @@ const ShowAllReactions: React.FC<{ reactions: postReactionInterface[], addEmoji:
                         >
                             {/* Content Goes here */}
                             <Dialog.Panel
-                                className={`relative bg-[${currentTheme.wrapper}] rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8`}>
+                                className={`relative bg-[${currentTheme.wrapper}] rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 max-w-3xl`}>
                                 <div className={styles.secondWrapper}>
                                     {reactions &&
                                         reactions
@@ -61,7 +61,7 @@ const ShowAllReactions: React.FC<{ reactions: postReactionInterface[], addEmoji:
                                                         className="flex justify-center items-center flex-col"
                                                     >
                                                         <div
-                                                            className={`w-10 h-10 text-3xl cursor-pointer rounded-md  mx-auto ${reaction.reactors.includes(session?.user?.email || "")
+                                                            className={`w-10 h-10 text-3xl cursor-pointer rounded-md  mx-auto ml-2 ${reaction.reactors.includes(session?.user?.email || "")
                                                                     ? " bg-[#DC143C]"
                                                                     : "bg-gray-800"
                                                                 }`}
