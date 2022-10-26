@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useSession } from "next-auth/react";
+import Head from "next/head";
 import React, { useState, useEffect } from "react";
 import { MdOutlineAddCircle } from "react-icons/md";
 import { useRecoilState } from "recoil";
@@ -10,6 +11,9 @@ import postReactionInterface from "../../Interfaces/PostReactionInterface";
 import { showNotification } from "../../pages/_app";
 import EmojiPickerModal from "../modals/EmojiPickerModal";
 import Slider from "../reusable/Slider";
+import { CgMoreO } from "react-icons/cg";
+import { showAllReactionsAtom } from "../../atoms/showAllReactionsModal";
+import ShowAllReactions from "../modals/ShowAllReactions";
 
 const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
   const { data: session } = useSession();
@@ -18,6 +22,8 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
     useRecoilState(emojiPickerModal);
 
   const [reactions, setReactions] = useState<postReactionInterface[]>([]);
+
+  const [showAllReactions, setShowAllReactions] = useRecoilState(showAllReactionsAtom);
 
   useEffect(() => {
     post.reactions !== null && setReactions(post.reactions);
@@ -83,6 +89,11 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
   };
   return (
     <div className="mx-2 md:mx-0">
+      <Head>
+        <title>{post.title}</title>
+        <meta name="description" content={`${post.title}`} />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="bg-[#121212] border-2 border-[#DC143C] rounded-md">
         <Slider images={post.images} />
         <div className="my-4 text-3xl md:text-5xl font-bold text-[#DC143C] mx-2">
@@ -103,7 +114,7 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
               else if (a.reactors.length < b.reactors.length) return 1;
               return 0;
             })
-            .slice(0, Math.max(5, reactions.length))
+            .slice(0, Math.min(5, reactions.length))
             .map((reaction: postReactionInterface, index: number) => {
               return (
                 <span
@@ -120,12 +131,15 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
                   >
                     {reaction.emoji}
                   </div>
-                  <p className="text-white -mt-3 ml-6">
+                  <p className="text-gray-300 font-semibold -mt-3 ml-6">
                     {reaction.reactors.length}
                   </p>
                 </span>
               );
             })}
+        <ShowAllReactions reactions={reactions} addEmoji={addEmoji} />
+        <CgMoreO className="text-gray-200 bg-zinc-800 rounded-full w-10 h-10 p-1 cursor-pointer"
+          onClick={() => setShowAllReactions(true)} />
         <MdOutlineAddCircle
           className="text-gray-200 bg-zinc-800 rounded-full w-10 h-10 p-1 cursor-pointer"
           onClick={() => setShowEmojiPicker(true)}
