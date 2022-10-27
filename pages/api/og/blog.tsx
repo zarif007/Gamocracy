@@ -1,7 +1,7 @@
 import { ImageResponse } from "@vercel/og";
 
 export const config = {
-    runtime: 'experimental-edge',
+  runtime: 'experimental-edge',
 };
 
 const handler = (req: any) => {
@@ -12,6 +12,8 @@ const handler = (req: any) => {
     const coverImage = searchParams.get('coverImage') ?? 'coverImage'
     const authorName = searchParams.get('authorName') ?? 'authorName'
     const authorImage = searchParams.get('authorImage') ?? 'authorImage'
+
+    console.log('api', title)
 
     return new ImageResponse(
       (
@@ -44,8 +46,8 @@ const handler = (req: any) => {
       ),
 
       {
-        width: 800,
-        height: 400,
+        width: 1200,
+        height: 630,
       }
     );
 }

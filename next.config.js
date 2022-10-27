@@ -14,7 +14,7 @@ const nextConfig = withPWA({
   },
   experimental: {
     scrollRestoration: true
-  }
+  },
 })
 
 module.exports = nextConfig

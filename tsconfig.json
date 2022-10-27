@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_document.js", "components/TextEditor.tsx", "components/textEditor/CkEditor.jsx", "components/SummaryAudio.tsx", "components/reusable/CustomTextEditor.jsx", "components/reusable/textEditor/constants.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_document.js", "components/TextEditor.tsx", "components/textEditor/CkEditor.jsx", "components/SummaryAudio.tsx", "components/reusable/CustomTextEditor.jsx", "components/reusable/textEditor/constants.js", "pages/api/og/blog.jsx"],
   "exclude": ["node_modules"]
 }

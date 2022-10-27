@@ -64,7 +64,7 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
     setBlogContentInString(cn?.textContent || '')
   }, [blog])
 
-  const ogUrl = `${deployedDomain}api/og/blog?title=${title}&coverImage=${coverImage}&authorName=${authorInfo.name}&authorImage=${authorInfo.image}`
+  // const ogUrl = `${deployedDomain}api/og/blog?title=${title}&coverImage=${coverImage}&authorName=${authorInfo.name}&authorImage=${authorInfo.image}`
 
   return (
     <div className="bg-black text-gray-200 mb-4">
@@ -72,7 +72,7 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
         <title>{title}</title>
         <meta name="description" content={blogContentInString.substr(0, Math.min(20, blogContentInString.length))} />
         <link rel="icon" href="/favicon.ico" />
-        <meta property="og:image" content={ogUrl} />
+        <meta property="og:image" content={coverImage} />
       </Head>
       
       <BlogReactionIsland />
