@@ -32,8 +32,6 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
   const countView = () => {
     let cn = document.getElementById(`content-${coverImage}`);
 
-    setBlogContentInString(cn?.textContent?.trim() || '')
-
     const wordCount = cn?.textContent?.trim().split(/\s+/).length || 0;
 
     const saveToDB = () => {
@@ -59,6 +57,12 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
 
     countView()
   }, [])
+
+  useEffect(() => {
+    let cn = document.getElementById(`content-${coverImage}`);
+
+    setBlogContentInString(cn?.textContent || '')
+  }, [blog])
 
 
   return (
