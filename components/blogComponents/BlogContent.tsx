@@ -19,6 +19,8 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
 
   const { author, title, coverImage, blogId, createdAt, content, selectedGames, selectedCategories, views } = blog;
 
+  const [blogContentInString, setBlogContentInString] = useState('');
+
   const router = useRouter();
   const [authorInfo, setAuthorInfo] = useState<userInterface>({
     name: '', 
@@ -29,6 +31,8 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
   // Count and save view count
   const countView = () => {
     let cn = document.getElementById(`content-${coverImage}`);
+
+    setBlogContentInString(cn?.textContent?.trim() || '')
 
     const wordCount = cn?.textContent?.trim().split(/\s+/).length || 0;
 
@@ -61,7 +65,7 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
     <div className="bg-black text-gray-200 mb-4">
       <Head>
         <title>{title}</title>
-        <meta name="description" content={blog.content} />
+        <meta name="description" content={blogContentInString} />
         <link rel="icon" href="/favicon.ico" />
         <meta property="og:image" content={blog.coverImage} />
       </Head>
