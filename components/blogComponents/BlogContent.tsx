@@ -5,7 +5,7 @@ import Image from "next/image";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { apiEndpoints } from "../../domain";
+import { apiEndpoints, deployedDomain } from "../../domain";
 import Moment from 'react-moment';
 import blogInterface from "../../Interfaces/BlogInterface";
 const BlogReactionIsland = dynamic(() => import("./BlogReactionIsland"));
@@ -64,6 +64,7 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
     setBlogContentInString(cn?.textContent || '')
   }, [blog])
 
+  const ogUrl = `${deployedDomain}/api/og/blog?title=${title}&coverImage=${coverImage}&authorName=${authorInfo.name}&authorImage=${authorInfo.image}`
 
   return (
     <div className="bg-black text-gray-200 mb-4">
@@ -71,7 +72,7 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
         <title>{title}</title>
         <meta name="description" content={blogContentInString.substr(0, Math.min(20, blogContentInString.length))} />
         <link rel="icon" href="/favicon.ico" />
-        <meta property="og:image" content={blog.coverImage} />
+        <meta property="og:image" content={ogUrl} />
       </Head>
       
       <BlogReactionIsland />

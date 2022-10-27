@@ -16,6 +16,7 @@
     "@thirdweb-dev/react": "^3.1.2",
     "@thirdweb-dev/sdk": "^3.1.2",
     "@tinymce/tinymce-react": "^4.2.0",
+    "@vercel/og": "0.0.20",
     "aws-sdk": "^2.1204.0",
     "axios": "^0.27.2",
     "dompurify": "^2.3.10",
