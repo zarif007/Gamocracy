@@ -12,10 +12,10 @@ export default async (
     const props: any = [];
 
     await axios.get(apiEndpoints.post)
-        .then(res => props.push(...res.data))
+        .then(res => props.push(...res.data.sort((a: any, b: any) => (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0))))
 
     await axios.get(apiEndpoints.blog)
-        .then(res => props.push(...res.data))
+        .then(res => props.push(...res.data.sort((a: any, b: any) => (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0))))
 
     for(let i = props.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
@@ -32,8 +32,6 @@ async function shuffleArray(array: any) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
-
-    array.sort((a: any, b: any) => (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0))
 
     return array;
 }
