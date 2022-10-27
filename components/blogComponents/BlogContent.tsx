@@ -61,7 +61,7 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
     <div className="bg-black text-gray-200 mb-4">
       <Head>
         <title>{title}</title>
-        <meta name="description" content={`${title}`} />
+        <meta name="description" content={blog.content} />
         <link rel="icon" href="/favicon.ico" />
         <meta property="og:image" content={blog.coverImage} />
       </Head>
