@@ -9,15 +9,13 @@ import SideBar from "../components/navBars/SideBar";
 import Widgets from "../components/Widgets";
 import SignInReminder from "../components/SignInReminder";
 import { useSession } from "next-auth/react";
-import { apiEndpoints } from "../domain";
+import { apiEndpoints, deployedDomain } from "../domain";
 import Redirector from "../components/Redirector";
 
 
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const { data } = await axios.get(
-    apiEndpoints.post
-  );
+  const { data } = await axios.get(`${deployedDomain}api/write`);
 
   return {
     props: {
@@ -28,6 +26,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 const Home: NextPage = ({ props }: any) => {
   const { data: session } = useSession();
+
+  console.log(props.data)
 
   const [isSidebarOpen] = useRecoilState<boolean>(sidebarOpen);
 
@@ -67,7 +67,7 @@ const Home: NextPage = ({ props }: any) => {
             <SideBar />
           </div>
           <div className={styles.feedWrapper}>
-            <Redirector props={props} />
+            <Redirector props={props.data} />
           </div>
           <div className={styles.widgetsWrapper}>
             {!session?.user?.email && <SignInReminder />}

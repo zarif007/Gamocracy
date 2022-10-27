@@ -7,6 +7,7 @@ import PostReactions from './PostReactions';
 const PostContentForTimeline: React.FC<{ post: postInterface }> = ({ post }) => {
 
   const router = useRouter();
+
   return (
     <div className="m-2">
       {/* Image, Title and content  */}  
@@ -14,7 +15,8 @@ const PostContentForTimeline: React.FC<{ post: postInterface }> = ({ post }) => 
         <div className="cursor-pointer" onClick={() => router.push(`post/${post.postId}`)}>
             <Slider images={post.images} />
         </div>
-        <div className="my-4 text-3xl md:text-5xl font-bold text-[#DC143C] mx-2 cursor-pointer">
+        <div className="my-4 text-3xl md:text-5xl font-bold text-[#DC143C] mx-2 cursor-pointer"
+            onClick={() => router.push(`post/${post.postId}`)}>
           {post.title}
         </div>
         <div className="my-4 text-lg md:text-xl font-semibold text-gray-300 mx-2 mb-8">
