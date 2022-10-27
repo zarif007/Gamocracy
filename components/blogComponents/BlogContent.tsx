@@ -64,7 +64,7 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
     setBlogContentInString(cn?.textContent || '')
   }, [blog])
 
-  const ogUrl = `${deployedDomain}/api/og/blog?title=${title}&coverImage=${coverImage}&authorName=${authorInfo.name}&authorImage=${authorInfo.image}`
+  const ogUrl = `${deployedDomain}api/og/blog?title=${title}&coverImage=${coverImage}&authorName=${authorInfo.name}&authorImage=${authorInfo.image}`
 
   return (
     <div className="bg-black text-gray-200 mb-4">
