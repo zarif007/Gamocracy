@@ -1,5 +1,6 @@
 import React from 'react'
 import dynamic from 'next/dynamic';
+import EmojiPickerModal from '../modals/EmojiPickerModal';
 const BottomNav = dynamic(() => import('../navBars/BottomNav'));
 const CreationModal = dynamic(() => import('../modals/CreationModal'));
 const MenuModal = dynamic(() => import('../modals/MenuModal'));

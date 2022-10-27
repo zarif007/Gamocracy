@@ -3,7 +3,6 @@ import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import { useRecoilState } from "recoil";
 import { sidebarOpen } from "../atoms/sidebarOpenAtom";
-import BlogContentForTimeline from "../components/blogComponents/BlogContentForTimeline";
 import ComponenetsForIndexes from "../components/reusable/ComponenetsForIndexes";
 import NavBar from "../components/navBars/NavBar";
 import SideBar from "../components/navBars/SideBar";
@@ -11,22 +10,23 @@ import Widgets from "../components/Widgets";
 import SignInReminder from "../components/SignInReminder";
 import { useSession } from "next-auth/react";
 import { apiEndpoints } from "../domain";
+import Redirector from "../components/Redirector";
 
 
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const { data } = await axios.get(
-    apiEndpoints.blog
+    apiEndpoints.post
   );
 
   return {
     props: {
-      blogs: data,
+      props: data,
     },
   };
 };
 
-const Home: NextPage = ({ blogs }: any) => {
+const Home: NextPage = ({ props }: any) => {
   const { data: session } = useSession();
 
   const [isSidebarOpen] = useRecoilState<boolean>(sidebarOpen);
@@ -50,7 +50,6 @@ const Home: NextPage = ({ blogs }: any) => {
           <link rel="icon" href="/favicon.ico" />
           <link
             rel="stylesheet"
-            href="https://unpkg.com/react-quill@1.3.3/dist/quill.snow.css"
           />
         </Head>
 
@@ -68,11 +67,7 @@ const Home: NextPage = ({ blogs }: any) => {
             <SideBar />
           </div>
           <div className={styles.feedWrapper}>
-            <div className="m-2">
-              {blogs.map((blog: any, index: number) => {
-                return <BlogContentForTimeline key={index} blog={blog} />;
-              })}
-            </div>
+            <Redirector props={props} />
           </div>
           <div className={styles.widgetsWrapper}>
             {!session?.user?.email && <SignInReminder />}
