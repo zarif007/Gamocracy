@@ -9,7 +9,7 @@ const PostContentForTimeline: React.FC<{ post: postInterface }> = ({ post }) => 
   const router = useRouter();
 
   return (
-    <div className="m-2">
+    <div className="">
       {/* Image, Title and content  */}  
       <div className="bg-[#121212] border-2 border-[#DC143C] rounded-md">
         <div className="cursor-pointer" onClick={() => router.push(`post/${post.postId}`)}>
