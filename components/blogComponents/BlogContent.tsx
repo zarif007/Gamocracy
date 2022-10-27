@@ -63,6 +63,7 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
         <title>{title}</title>
         <meta name="description" content={`${title}`} />
         <link rel="icon" href="/favicon.ico" />
+        <meta property="og:image" content={blog.coverImage} />
       </Head>
       
       <BlogReactionIsland />

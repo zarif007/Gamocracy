@@ -93,6 +93,7 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
         <title>{post.title}</title>
         <meta name="description" content={`${post.title}`} />
         <link rel="icon" href="/favicon.ico" />
+        <meta property="og:image" content={post.images[0]} />
       </Head>
       <div className="bg-[#121212] border-2 border-[#DC143C] rounded-md">
         <Slider images={post.images} />
@@ -106,7 +107,7 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
         </div>
       </div>
 
-      <div className="flex space-x-2 -mt-6 ml-2 flex-wrap">
+      <div className="flex space-x-1 -mt-6 ml-2 flex-wrap">
         {reactions &&
           reactions
             .sort((a, b) => {
@@ -122,18 +123,17 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
                   className="flex justify-center items-center flex-col"
                 >
                   <div
-                    className={`w-10 h-10 text-3xl cursor-pointer rounded-md  mx-auto ${
-                      reaction.reactors.includes(session?.user?.email || "")
-                        ? " bg-[#DC143C]"
-                        : "bg-gray-800"
-                    }`}
+                    className={`w-10 h-10 text-3xl cursor-pointer rounded-md  mx-auto ml-2 ${reaction.reactors.includes(session?.user?.email || "")
+                            ? " bg-[#DC143C]"
+                            : "bg-gray-800"
+                        }`}
                     onClick={() => addEmoji(reaction.emoji)}
-                  >
+                >
                     {reaction.emoji}
-                  </div>
-                  <p className="text-gray-300 font-semibold -mt-3 ml-6">
+                </div>
+                <p className="text-gray-300 font-semibold -mt-3 ml-6">
                     {reaction.reactors.length}
-                  </p>
+                </p>
                 </span>
               );
             })}
