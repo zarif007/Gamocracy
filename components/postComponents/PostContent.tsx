@@ -91,7 +91,7 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
     <div className="mx-2 md:mx-0">
       <Head>
         <title>{post.title}</title>
-        <meta name="description" content={post.content.substring(Math.min(20, post.content.length))} />
+        <meta name="description" content={post.content.substr(0, Math.min(20, post.content.length))} />
         <link rel="icon" href="/favicon.ico" />
         <meta property="og:image" content={post.images[0]} />
       </Head>
