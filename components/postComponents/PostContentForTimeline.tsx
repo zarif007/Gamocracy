@@ -65,7 +65,7 @@ const PostContentForTimeline: React.FC<{ post: postInterface }> = ({ post }) => 
             return <div key={index}>{ps}</div>;
           })}
           <span
-            className='text-[#DC143C] cursor-pointer text-sm'
+            className='text-[#DC143C] cursor-pointer text-md'
             onClick={() => {
               router.push(`/post/${post.postId}`);
             }}> ...more</span>
