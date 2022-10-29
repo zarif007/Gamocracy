@@ -17,13 +17,6 @@ export default async (
     await axios.get(apiEndpoints.blog)
         .then(res => props.push(...res.data))
 
-    for(let i = props.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        let temp = props[i];
-        props[i] = props[j];
-        props[j] = temp;
-    }
-    
     res.status(200).json({ success: true, data: await shuffleArray(props) })
 }
 
@@ -33,7 +26,7 @@ async function shuffleArray(array: any) {
         [array[i], array[j]] = [array[j], array[i]];
     }
 
-    array.sort((a: any, b: any) => (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0))
+    // array.sort((a: any, b: any) => (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0))
 
     return array;
 }
