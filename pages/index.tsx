@@ -13,7 +13,6 @@ import { apiEndpoints, deployedDomain } from "../domain";
 import Redirector from "../components/Redirector";
 
 
-
 export const getServerSideProps: GetServerSideProps = async () => {
   const { data } = await axios.get(`${deployedDomain}api/write`);
 

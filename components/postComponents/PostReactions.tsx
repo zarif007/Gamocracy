@@ -12,12 +12,14 @@ import { showNotification } from "../../pages/_app";
 import EmojiPickerModal from "../modals/EmojiPickerModal";
 import ShowAllReactions from "../modals/ShowAllReactions";
 import postInterface from "./../../Interfaces/PostInterface";
+import data from '@emoji-mart/data'
+import Picker from '@emoji-mart/react'
 
 const PostReactions: React.FC<{ post: postInterface, forTimeline: boolean }> = ({ post, forTimeline }) => {
   const { data: session } = useSession();
 
   const [showEmojiPicker, setShowEmojiPicker] =
-    useRecoilState(emojiPickerModal);
+    useState(false);
 
   const [reactions, setReactions] = useState<postReactionInterface[]>([]);
 
@@ -27,7 +29,10 @@ const PostReactions: React.FC<{ post: postInterface, forTimeline: boolean }> = (
     post.reactions !== null && setReactions(post.reactions);
   }, [post]);
 
-  const addEmoji = async (e: string) => {
+  const addEmoji = async (e: any) => {
+    
+    setShowEmojiPicker(false)
+
     if (!session?.user?.email) {
       showNotification("Login to react 😐");
       return;
@@ -130,14 +135,36 @@ const PostReactions: React.FC<{ post: postInterface, forTimeline: boolean }> = (
 
             <MdOutlineAddCircle
               className="text-gray-200 bg-zinc-800 rounded-full w-10 h-10 p-1 cursor-pointer"
-              onClick={() => setShowEmojiPicker(true)}
+              onClick={() => setShowEmojiPicker(!showEmojiPicker)}
             />
           </>
         }
       </div>
-      <div>
+      
+      {/* <div>
         <EmojiPickerModal addEmoji={addEmoji} />
-      </div>
+      </div> */}
+
+      {
+        showEmojiPicker && <Picker 
+        onEmojiSelect={(e: any) => {
+          let sym = e.unified.split('-');
+          let codesArray: any = [];
+          sym.forEach((el: any) => codesArray.push('0x' + el));
+          let emoji = String.fromCodePoint(...codesArray);
+          
+          addEmoji(emoji)
+        }}
+        style={{
+          position: "absolute",
+          marginTop: "465px",
+          marginLeft: -40,
+          maxWidth: "320px",
+          borderRadius: "20px",
+        }}
+        theme="dark"
+      />
+      }
     </>
   );
 };
