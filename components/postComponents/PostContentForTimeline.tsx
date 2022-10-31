@@ -60,7 +60,7 @@ const PostContentForTimeline: React.FC<{ post: postInterface }> = ({ post }) => 
           }
         </div>
 
-        <div className="my-4 text-lg md:text-xl font-semibold text-gray-300 mx-2 mb-8">
+        <div className="my-4 text-sm md:text-md font-bold text-gray-300 mx-2 mb-8">
           {post.content.split("\n").slice(0, Math.min(2, post.content.split("\n").length)).map((ps: string, index) => {
             return <div key={index}>{ps}</div>;
           })}

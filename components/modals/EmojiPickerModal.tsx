@@ -5,6 +5,8 @@ import { emojiPickerModal } from "../../atoms/emojiPickerAtom";
 import { theme } from '../../atoms/themeAtom';
 import EmojiPicker from 'emoji-picker-react';
 import { Theme } from 'emoji-picker-react';
+import data from '@emoji-mart/data'
+import Picker from '@emoji-mart/react'
 
 const EmojiPickerModal = ({ addEmoji }: any) => {
     const [open, setOpen] = useRecoilState(emojiPickerModal);
@@ -45,7 +47,24 @@ const EmojiPickerModal = ({ addEmoji }: any) => {
                             <Dialog.Panel
                                 className={`relative bg-[${currentTheme.wrapper}] rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8`}>
                                 <div className={styles.secondWrapper}>
-                                    <EmojiPicker width="320px" onEmojiClick={(e) => addEmoji(e.emoji)} theme={Theme.DARK} />
+                                <Picker 
+                                    onEmojiSelect={(e: any) => {
+                                    let sym = e.unified.split('-');
+                                    let codesArray: any = [];
+                                    sym.forEach((el: any) => codesArray.push('0x' + el));
+                                    let emoji = String.fromCodePoint(...codesArray);
+                                    
+                                    addEmoji(emoji)
+                                    }}
+                                    style={{
+                                    position: "absolute",
+                                    marginTop: "465px",
+                                    marginLeft: -40,
+                                    maxWidth: "320px",
+                                    borderRadius: "20px",
+                                    }}
+                                    theme="dark"
+                                />
                                 </div>
                             </Dialog.Panel>
                         </Transition.Child>

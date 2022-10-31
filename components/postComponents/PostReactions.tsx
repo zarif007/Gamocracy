@@ -12,14 +12,12 @@ import { showNotification } from "../../pages/_app";
 import EmojiPickerModal from "../modals/EmojiPickerModal";
 import ShowAllReactions from "../modals/ShowAllReactions";
 import postInterface from "./../../Interfaces/PostInterface";
-import data from '@emoji-mart/data'
-import Picker from '@emoji-mart/react'
 
 const PostReactions: React.FC<{ post: postInterface, forTimeline: boolean }> = ({ post, forTimeline }) => {
   const { data: session } = useSession();
 
   const [showEmojiPicker, setShowEmojiPicker] =
-    useState(false);
+    useRecoilState(emojiPickerModal);
 
   const [reactions, setReactions] = useState<postReactionInterface[]>([]);
 
@@ -140,31 +138,9 @@ const PostReactions: React.FC<{ post: postInterface, forTimeline: boolean }> = (
           </>
         }
       </div>
-      
-      {/* <div>
+      <div>
         <EmojiPickerModal addEmoji={addEmoji} />
-      </div> */}
-
-      {
-        showEmojiPicker && <Picker 
-        onEmojiSelect={(e: any) => {
-          let sym = e.unified.split('-');
-          let codesArray: any = [];
-          sym.forEach((el: any) => codesArray.push('0x' + el));
-          let emoji = String.fromCodePoint(...codesArray);
-          
-          addEmoji(emoji)
-        }}
-        style={{
-          position: "absolute",
-          marginTop: "465px",
-          marginLeft: -40,
-          maxWidth: "320px",
-          borderRadius: "20px",
-        }}
-        theme="dark"
-      />
-      }
+      </div>
     </>
   );
 };
