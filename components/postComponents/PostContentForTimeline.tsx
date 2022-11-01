@@ -32,7 +32,7 @@ const PostContentForTimeline: React.FC<{ post: postInterface }> = ({ post }) => 
         <div className="cursor-pointer" onClick={() => router.push(`post/${post.postId}`)}>
             <Slider images={post.images} />
         </div>
-        <div className="my-4 text-3xl md:text-5xl font-bold text-[#DC143C] mx-2 cursor-pointer"
+        <div className="my-4 text-2xl md:text-4xl font-bold text-[#DC143C] mx-2 cursor-pointer"
             onClick={() => router.push(`post/${post.postId}`)}>
           {post.title}
         </div>
@@ -65,7 +65,7 @@ const PostContentForTimeline: React.FC<{ post: postInterface }> = ({ post }) => 
             return <div key={index}>{ps}</div>;
           })}
           <span
-            className='text-[#DC143C] cursor-pointer text-md'
+            className='text-[#DC143C] cursor-pointer'
             onClick={() => {
               router.push(`/post/${post.postId}`);
             }}> ...more</span>

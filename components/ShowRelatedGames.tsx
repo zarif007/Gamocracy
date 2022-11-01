@@ -6,13 +6,13 @@ const ShowRelatedGames: React.FC<{ selectedGames : gameForOptionInterface[]}> = 
   return (
     <div className="flex space-x-1 mx-4">
         {
-        selectedGames && selectedGames.map((game: gameForOptionInterface) => {
-            return (
-            <Tooltip key={game.image} content={`${game.name}`} placement="bottom-start">
-                <img  src={game.image} className="h-10 w-10 border-2 border-[#DC143C] rounded-full cursor-pointer" />
-            </Tooltip>
-            )
-        })
+          selectedGames && selectedGames.map((game: gameForOptionInterface) => {
+              return (
+                <Tooltip key={game.image} content={`${game.name}`} placement="bottom-start">
+                    <img  src={game.image} className="h-10 w-10 border-2 border-[#DC143C] rounded-full cursor-pointer" />
+                </Tooltip>
+              )
+          })
         }
     </div>
   )

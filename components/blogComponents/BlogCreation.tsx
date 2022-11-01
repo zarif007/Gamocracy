@@ -25,6 +25,16 @@ const category: string[] = [
   "Upcoming ⏭️",
 ];
 
+// Blog error interface 
+interface errorInterface {
+  coverImage: string;
+  title: string;
+  content: string;
+  selectedGames: string;
+  selectedCategories: string;
+  others: string;
+}
+
 // S3 Buckect config
 const s3 = new AWS.S3({
   credentials: {
@@ -60,7 +70,14 @@ const BlogCreation = () => {
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const [error, setError] = useState<string>("");
+  const [errors, setErrors] = useState<errorInterface>({
+    coverImage: '',
+    title: '',
+    content: '',
+    selectedGames: '',
+    selectedCategories: '',
+    others: '',
+  });
 
   const [optionsForGames, setOptionsForGames] = useState<
     gameForOptionInterface[]
@@ -70,13 +87,25 @@ const BlogCreation = () => {
   const [optionsForCategories, setOptionsForCategories] =
     useState<string[]>(category);
 
+  const resetErrors = () => {
+    setErrors({
+      coverImage: '',
+      title: '',
+      content: '',
+      selectedGames: '',
+      selectedCategories: '',
+      others: '',
+    });
+  }
+
   // Adding Games to blog obj
   const addGame = (selectedGame: gameForOptionInterface) => {
-    setError("");
+    resetErrors();
+
     if (selectedGame.name === "") return;
 
-    if (blog.selectedGames.length === 3) {
-      setError("Select upto 3 Games");
+    if (blog.selectedGames.length >= 3) {
+      setErrors({ ...errors, selectedGames: 'Set upto 3 Games' });
       return;
     }
 
@@ -109,11 +138,12 @@ const BlogCreation = () => {
   };
 
   const addCategory = (selectedCategory: string) => {
-    setError("");
+    resetErrors();
+
     if (selectedCategory === "") return;
 
     if (blog.selectedCategories.length === 2) {
-      setError("Select upto 2 Category");
+      setErrors({ ...errors, selectedCategories: 'Select upto 2 Categories' });
       return;
     }
 
@@ -142,7 +172,7 @@ const BlogCreation = () => {
 
   // Updating blog title that will be used as imageName and id
   useEffect(() => {
-    setError("");
+    resetErrors();
 
     if (blog.title === "") return;
 
@@ -155,7 +185,7 @@ const BlogCreation = () => {
     }
 
     if (updatedTitle2 === "") {
-      setError("Title must contain a-z or A-Z or 0-9");
+      setErrors({ ...errors, title: "Title must contain a-z or A-Z or 0-9" });
       return;
     }
 
@@ -178,9 +208,10 @@ const BlogCreation = () => {
   const handleImageUpload = (e: any) => {
     const file = e.target.files[0];
 
-    setError("");
+    resetErrors();
+
     if (file.size > 1024 * 1024 * 8) {
-      setError("Over Sized Cover Image(8MB)");
+      setErrors({ ...errors, coverImage: "Over Sized Cover Image(8MB)" });
       return;
     }
 
@@ -215,22 +246,38 @@ const BlogCreation = () => {
     }
   };
 
+  const handleInputsErrors = () => {
+    if(blog.title === "") {
+      setErrors({ ...errors, title: 'Add title' })
+      return 1;
+    }
+    if(blog.coverImage === "") {
+      setErrors({ ...errors, coverImage: 'Add cover image' })
+      return 1;
+    }
+    if(blog.content === "") {
+      setErrors({ ...errors, content: 'Add content' })
+      return 1;
+    }
+    if(blog.selectedCategories.length === 0) {
+      setErrors({ ...errors, selectedCategories: 'Select related Category' })
+      return 1;
+    }
+    if(blog.selectedGames.length === 0) {
+      setErrors({ ...errors, selectedGames: 'Select related Game' })
+      return 1;
+    }
+
+    return 0;
+  }
+
   // Upload coverImage on s3 and upload the entire blog part on dynamoDB
   const handleSubmit = async () => {
     if (isLoading) return;
 
-    setError("");
+    resetErrors();
 
-    if (blog.title === "" || blog.coverImage === "" || blog.content === "") {
-      setError(
-        `Add ${
-          blog.title === ""
-            ? "Title"
-            : blog.coverImage === ""
-            ? "Cover Image"
-            : "Content"
-        }`
-      );
+    if(handleInputsErrors()){
       return;
     }
 
@@ -251,11 +298,11 @@ const BlogCreation = () => {
           showNotification("Blog Uploaded 😎");
           router.push(`/blog/${res.data.blogId}`);
         } else {
-          setError("Over sized data (400KB)");
+          setErrors({ ...errors, others: 'Failed to upload, try again later' });
         }
       });
     } catch {
-      setError("Over sized data");
+      setErrors({ ...errors, others: 'Failed to upload, try again later' });
     }
 
     setIsLoading(false);
@@ -304,6 +351,7 @@ const BlogCreation = () => {
                   />
                 )}
               </div>
+              <div className="mb-6 text-xl font-semibold text-red-500">{errors.coverImage}</div>
             </div>
           </div>
           <p className="mt-6 text-xl font-bold text-gray-300">Title</p>
@@ -315,21 +363,16 @@ const BlogCreation = () => {
               setBlog({ ...blog, title: e.target.value });
             }}
           />
+          <div className="mb-6 text-xl font-semibold text-red-500">{errors.title}</div>
 
           {/* Text Editor for content */}
           <p className="my-2 text-xl font-bold text-gray-300">Content</p>
-          <div className="mb-8 mt-2">
-            {/* <TextEditor
-              value={blog}
-              setValue={setBlog}
-              defaultValue={blog.content}
-            /> */}
-
+          <div className="mb-4 mt-2">
             <CustomTextEditor value={blog}
               setValue={setBlog}
               defaultValue={blog.content} />
-            
           </div>
+          <div className="mb-6 text-xl font-semibold text-red-500">{errors.content}</div>
 
           {/* Related Game uploading part */}
           <p className="my-2 text-xl font-bold text-gray-300">
@@ -364,8 +407,9 @@ const BlogCreation = () => {
             propsOption={optionsForGames}
             addFunction={addGame}
           />
+          <div className="mb-6 text-xl font-semibold text-red-500">{errors.selectedGames}</div>
 
-          {/* Related tags uploading part */}
+          {/* Related Category uploading part */}
           <p className="my-2 text-xl font-bold text-gray-300">
             Select related Category (Max. 2)
           </p>
@@ -397,11 +441,12 @@ const BlogCreation = () => {
             propsOption={optionsForCategories}
             addFunction={addCategory}
           />
+          <div className="mb-6 text-xl font-semibold text-red-500">{errors.selectedCategories}</div>
         </>
       )}
 
       {/* Error */}
-      <div className="mb-2 text-xl font-semibold text-red-500">{error}</div>
+      <div className="mb-6 text-xl font-semibold text-red-500">{errors.others}</div>
 
       {/* Button of preview and post */}
       <div className="flex space-x-2 justify-end mt-2 mb-6">

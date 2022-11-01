@@ -97,7 +97,7 @@ const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => 
 
         {/* Title */}
         <div className="mx-4 mb-4">
-          <h1 className="text-3xl md:text-5xl font-bold my-1 text-[#DC143C] cursor-pointer"
+          <h1 className="text-2xl md:text-4xl font-bold my-1 text-[#DC143C] cursor-pointer"
             onClick={() => {
               router.push(`/blog/${blogId}`);
             }}>
@@ -120,7 +120,7 @@ const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => 
         </div>
 
         {/* Content in short */}
-        <div className='mx-4 mb-1'>
+        <div className='mx-4 mb-1 text-sm md:text-md font-bold'>
           <span className='md:hidden'>{contentInfo.contentInString.slice(0, Math.min(100, contentInfo.contentInString.length))}</span>
           <span className='hidden md:inline'>{contentInfo.contentInString.slice(0, Math.min(250, contentInfo.contentInString.length))}</span>
           <span
