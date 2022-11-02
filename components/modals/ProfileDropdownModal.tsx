@@ -7,6 +7,7 @@ import { RiSettingsFill } from "react-icons/ri";
 import { MdOutlineLogout } from "react-icons/md";
 import { theme } from "../../atoms/themeAtom";
 import EscForModals from "../reusable/EscForModals";
+import { useRouter } from 'next/router';
 
 const ProfileDropDownModal = () => {
 
@@ -14,6 +15,8 @@ const ProfileDropDownModal = () => {
   const [currentTheme] = useRecoilState(theme);
 
   const { data: session } = useSession();
+
+  const router = useRouter();
 
   const styles = {
     secondWrapper: `bg-${currentTheme.background} border-[${currentTheme.crimson}]  border-2 rounded-lg p-2 sm:p-4`,
@@ -57,7 +60,8 @@ const ProfileDropDownModal = () => {
                 <div className={styles.secondWrapper}>
                   <EscForModals setOpen={setOpen} />
                   <div className="">
-                    <div className={styles.fourthWrapper}>
+                    <div className={styles.fourthWrapper}
+                      onClick={() => router.push(`og/${session?.user?.email}`)}>
                       <img
                         src={session?.user?.image || ""}
                         className="w-8 rounded-md"

@@ -10,7 +10,7 @@ const nextConfig = withPWA({
     // disable: process.env.NODE_ENV === 'development',
   },
   images: {
-    domains: ['gc-s3images.s3.amazonaws.com'],
+    domains: ['gc-s3images.s3.amazonaws.com', 'lh3.googleusercontent.com'],
   },
   experimental: {
     scrollRestoration: true
