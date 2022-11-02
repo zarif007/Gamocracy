@@ -6,7 +6,6 @@ import Image from "next/image";
 import { FaGgCircle } from "react-icons/fa";
 import { useRouter } from "next/router";
 const BlogContent = dynamic(() => import("./BlogContent"));
-import AWS from "aws-sdk";
 import { apiEndpoints } from "../../domain";
 import { useSession } from "next-auth/react";
 const Selector = dynamic(() => import("../Selector"));
@@ -14,6 +13,7 @@ import { showNotification } from "../../pages/_app";
 import gameForOptionInterface from "../../Interfaces/GameForOptionInterface";
 import blogInterface from "../../Interfaces/BlogInterface";
 const CustomTextEditor = dynamic(() => import('./../reusable/CustomTextEditor'));
+import s3ImageUploder from './../../s3ImageUploder';
 
 // Category
 const category: string[] = [
@@ -35,13 +35,6 @@ interface errorInterface {
   others: string;
 }
 
-// S3 Buckect config
-const s3 = new AWS.S3({
-  credentials: {
-    accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEYID || "",
-    secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEYID || "",
-  },
-});
 
 const BlogCreation = () => {
   const { data: session } = useSession();
@@ -230,20 +223,9 @@ const BlogCreation = () => {
   const uploadImageOnS3 = async () => {
     const imageName = `blog/${blog.blogId}.jpeg`;
 
-    const params = {
-      Bucket: "gc-s3images",
-      Key: imageName,
-      Body: coverImageInUrl,
-    };
-
-    try {
-      const uploadedDataOns3 = await s3.upload(params).promise();
-      const up = blog;
-      up.coverImage = uploadedDataOns3.Location;
-      setBlog(up);
-    } catch (err) {
-      console.log("error", err);
-    }
+    const up = blog;
+    up.coverImage = await s3ImageUploder(imageName, coverImageInUrl);
+    setBlog(up);
   };
 
   const handleInputsErrors = () => {

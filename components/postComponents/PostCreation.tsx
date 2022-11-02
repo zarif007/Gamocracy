@@ -4,20 +4,13 @@ import TextareaAutosize from 'react-textarea-autosize';
 import { BiImageAdd } from "react-icons/bi";
 import { BsEmojiSunglassesFill } from "react-icons/bs";
 import { FaGgCircle } from "react-icons/fa";
-import AWS from "aws-sdk";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import { apiEndpoints } from "../../domain";
 import { showNotification } from "../../pages/_app";
-import postReactionInterface from './../../Interfaces/PostReactionInterface';
+import s3ImageUploder from './../../s3ImageUploder';
 
-const s3 = new AWS.S3({
-  credentials: {
-    accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEYID || "",
-    secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEYID || "",
-  },
-});
 
 const PostCreation = () => {
   const { data: session } = useSession();
@@ -84,20 +77,9 @@ const PostCreation = () => {
     await Promise.all(imagesInFileFormat.map(async (image: string, index: number) => {
       const imageName = `post/${post.postId + index}.jpeg`;
 
-      const params = {
-        Bucket: "gc-s3images",
-        Key: imageName,
-        Body: image,
-      };
-  
-      try {
-        const uploadedDataOns3 = await s3.upload(params).promise();
-        const up = post;
-        up.images = [ ...up.images, uploadedDataOns3.Location ];
-        setPost(up);
-      } catch (err) {
-        console.log("error", err);
-      }
+      const up = post;
+      up.images = [ ...up.images, await s3ImageUploder(imageName, image) ];
+      setPost(up);
     }))
   };
 
