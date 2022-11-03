@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { showProfileDropdown } from "../../atoms/showProfileDropDownAtom";
 import { signOut, useSession } from "next-auth/react";
@@ -8,15 +8,31 @@ import { MdOutlineLogout } from "react-icons/md";
 import { theme } from "../../atoms/themeAtom";
 import EscForModals from "../reusable/EscForModals";
 import { useRouter } from 'next/router';
+import userInterface from './../../Interfaces/UserInterface';
+import axios from "axios";
+import { apiEndpoints } from "../../domain";
+import LoadingSkeleton from "../reusable/LoadingSkeleton";
 
 const ProfileDropDownModal = () => {
 
   const [open, setOpen] = useRecoilState(showProfileDropdown);
   const [currentTheme] = useRecoilState(theme);
 
+  const [user, setUser] = useState<userInterface>({
+    name: "",
+    image: "",
+    email: "",
+  })
+
   const { data: session } = useSession();
 
   const router = useRouter();
+
+  useEffect(() => {
+    axios.get(`${apiEndpoints.user}/?email=${session?.user?.email || ''}`)
+      .then(res => setUser(res.data))
+
+  }, [session])
 
   const styles = {
     secondWrapper: `bg-${currentTheme.background} border-[${currentTheme.crimson}]  border-2 rounded-lg p-2 sm:p-4`,
@@ -59,29 +75,32 @@ const ProfileDropDownModal = () => {
               <Dialog.Panel className="relative bg-[#121212] rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg w-full">
                 <div className={styles.secondWrapper}>
                   <EscForModals setOpen={setOpen} />
-                  <div className="">
-                    <div className={styles.fourthWrapper}
-                      onClick={() => router.push(`og/${session?.user?.email}`)}>
-                      <img
-                        src={session?.user?.image || ""}
-                        className="w-8 rounded-md"
-                      />
-                      <h1 className={styles.text}>{session?.user?.name}</h1>
-                    </div>
+                  {
+                    user.name !== '' ? <div className="">
+                      <div className={styles.fourthWrapper}
+                        onClick={() => router.push(`og/${user.email}`)}>
+                        <img
+                          src={user.image || ""}
+                          className="w-8 rounded-md"
+                        />
+                        <h1 className={styles.text}>{user.name}</h1>
+                      </div>
 
-                    <div className={styles.fourthWrapper}>
-                      <RiSettingsFill className={`icon`} />
-                      <h1 className={styles.text}>Settings</h1>
-                    </div>
+                      <div className={styles.fourthWrapper}
+                        onClick={() => router.push(`og/settings/${user.email}`)}>
+                        <RiSettingsFill className={`icon`} />
+                        <h1 className={styles.text}>Settings</h1>
+                      </div>
 
-                    <div
-                      className={styles.fourthWrapper}
-                      onClick={() => signOut()}
-                    >
-                      <MdOutlineLogout className={`icon`} />
-                      <h1 className={styles.text}>Logout</h1>
-                    </div>
-                  </div>
+                      <div
+                        className={styles.fourthWrapper}
+                        onClick={() => signOut()}
+                      >
+                        <MdOutlineLogout className={`icon`} />
+                        <h1 className={styles.text}>Logout</h1>
+                      </div>
+                    </div> : <LoadingSkeleton iteration={6} />
+                  }
                 </div>
               </Dialog.Panel>
             </Transition.Child>
