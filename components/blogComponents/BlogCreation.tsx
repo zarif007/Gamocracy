@@ -329,6 +329,7 @@ const BlogCreation = () => {
                     alt="Current Image"
                     width={900}
                     height={300}
+                    objectFit='cover'
                     onClick={() => setCoverImageInBase64("")}
                   />
                 )}
