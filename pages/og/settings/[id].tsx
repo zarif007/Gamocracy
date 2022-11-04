@@ -114,8 +114,7 @@ const UserSettings: React.FC<{ user: userInterface }> = ({ user }) => {
           />
           <p className="mt-6 text-xl font-bold text-gray-300 mb-2">User Image</p>
           <div className="flex space-x-4">
-
-            {
+            {/* {
               updatedUser.image && <Image
                 className="rounded-md"
                 src={userImageInBase64 || updatedUser.image}
@@ -125,7 +124,8 @@ const UserSettings: React.FC<{ user: userInterface }> = ({ user }) => {
                 placeholder='blur'
                 objectFit="cover"
               />
-            }
+            } */}
+            <img src={userImageInBase64 || updatedUser.image} alt="author dp" style={{ width: "200px", }} className="rounded-md" loading="lazy" />
 
             {/* Image uploading */}
             <label className="flex flex-col rounded-md border-2 border-dashed border-white w-32 h-32 p-10 group text-center">
