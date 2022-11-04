@@ -116,7 +116,7 @@ const PostReactions: React.FC<{ post: postInterface, forTimeline: boolean }> = (
                   >
                     {reaction.emoji}
                   </div>
-                  <p className="text-gray-300 font-semibold -mt-3 ml-6">
+                  <p className="text-gray-100 font-bold -mt-3 ml-6">
                     {reaction.reactors.length}
                   </p>
                 </span>
