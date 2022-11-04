@@ -28,10 +28,22 @@ const PostContentForTimeline: React.FC<{ post: postInterface }> = ({ post }) => 
 
   return (
     <div className={`${!post?.reactions && 'mb-12'}`}>
-      {/* Title and author Info */}
       <div className="bg-[#121212] border-2 border-[#DC143C] rounded-md">
-        <div className="flex rounded-md items-top">
-        <div className="m-2 w-3/12 lg:w-2/12">
+
+        {/* Title */}
+        <div className="rounded-md items-center">
+          <div className="text-xl md:text-2xl font-bold text-[#DC143C] mx-2 my-3 cursor-pointer title"
+              onClick={() => router.push(`post/${post.postId}`)}>{post.title}
+          </div>
+        </div>
+
+        {/* Image Slider */}
+        <div className="cursor-pointer" onClick={() => router.push(`post/${post.postId}`)}>
+            <Slider images={post.images} />
+        </div>
+
+        {/* Author Info */}
+        <div className="m-2">
             {
               authorInfo.email ?
                 <div className="flex space-x-2 items-center">
@@ -52,17 +64,6 @@ const PostContentForTimeline: React.FC<{ post: postInterface }> = ({ post }) => 
                 <LoadingSkeleton iteration={2} />
             }
           </div>
-          <div className="my-1 text-xl md:text-2xl font-bold text-[#DC143C] mx-1 cursor-pointer w-9/12 lg:w-10/12 title"
-              onClick={() => router.push(`post/${post.postId}`)}>
-            <span className="hidden lg:inline">{post.title.slice(0,80)}{post.title.length >= 80 && '...'}</span>
-            <span className="lg:hidden">{post.title.slice(0,30)}...</span>
-          </div>
-        </div>
-
-        {/* Image Slider */}
-        <div className="cursor-pointer" onClick={() => router.push(`post/${post.postId}`)}>
-            <Slider images={post.images} />
-        </div>
 
         <div className="my-4 text-sm md:text-md font-bold text-gray-300 mx-2 mb-8">
           {post.content.split("\n").slice(0, Math.min(2, post.content.split("\n").length)).map((ps: string, index) => {

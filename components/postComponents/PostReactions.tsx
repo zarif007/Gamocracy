@@ -91,7 +91,7 @@ const PostReactions: React.FC<{ post: postInterface, forTimeline: boolean }> = (
 
   return (
     <>
-      <div className="flex space-x-1 -mt-6 ml-2 flex-wrap">
+      <div className="flex -mt-6 ml-2 flex-wrap">
         {reactions &&
           reactions
             .sort((a, b) => {
@@ -107,7 +107,7 @@ const PostReactions: React.FC<{ post: postInterface, forTimeline: boolean }> = (
                   className="flex justify-center items-center flex-col"
                 >
                   <div
-                    className={`w-10 h-10 text-3xl cursor-pointer rounded-md  mx-auto ml-2 ${
+                    className={`w-10 h-10 text-3xl cursor-pointer rounded-md mx-1 ${
                       reaction.reactors.includes(session?.user?.email || "")
                         ? " bg-[#DC143C]"
                         : "bg-gray-800"

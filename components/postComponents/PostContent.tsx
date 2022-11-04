@@ -36,14 +36,20 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
         <meta name="description" content={post.content.substr(0, Math.min(20, post.content.length))} />
         <link rel="icon" href="/favicon.ico" />
         <meta property="og:image" content={post.images[0]} />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet" />
       </Head>
 
       {/* Image, Title and content  */}
       <div className="bg-[#121212] border-2 border-[#DC143C] rounded-md">
-        <Slider images={post.images} />
-        <div className="my-4 text-3xl md:text-5xl font-bold text-[#DC143C] mx-2 title">
-          {post.title}
+        {/* Title */}
+        <div className="rounded-md items-center">
+          <div className="text-2xl md:text-4xl font-bold text-[#DC143C] mx-2 my-3 cursor-pointer title">
+            {post.title}
+          </div>
         </div>
+        <Slider images={post.images} />
 
         {/* Author Info  */}
         <div className="m-2">
@@ -68,7 +74,7 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
           }
         </div>
 
-        <div className="my-4 text-lg md:text-xl font-semibold text-gray-300 mx-2 mb-8">
+        <div className="my-4 text-md md:text-lg font-semibold text-gray-300 mx-2 mb-8">
           {post.content.split("\n").map((ps: string, index) => {
             return <div key={index}>{ps}</div>;
           })}
