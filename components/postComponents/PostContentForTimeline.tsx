@@ -52,7 +52,7 @@ const PostContentForTimeline: React.FC<{ post: postInterface }> = ({ post }) => 
                 <LoadingSkeleton iteration={2} />
             }
           </div>
-          <div className="my-1 text-lg md:text-xl font-bold text-[#DC143C] mx-1 cursor-pointer w-9/12 lg:w-10/12 title"
+          <div className="my-1 text-xl md:text-2xl font-bold text-[#DC143C] mx-1 cursor-pointer w-9/12 lg:w-10/12 title"
               onClick={() => router.push(`post/${post.postId}`)}>
             <span className="hidden lg:inline">{post.title.slice(0,80)}{post.title.length >= 80 && '...'}</span>
             <span className="lg:hidden">{post.title.slice(0,30)}...</span>
