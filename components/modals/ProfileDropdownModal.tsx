@@ -82,6 +82,7 @@ const ProfileDropDownModal = () => {
                         onClick={() => router.push(`og/${user.email}`)}>
                         <img
                           src={user.image || ""}
+                          style={{ width: "30px", height: "30px", objectFit: "cover"  }}
                           className="w-8 rounded-md"
                         />
                         <h1 className={styles.text}>{user.name}</h1>

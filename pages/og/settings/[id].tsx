@@ -132,13 +132,13 @@ const UserSettings: React.FC<{ user: userInterface }> = ({ user }) => {
             <img
               src={userImageInBase64 || updatedUser.image}
               alt="author dp"
-              style={{ width: "200px" }}
+              style={{ width: "200px", height: "200px", objectFit: "cover" }}
               className="rounded-md"
               loading="lazy"
             />
 
             {/* Image uploading */}
-            <label className="flex flex-col rounded-md border-2 border-dashed border-white w-32 p-10 group text-center">
+            <label className="flex flex-col rounded-md border-2 border-dashed border-white w-40 p-10 group text-center">
               <div className="h-full w-full text-center flex flex-col justify-center items-center  ">
                 <p className="pointer-none text-gray-500 text-sm md:text-lg">
                   Select a new DP

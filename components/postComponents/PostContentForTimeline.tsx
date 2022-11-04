@@ -47,7 +47,7 @@ const PostContentForTimeline: React.FC<{ post: postInterface }> = ({ post }) => 
             {
               authorInfo.email ?
                 <div className="flex space-x-2 items-center">
-                  <img src={authorInfo.image} alt="author dp" style={{ height: "30px" }} className="rounded-md" />
+                  <img src={authorInfo.image} alt="author dp" style={{ width: "35px", height: "35px", objectFit: "cover" }} className="rounded-md" />
                   <div className="flex flex-col">
                     <h1 className="text-sm text-gray-200">{authorInfo?.name}</h1>
                     <h2 className="text-xs text-gray-500 font-semibold">

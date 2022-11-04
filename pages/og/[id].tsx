@@ -40,7 +40,7 @@ const User: React.FC<{ user: userInterface }> = ({ user }) => {
             placeholder="blur"
           /> */}
 
-          <img src={user.image} alt="author dp" style={{ width: "230px", }} className="rounded-md" />
+          <img src={user.image} alt="author dp" style={{ width: "230px", height: '230px', objectFit: "cover" }} className="rounded-md" />
           <p className="font-bold text-2xl md:text-4xl my-4">{user.name}</p>
           <p onClick={() => router.push(`settings/${user.email}`)}>Seetings</p>
         </div>
