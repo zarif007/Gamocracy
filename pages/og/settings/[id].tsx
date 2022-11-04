@@ -8,6 +8,7 @@ import userInterface from "../../../Interfaces/UserInterface";
 import { FaGgCircle } from "react-icons/fa";
 import s3ImageUploder from './../../../s3ImageUploder';
 import { showNotification } from './../../_app';
+import NavBar from "../../../components/navBars/NavBar";
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { data } = await axios.get(`${apiEndpoints.user}/?email=${params?.id}`);
@@ -97,66 +98,69 @@ const UserSettings: React.FC<{ user: userInterface }> = ({ user }) => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto mt-16">
-      <div className="mx-4">
-        <h1 className="text-4xl my-2 font-bold text-[#DC143C]">
-          User Settings
-        </h1>
-        <p className="mt-6 text-xl font-bold text-gray-300">User Name</p>
-        <input
-          className={`border-2 border-white w-full py-2 bg-black text-xl font-bold mb-4 mt-1 px-1 text-gray-300`}
-          placeholder="User Name"
-          defaultValue={updatedUser.name}
-          onChange={(e: any) => {setUpdatedUser({ ...updatedUser, name: e.target.value })}}
-        />
-        <p className="mt-6 text-xl font-bold text-gray-300 mb-2">User Image</p>
-        <div className="flex space-x-4">
+    <div>
+      <NavBar />
+      <div className="max-w-5xl mx-auto mt-16">
+        <div className="mx-4">
+          <h1 className="text-4xl my-2 font-bold text-[#DC143C]">
+            User Settings
+          </h1>
+          <p className="mt-6 text-xl font-bold text-gray-300">User Name</p>
+          <input
+            className={`border-2 border-white w-full py-2 bg-black text-xl font-bold mb-4 mt-1 px-1 text-gray-300`}
+            placeholder="User Name"
+            defaultValue={updatedUser.name}
+            onChange={(e: any) => {setUpdatedUser({ ...updatedUser, name: e.target.value })}}
+          />
+          <p className="mt-6 text-xl font-bold text-gray-300 mb-2">User Image</p>
+          <div className="flex space-x-4">
 
-          {
-            updatedUser.image && <Image
-              className="rounded-md"
-              src={userImageInBase64 || updatedUser.image}
-              height={130}
-              width={130}
-              blurDataURL={userImageInBase64 || updatedUser.image}
-              placeholder='blur'
-              objectFit="cover"
-            />
-          }
+            {
+              updatedUser.image && <Image
+                className="rounded-md"
+                src={userImageInBase64 || updatedUser.image}
+                height={130}
+                width={130}
+                blurDataURL={userImageInBase64 || updatedUser.image}
+                placeholder='blur'
+                objectFit="cover"
+              />
+            }
 
-          {/* Image uploading */}
-          <label className="flex flex-col rounded-md border-2 border-dashed border-white w-32 h-32 p-10 group text-center">
-            <div className="h-full w-full text-center flex flex-col justify-center items-center  ">
-              <p className="pointer-none text-gray-500 text-sm md:text-lg">
-                Select a new DP
-              </p>
-            </div>
-            <input
-              type="file"
-              accept="image/*"
-              hidden
-              onChange={(e: any) => handleImageUpload(e)}
-            />
-          </label>
-        </div>
-        <div className="mb-6 text-xl font-semibold text-red-500 mt-4">{errors}</div>
-        <div className="flex space-x-2 justify-end pt-4">
-          <button
-            disabled={isLoading}
-            className={`py-1 px-6 rounded-md bg-[#DC143C] text-xl font-semibold text-white ${
-              isLoading && "opacity-80 cursor-not-allowed"
-            }`}
-            onClick={handleSubmit}
-          >
-            {isLoading ? (
-              <div className="flex justify-center items-center space-x-2">
-                <FaGgCircle className="animate-spin h-5 w-5" />
-                <p>Saving</p>
+            {/* Image uploading */}
+            <label className="flex flex-col rounded-md border-2 border-dashed border-white w-32 h-32 p-10 group text-center">
+              <div className="h-full w-full text-center flex flex-col justify-center items-center  ">
+                <p className="pointer-none text-gray-500 text-sm md:text-lg">
+                  Select a new DP
+                </p>
               </div>
-            ) : (
-              <p>Save</p>
-            )}
-          </button>
+              <input
+                type="file"
+                accept="image/*"
+                hidden
+                onChange={(e: any) => handleImageUpload(e)}
+              />
+            </label>
+          </div>
+          <div className="mb-6 text-xl font-semibold text-red-500 mt-4">{errors}</div>
+          <div className="flex space-x-2 justify-end pt-4">
+            <button
+              disabled={isLoading}
+              className={`py-1 px-6 rounded-md bg-[#DC143C] text-xl font-semibold text-white ${
+                isLoading && "opacity-80 cursor-not-allowed"
+              }`}
+              onClick={handleSubmit}
+            >
+              {isLoading ? (
+                <div className="flex justify-center items-center space-x-2">
+                  <FaGgCircle className="animate-spin h-5 w-5" />
+                  <p>Saving</p>
+                </div>
+              ) : (
+                <p>Save</p>
+              )}
+            </button>
+          </div>
         </div>
       </div>
     </div>

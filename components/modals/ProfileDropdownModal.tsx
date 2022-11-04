@@ -12,6 +12,7 @@ import userInterface from './../../Interfaces/UserInterface';
 import axios from "axios";
 import { apiEndpoints } from "../../domain";
 import LoadingSkeleton from "../reusable/LoadingSkeleton";
+import Image from "next/image";
 
 const ProfileDropDownModal = () => {
 

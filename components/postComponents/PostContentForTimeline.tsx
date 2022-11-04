@@ -26,7 +26,7 @@ const PostContentForTimeline: React.FC<{ post: postInterface }> = ({ post }) => 
   }, [])
 
   return (
-    <div className="">
+    <div className={`${!post?.reactions && 'mb-12'}`}>
       {/* Image, Title and content  */}  
       <div className="bg-[#121212] border-2 border-[#DC143C] rounded-md">
         <div className="cursor-pointer" onClick={() => router.push(`post/${post.postId}`)}>
