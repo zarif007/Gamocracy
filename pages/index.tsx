@@ -48,6 +48,9 @@ const Home: NextPage = ({ props }: any) => {
           <link
             rel="stylesheet"
           />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet" />
         </Head>
 
         {/* 

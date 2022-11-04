@@ -95,3 +95,7 @@ p{
 .awssld__bullets {
   display: none !important;
 }
+
+.title {
+  font-family: 'Oswald', sans-serif;
+}

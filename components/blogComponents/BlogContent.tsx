@@ -126,7 +126,7 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
         {/* Title */}
         <div className="mx-4 mb-4">
           <h1 
-            className="text-3xl md:text-6xl font-bold my-4 md:my-8 text-[#DC143C] cursor-pointer"
+            className="text-3xl md:text-6xl font-bold my-4 md:my-8 text-[#DC143C] cursor-pointer title"
             onClick={() => {
               router.push(`/blog/${blogId}`);
             }}>

@@ -41,7 +41,7 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
       {/* Image, Title and content  */}
       <div className="bg-[#121212] border-2 border-[#DC143C] rounded-md">
         <Slider images={post.images} />
-        <div className="my-4 text-3xl md:text-5xl font-bold text-[#DC143C] mx-2">
+        <div className="my-4 text-3xl md:text-5xl font-bold text-[#DC143C] mx-2 title">
           {post.title}
         </div>
 
