@@ -30,17 +30,18 @@ const User: React.FC<{ user: userInterface }> = ({ user }) => {
       <NavBar />
       <div className="mt-8">
         <div className="flex justify-center items-center flex-col text-gray-300">
-          {/* <Image
-            className="rounded-md"
-            src={user.image}
-            height={200}
-            width={200}
-            objectFit="cover"
-            blurDataURL={user.image}
-            placeholder="blur"
-          /> */}
-
-          <img src={user.image} alt="author dp" style={{ width: "230px", height: '230px', objectFit: "cover" }} className="rounded-md" />
+          {
+            user.image && <Image
+              className="rounded-md"
+              src={user.image}
+              height={230}
+              width={230}
+              objectFit="cover"
+              blurDataURL={user.image}
+              placeholder="blur"
+              alt="user DP"
+            />
+          }
           <p className="font-bold text-2xl md:text-4xl my-4">{user.name}</p>
           <p onClick={() => router.push(`settings/${user.email}`)}>Seetings</p>
         </div>

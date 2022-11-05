@@ -69,7 +69,18 @@ const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => 
           {
             authorInfo.email ?
               <div className="flex space-x-2 justify-center items-center">
-                <img src={authorInfo.image} alt="author dp" style={{ width: "35px", height: "35px", objectFit: "cover"  }} className="rounded-md" />
+                {
+                  authorInfo.image && <Image
+                    className="rounded-md"
+                    src={authorInfo.image}
+                    height={40}
+                    width={40}
+                    objectFit="cover"
+                    blurDataURL={authorInfo.image}
+                    placeholder="blur"
+                    alt="user DP"
+                  />
+                }
                 <div className="flex flex-col">
                   <h1 className="text-sm">{authorInfo?.name}</h1>
                   <h2 className="text-xs text-gray-500 font-semibold">

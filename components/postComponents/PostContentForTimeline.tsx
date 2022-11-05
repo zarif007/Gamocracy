@@ -38,7 +38,7 @@ const PostContentForTimeline: React.FC<{ post: postInterface }> = ({ post }) => 
         </div>
 
         {/* Image Slider */}
-        <div className="cursor-pointer" onClick={() => router.push(`post/${post.postId}`)}>
+        <div className="cursor-pointer border-y-2 border-gray-900" onClick={() => router.push(`post/${post.postId}`)}>
             <Slider images={post.images} />
         </div>
 
@@ -47,7 +47,18 @@ const PostContentForTimeline: React.FC<{ post: postInterface }> = ({ post }) => 
             {
               authorInfo.email ?
                 <div className="flex space-x-2 items-center">
-                  <img src={authorInfo.image} alt="author dp" style={{ width: "35px", height: "35px", objectFit: "cover" }} className="rounded-md" />
+                  {
+                    authorInfo.image && <Image
+                      className="rounded-md"
+                      src={authorInfo.image}
+                      height={40}
+                      width={40}
+                      objectFit="cover"
+                      blurDataURL={authorInfo.image}
+                      placeholder="blur"
+                      alt="user DP"
+                    />
+                  }
                   <div className="flex flex-col">
                     <h1 className="text-sm text-gray-200">{authorInfo?.name}</h1>
                     <h2 className="text-xs text-gray-500 font-semibold">

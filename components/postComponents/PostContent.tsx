@@ -11,6 +11,7 @@ import { apiEndpoints } from "../../domain";
 import { Tooltip } from '@material-tailwind/react';
 import { useRecoilState } from 'recoil';
 import { creationModal } from "../../atoms/creationModal";
+import Image from 'next/image';
 
 const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
 
@@ -49,14 +50,27 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
             {post.title}
           </div>
         </div>
-        <Slider images={post.images} />
+        <div className="border-y-2 border-gray-900">
+          <Slider images={post.images} />
+        </div>
 
         {/* Author Info  */}
         <div className="m-2">
           {
             authorInfo.email ?
               <div className="flex space-x-2 items-center">
-                <img src={authorInfo.image} alt="author dp" style={{ height: "30px" }} className="rounded-md" />
+                {
+                  authorInfo.image && <Image
+                    className="rounded-md"
+                    src={authorInfo.image}
+                    height={45}
+                    width={45}
+                    objectFit="cover"
+                    blurDataURL={authorInfo.image}
+                    placeholder="blur"
+                    alt="user DP"
+                  />
+                }
                 <div className="flex flex-col">
                   <h1 className="text-sm text-gray-200">{authorInfo?.name}</h1>
                   <h2 className="text-xs text-gray-500 font-semibold">

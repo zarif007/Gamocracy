@@ -97,7 +97,18 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
         <div className="mx-4 flex mt-4 justify-between">
           {
             authorInfo.email ? <div className="flex space-x-2">
-              <img src={authorInfo.image} alt="Dp" style={{ height: "45px" }} className="rounded-md" />
+              {
+                authorInfo.image && <Image
+                  className="rounded-md"
+                  src={authorInfo.image}
+                  height={45}
+                  width={45}
+                  objectFit="cover"
+                  blurDataURL={authorInfo.image}
+                  placeholder="blur"
+                  alt="user DP"
+                />
+              }
               <div className="flex flex-col">
                 <h1 className="text-sm">{authorInfo?.name}</h1>
                 <h2 className="text-sm text-gray-500 font-semibold">
