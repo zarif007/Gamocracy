@@ -46,7 +46,7 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
       <div className="bg-[#121212] border-2 border-[#DC143C] rounded-md">
         {/* Title */}
         <div className="rounded-md items-center">
-          <div className="text-2xl md:text-4xl font-bold text-[#DC143C] mx-2 my-3 cursor-pointer title">
+          <div className="text-2xl md:text-4xl font-bold text-[#DC143C] mx-4 my-3 cursor-pointer title">
             {post.title}
           </div>
         </div>
@@ -55,7 +55,7 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
         </div>
 
         {/* Author Info  */}
-        <div className="m-2">
+        <div className="m-2 mx-4">
           {
             authorInfo.email ?
               <div className="flex space-x-2 items-center">
@@ -88,7 +88,7 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
           }
         </div>
 
-        <div className="my-4 text-md md:text-lg font-semibold text-gray-300 mx-2 mb-8">
+        <div className="my-4 text-md md:text-lg font-semibold text-gray-300 mx-4 mb-8">
           {post.content.split("\n").map((ps: string, index) => {
             return <div key={index}>{ps}</div>;
           })}

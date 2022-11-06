@@ -18,7 +18,7 @@ const Slider: React.FC<{ images: string[] }> = ({ images }) => {
               return (
                 <SwiperSlide className="my-auto grid" key={index}>
                   <div className="text-sm text-gray-300 bg-gray-900 justify-self-end py-1 px-1 rounded-md mt-1 -mb-8 mr-1 z-20">{index + 1}/{images.length}</div>
-                  <img src={image} className="sm:h-[300px] md:h-[500px] w-full object-contain" loading='lazy' />
+                  <img src={image} className={`sm:h-[300px] md:h-[500px] w-full object-contain`} loading='lazy' />
                 </SwiperSlide>
               )
             })

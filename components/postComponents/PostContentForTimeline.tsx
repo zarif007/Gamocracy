@@ -32,7 +32,7 @@ const PostContentForTimeline: React.FC<{ post: postInterface }> = ({ post }) => 
 
         {/* Title */}
         <div className="rounded-md items-center">
-          <div className="text-xl md:text-2xl font-bold text-[#DC143C] mx-2 my-3 cursor-pointer title"
+          <div className="text-xl md:text-2xl font-bold text-[#DC143C] mx-4 my-3 cursor-pointer title"
               onClick={() => router.push(`post/${post.postId}`)}>{post.title}
           </div>
         </div>
@@ -43,7 +43,7 @@ const PostContentForTimeline: React.FC<{ post: postInterface }> = ({ post }) => 
         </div>
 
         {/* Author Info */}
-        <div className="m-2">
+        <div className="m-2 mx-4">
             {
               authorInfo.email ?
                 <div className="flex space-x-2 items-center">
@@ -76,10 +76,10 @@ const PostContentForTimeline: React.FC<{ post: postInterface }> = ({ post }) => 
             }
           </div>
 
-        <div className="my-4 text-sm md:text-md font-bold text-gray-300 mx-2 mb-8">
-          {post.content.split("\n").slice(0, Math.min(2, post.content.split("\n").length)).map((ps: string, index) => {
-            return <div key={index}>{ps}</div>;
-          })}
+        <div className="my-4 text-sm md:text-md font-bold text-gray-300 mx-4 mb-8">
+          {
+            post.content.slice(0, 150)
+          }
           <span
             className='text-[#DC143C] cursor-pointer'
             onClick={() => {
