@@ -122,21 +122,18 @@ const PostReactions: React.FC<{ post: postInterface, forTimeline: boolean }> = (
                 </span>
               );
             })}
-        {
-          !forTimeline && <>
-            <ShowAllReactions reactions={reactions} addEmoji={addEmoji} />
+            
+        <ShowAllReactions reactions={reactions} addEmoji={addEmoji} />
         
-            <CgMoreO
-              className="text-gray-200 bg-zinc-800 rounded-full w-10 h-10 p-1 cursor-pointer"
-              onClick={() => setShowAllReactions(true)}
-            />
+        <CgMoreO
+          className="text-gray-200 bg-zinc-800 rounded-full w-10 h-10 p-1 cursor-pointer"
+          onClick={() => setShowAllReactions(true)}
+        />
 
-            <MdOutlineAddCircle
-              className="text-gray-200 bg-zinc-800 rounded-full w-10 h-10 p-1 cursor-pointer"
-              onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-            />
-          </>
-        }
+        <MdOutlineAddCircle
+          className="text-gray-200 bg-zinc-800 rounded-full w-10 h-10 p-1 cursor-pointer"
+          onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+        />
       </div>
       <div>
         <EmojiPickerModal addEmoji={addEmoji} />

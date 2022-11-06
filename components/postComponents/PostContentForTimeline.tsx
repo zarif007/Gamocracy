@@ -29,7 +29,7 @@ const PostContentForTimeline: React.FC<{ post: postInterface }> = ({ post }) => 
   }, [])
 
   return (
-    <div className={`${!post?.reactions && 'mb-12'}`}>
+    <div className={`${!post?.reactions && 'mb-2'}`}>
       <div className="bg-[#121212] border-2 border-[#DC143C] rounded-md">
 
         {/* Title */}
@@ -93,7 +93,7 @@ const PostContentForTimeline: React.FC<{ post: postInterface }> = ({ post }) => 
             </> : 
             <>
               {
-                post.content.slice(0, 180)
+                post.content.slice(0, 250)
               }
               <span
                 className='text-[#DC143C] cursor-pointer'
