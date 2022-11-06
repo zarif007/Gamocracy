@@ -11,6 +11,7 @@ import SignInReminder from "../components/SignInReminder";
 import { useSession } from "next-auth/react";
 import { apiEndpoints, deployedDomain } from "../domain";
 import Redirector from "../components/Redirector";
+import EmojiPickerModal from "../components/modals/EmojiPickerModal";
 
 
 export const getServerSideProps: GetServerSideProps = async () => {
@@ -76,6 +77,9 @@ const Home: NextPage = ({ props }: any) => {
         </main>
 
         <ComponenetsForIndexes />
+
+        
+        <EmojiPickerModal />
       </div>
   );
 };

@@ -3,12 +3,9 @@ import React, { Fragment, useEffect } from "react";
 import { useRecoilState } from 'recoil';
 import { emojiPickerModal } from "../../atoms/emojiPickerAtom";
 import { theme } from '../../atoms/themeAtom';
-import EmojiPicker from 'emoji-picker-react';
-import { Theme } from 'emoji-picker-react';
-import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
 
-const EmojiPickerModal = ({ addEmoji }: any) => {
+const EmojiPickerModal = () => {
     const [open, setOpen] = useRecoilState(emojiPickerModal);
     const [currentTheme] = useRecoilState(theme);
 
@@ -16,8 +13,8 @@ const EmojiPickerModal = ({ addEmoji }: any) => {
         secondWrapper: ` bg-${currentTheme.background} border-[${currentTheme.crimson}]  border-2 rounded-lg sm:p-6 `,
     };
     return (
-        <Transition.Root show={open} as={Fragment}>
-            <Dialog as="div" className="relative z-10" onClose={setOpen}>
+        <Transition.Root show={open.active} as={Fragment}>
+            <Dialog as="div" className="relative z-10" onClose={() => setOpen({ active: false, addEmoji: () => {} })}>
                 <Transition.Child
                     as={Fragment}
                     enter="ease-out duration-300"
@@ -54,16 +51,16 @@ const EmojiPickerModal = ({ addEmoji }: any) => {
                                     sym.forEach((el: any) => codesArray.push('0x' + el));
                                     let emoji = String.fromCodePoint(...codesArray);
                                     
-                                    addEmoji(emoji)
-                                    }}
+                                    open.addEmoji(emoji)
+                                }}
                                     style={{
                                     position: "absolute",
                                     marginTop: "465px",
                                     marginLeft: -40,
                                     maxWidth: "320px",
                                     borderRadius: "20px",
-                                    }}
-                                    theme="dark"
+                                }}
+                                theme="dark"
                                 />
                                 </div>
                             </Dialog.Panel>

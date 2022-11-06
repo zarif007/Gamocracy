@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import PostContent from "../../components/postComponents/PostContent";
 import BottomNav from "../../components/navBars/BottomNav";
 import ComponenetsForIndexes from "../../components/reusable/ComponenetsForIndexes";
+import EmojiPickerModal from './../../components/modals/EmojiPickerModal';
 
 
 export const getServerSideProps: GetServerSideProps = async ( { params } ) => {
@@ -40,6 +41,7 @@ const Post: React.FC<{ post: postInterface }> = ({ post }) => {
         }
       </div>
       <BottomNav />
+      <EmojiPickerModal />
       <ComponenetsForIndexes />
     </div>
   );

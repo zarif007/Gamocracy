@@ -11,6 +11,7 @@ import postReactionInterface from "../../Interfaces/PostReactionInterface";
 import { showNotification } from "../../pages/_app";
 import EmojiPickerModal from "../modals/EmojiPickerModal";
 import ShowAllReactions from "../modals/ShowAllReactions";
+import ComponenetsForIndexes from "../reusable/ComponenetsForIndexes";
 import postInterface from "./../../Interfaces/PostInterface";
 
 const PostReactions: React.FC<{ post: postInterface, forTimeline: boolean }> = ({ post, forTimeline }) => {
@@ -27,9 +28,11 @@ const PostReactions: React.FC<{ post: postInterface, forTimeline: boolean }> = (
     post.reactions !== null && setReactions(post.reactions);
   }, [post]);
 
+  
+
   const addEmoji = async (e: any) => {
     
-    setShowEmojiPicker(false)
+    setShowEmojiPicker({ active: false, addEmoji: () => {} })
 
     if (!session?.user?.email) {
       showNotification("Login to react 😐");
@@ -91,7 +94,7 @@ const PostReactions: React.FC<{ post: postInterface, forTimeline: boolean }> = (
 
   return (
     <>
-      <div className="flex -mt-6 ml-2 flex-wrap">
+      <div className="flex -mt-6 ml-4 flex-wrap">
         {reactions &&
           reactions
             .sort((a, b) => {
@@ -123,21 +126,20 @@ const PostReactions: React.FC<{ post: postInterface, forTimeline: boolean }> = (
               );
             })}
             
-        <ShowAllReactions reactions={reactions} addEmoji={addEmoji} />
-        
-        <CgMoreO
-          className="text-gray-200 bg-zinc-800 rounded-full w-10 h-10 p-1 cursor-pointer"
-          onClick={() => setShowAllReactions(true)}
-        />
+        {
+          !forTimeline && <CgMoreO
+            className="text-gray-200 bg-zinc-800 rounded-full w-10 h-10 p-1 cursor-pointer"
+            onClick={() => setShowAllReactions(true)}
+          />
+        }
 
         <MdOutlineAddCircle
           className="text-gray-200 bg-zinc-800 rounded-full w-10 h-10 p-1 cursor-pointer"
-          onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+          onClick={() => setShowEmojiPicker({ active: true, addEmoji })}
         />
       </div>
-      <div>
-        <EmojiPickerModal addEmoji={addEmoji} />
-      </div>
+
+      <ShowAllReactions reactions={reactions} addEmoji={addEmoji} />
     </>
   );
 };
