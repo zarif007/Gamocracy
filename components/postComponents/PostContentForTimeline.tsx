@@ -15,6 +15,8 @@ const PostContentForTimeline: React.FC<{ post: postInterface }> = ({ post }) => 
 
   const router = useRouter();
 
+  const [showFullText, setShowFullText] = useState<boolean>(false);
+
   const [authorInfo, setAuthorInfo] = useState<userInterface>({
     name: '',
     email: '',
@@ -38,9 +40,11 @@ const PostContentForTimeline: React.FC<{ post: postInterface }> = ({ post }) => 
         </div>
 
         {/* Image Slider */}
-        <div className="cursor-pointer border-y-2 border-gray-900" onClick={() => router.push(`post/${post.postId}`)}>
-            <Slider images={post.images} />
-        </div>
+        {
+          post.images && <div className="cursor-pointer border-y-2 border-gray-900" onClick={() => router.push(`post/${post.postId}`)}>
+              <Slider images={post.images} />
+          </div>
+        }
 
         {/* Author Info */}
         <div className="m-2 mx-4">
@@ -78,13 +82,25 @@ const PostContentForTimeline: React.FC<{ post: postInterface }> = ({ post }) => 
 
         <div className="my-4 text-sm md:text-md font-bold text-gray-300 mx-4 mb-8">
           {
-            post.content.slice(0, 150)
+            showFullText ? <>
+              {post.content.split("\n").map((ps: string, index) => {
+                return <div key={index}>{ps}</div>;
+              })}
+              <span
+                className='text-[#DC143C] cursor-pointer'
+                onClick={() => setShowFullText(false)}> hide
+              </span>
+            </> : 
+            <>
+              {
+                post.content.slice(0, 180)
+              }
+              <span
+                className='text-[#DC143C] cursor-pointer'
+                onClick={() => setShowFullText(true)}> ...more
+              </span>
+            </>
           }
-          <span
-            className='text-[#DC143C] cursor-pointer'
-            onClick={() => {
-              router.push(`/post/${post.postId}`);
-            }}> ...more</span>
         </div>
       </div>
 

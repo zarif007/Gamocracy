@@ -36,7 +36,7 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
         <title>{post.title}</title>
         <meta name="description" content={post.content.substr(0, Math.min(20, post.content.length))} />
         <link rel="icon" href="/favicon.ico" />
-        <meta property="og:image" content={post.images[0]} />
+        <meta property="og:image" content={post.images ? post.images[0] : authorInfo.image} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet" />
@@ -50,9 +50,12 @@ const PostContent: React.FC<{ post: postInterface }> = ({ post }) => {
             {post.title}
           </div>
         </div>
-        <div className="border-y-2 border-gray-900">
-          <Slider images={post.images} />
-        </div>
+        
+        {
+          post.images && <div className="border-y-2 border-gray-900">
+            <Slider images={post.images} />
+          </div>
+        }
 
         {/* Author Info  */}
         <div className="m-2 mx-4">
