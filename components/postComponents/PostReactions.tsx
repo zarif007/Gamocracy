@@ -110,7 +110,7 @@ const PostReactions: React.FC<{ post: postInterface, forTimeline: boolean }> = (
                   className="flex justify-center items-center flex-col"
                 >
                   <div
-                    className={`w-10 h-10 text-3xl cursor-pointer rounded-md mx-1 ${
+                    className={`w-8 h-8 text-xl md:w-9 md:h-9 md:text-2xl flex justify-center cursor-pointer rounded-md mx-[2px] md:mx-[4px] ${
                       reaction.reactors.includes(session?.user?.email || "")
                         ? " bg-[#DC143C]"
                         : "bg-gray-800"

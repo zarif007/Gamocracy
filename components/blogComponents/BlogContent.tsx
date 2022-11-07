@@ -73,6 +73,10 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
         <meta name="description" content={blogContentInString.substr(0, Math.min(20, blogContentInString.length))} />
         <link rel="icon" href="/favicon.ico" />
         <meta property="og:image" content={coverImage} />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet" />
       </Head>
       
       <BlogReactionIsland />
@@ -138,7 +142,7 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
         {/* Title */}
         <div className="mx-4 mb-4">
           <h1 
-            className="text-3xl md:text-6xl font-bold my-4 md:my-8 text-[#DC143C] cursor-pointer title"
+            className="text-3xl md:text-5xl font-bold my-4 md:my-8 text-[#DC143C] cursor-pointer title"
             onClick={() => {
               router.push(`/blog/${blogId}`);
             }}>
