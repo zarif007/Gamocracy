@@ -128,8 +128,9 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
         </div>
         
         {/* Related games */}
-        <div className={`mt-4 flex flex-wrap sapce-x-2 md:space-x-6 items-center ${selectedCategories.length + selectedGames.length > 4 && 'flex-col md:flex-row'}`}>
+        <div className={`mb-2 flex sapce-x-1 items-center mt-4`}>
           <ShowRelatedGames selectedGames={selectedGames} />
+          <span className="text-4xl font-bold text-[#DC143C] mb-1 title"> + </span>
           <div className="flex space-x-2 mx-4 my-1 md:my-0 text-xs md:text-lg mt-2">
             <ShowSelectedCategories selectedCategories={selectedCategories} />
           </div>

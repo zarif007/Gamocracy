@@ -124,11 +124,12 @@ const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => 
         </div>
 
         {/* Related Games */}
-        <div className={`mb-2 flex sapce-x-3 md:space-x-4 ${selectedCategories.length + selectedGames.length > 4 && 'flex-col md:flex-row'}`}>
+        <div className={`mb-2 flex sapce-x-1 items-center`}>
           <ShowRelatedGames selectedGames={selectedGames} />
-          <div className="flex space-x-2 mx-4 my-1 md:my-0 text-xs md:text-lg mt-1">
-          <ShowSelectedCategories selectedCategories={selectedCategories} />
-        </div>
+          <span className="text-4xl font-bold text-[#DC143C] mb-1 title"> + </span>
+          <div className="flex space-x-2 mx-4 my-1 md:my-0 text-xs md:text-lg">
+            <ShowSelectedCategories selectedCategories={selectedCategories} />
+          </div>
         </div>
 
         {/* Content in short */}
