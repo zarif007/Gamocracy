@@ -4,12 +4,15 @@ import { Tooltip } from '@material-tailwind/react';
 
 const ShowRelatedGames: React.FC<{ selectedGames : gameForOptionInterface[]}> = ({ selectedGames }) => {
   return (
-    <div className="flex space-x-1 mx-4">
+    <div className="flex space-x-2 mx-4">
         {
           selectedGames && selectedGames.map((game: gameForOptionInterface) => {
               return (
                 <Tooltip key={game.image} content={`${game.name}`} placement="bottom-start">
-                    <img  src={game.image} className="h-10 w-10 border-2 border-[#DC143C] rounded-full cursor-pointer" />
+                    <div className='flex items-center justify-center border-2 border-[#DC143C] rounded-md cursor-pointer h-9'>
+                      <img  src={game.image} className="h-8 rounded-md" />
+                      <p className='text-xs mx-1 md:inline hidden'>{game.name}</p>
+                    </div>
                 </Tooltip>
               )
           })
