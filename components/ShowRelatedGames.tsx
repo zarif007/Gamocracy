@@ -9,7 +9,7 @@ const ShowRelatedGames: React.FC<{ selectedGames : gameForOptionInterface[]}> = 
           selectedGames && selectedGames.map((game: gameForOptionInterface) => {
               return (
                 <Tooltip key={game.image} content={`${game.name}`} placement="bottom-start">
-                    <div className='flex items-center justify-center border-2 border-[#DC143C] rounded-md cursor-pointer h-9'>
+                    <div className='flex items-center justify-center border-2 border-[#DC143C] hover:bg-[#DC143C] rounded-md cursor-pointer h-9'>
                       <img  src={game.image} className="h-8 rounded-md" />
                       <p className='text-xs mx-1 lg:inline hidden'>{game.name}</p>
                     </div>
