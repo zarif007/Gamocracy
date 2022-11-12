@@ -143,6 +143,8 @@ const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => 
             }}> ...more</span>
         </div>
 
+        {/* Blog reactions */}
+        <div></div>
       </div>
     </div>
   )
