@@ -117,7 +117,7 @@ const PostReactions: React.FC<{ post: postInterface, forTimeline: boolean }> = (
                     }`}
                     onClick={() => addEmoji(reaction.emoji)}
                   >
-                    {reaction.emoji}
+                    <span className="hover:animate-bounce">{reaction.emoji}</span>
                   </div>
                   <p className="text-gray-100 font-bold -mt-3 ml-6">
                     {reaction.reactors.length}

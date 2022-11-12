@@ -65,7 +65,7 @@ const ShowAllReactions: React.FC<{
                             className="flex justify-center items-center flex-col"
                           >
                             <div
-                              className={`w-10 h-10 text-3xl cursor-pointer rounded-md  mx-2 ${
+                              className={`w-10 h-10 text-3xl cursor-pointer rounded-md mx-1 flex justify-center items-center ${
                                 reaction.reactors.includes(
                                   session?.user?.email || ""
                                 )
@@ -74,7 +74,7 @@ const ShowAllReactions: React.FC<{
                               }`}
                               onClick={() => addEmoji(reaction.emoji)}
                             >
-                              {reaction.emoji}
+                              <span className="hover:animate-bounce">{reaction.emoji}</span>
                             </div>
                             <p className="text-gray-300 font-bold -mt-3 ml-6">
                               {reaction.reactors.length}
