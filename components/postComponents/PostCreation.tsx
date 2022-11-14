@@ -193,7 +193,7 @@ const PostCreation = () => {
             
             <input
                 type="file"
-                accept="image/*"
+                accept="image/*|video/*"
                 hidden
                 onChange={(e: any) => handleImageUpload(e)}
             />

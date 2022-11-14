@@ -14,7 +14,6 @@ const ShowRelatedGames = dynamic(() => import('../ShowRelatedGames'));
 import userInterface from './../../Interfaces/UserInterface';
 import { Tooltip } from '@material-tailwind/react';
 import { GoComment } from 'react-icons/go';
-import { MdShare } from 'react-icons/md';
 const ShowSelectedCategories = dynamic(() => import('../ShowSelectedCategories'));
 
 const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => {
@@ -146,26 +145,23 @@ const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => 
         </div>
 
         {/* Blog reactions */}
-        <div className='flex space-x-2 md:space-x-4 mx-4 my-2'>
-          <div className="flex space-x-1 justify-center items-center">
-            <GiSelfLove className='h-6 w-6 ' />
-            <p className="text-sm">166</p>
-          </div>
-          <div className="flex space-x-1 justify-center items-center">
-            <GiPunchBlast className='h-6 w-6 ' />
-            <p className="text-sm">508</p>
-          </div>
-          <div className="flex space-x-1 justify-center items-center">
-            <GoComment className='h-6 w-6 ' />
-            <p className="text-sm">124</p>
-          </div>
-          <div className="flex space-x-1 justify-center items-center">
-            <GiRank3 className='h-6 w-6 ' />
-            <p className="text-sm">245</p>
-          </div>
-          <div className="flex space-x-1 justify-center items-center">
-            <MdShare className='h-6 w-6 ' />
-            <p className="text-sm">56</p>
+        <div className="flex items-center justify-between mx-4 my-2 text-gray-300">
+          <div className='flex space-x-4'>
+            <div className="flex space-x-1 justify-center items-center">
+              <GiSelfLove className='h-6 w-6 ' />
+              <p className="text-sm">166</p>
+            </div>
+            <div className="flex space-x-1 justify-center items-center">
+              <GiPunchBlast className='h-6 w-6 ' />
+              <p className="text-sm">508</p>
+            </div>
+            <div className="flex space-x-1 justify-center items-center">
+              <GoComment className='h-6 w-6 ' />
+              <p className="text-sm">124</p>
+            </div>
+          </div> 
+          <div>
+            <GiRank3 className='h-8 w-8 cursor-pointer hover:text-[#DC143C] transition duration-200 ease-out' />
           </div>
         </div>
       </div>
