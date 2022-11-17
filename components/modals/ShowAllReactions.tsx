@@ -65,7 +65,7 @@ const ShowAllReactions: React.FC<{
                             className="flex justify-center items-center flex-col"
                           >
                             <div
-                              className={`w-10 h-10 text-3xl cursor-pointer rounded-md mx-1 flex justify-center items-center ${
+                              className={`w-10 h-10 text-3xl cursor-pointer rounded-md mx-1 flex justify-center ${
                                 reaction.reactors.includes(
                                   session?.user?.email || ""
                                 )

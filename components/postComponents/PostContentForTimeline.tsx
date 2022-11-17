@@ -86,10 +86,6 @@ const PostContentForTimeline: React.FC<{ post: postInterface }> = ({ post }) => 
               {post.content.split("\n").map((ps: string, index) => {
                 return <div key={index}>{ps}</div>;
               })}
-              <span
-                className='text-[#DC143C] cursor-pointer'
-                onClick={() => setShowFullText(false)}> hide
-              </span>
             </> : 
             <>
               {
