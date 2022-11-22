@@ -37,7 +37,7 @@ const SummaryAudio: React.FC<{ blog: blogInterface }> = ({ blog }) => {
       <div className="group">
         <button className="bg-black text-[#DC143C] rounded-full" onClick={handleVoice}>
           { isPlaying ? <BsStopCircleFill className='h-8 w-12' /> :  
-            <BsFillPlayCircleFill className='h-8 w-12' /> } 
+            <BsFillPlayCircleFill className='h-10 w-10' /> } 
         </button>
 
         <div id={`content-${blog.coverImage}`} dangerouslySetInnerHTML={{

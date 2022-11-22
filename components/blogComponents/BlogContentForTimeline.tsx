@@ -126,9 +126,10 @@ const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => 
 
         {/* Related Games and categories */}
         <div className={`mb-2 flex sapce-x-1 items-center flex-wrap`}>
-          <ShowRelatedGames selectedGames={selectedGames} />
-          <span className="text-4xl font-bold text-[#DC143C] mb-1 title"> + </span>
-          <div className="flex space-x-2 mx-4 my-1 md:my-0 text-xs md:text-lg">
+          <div className="mx-4 mt-1">
+            <ShowRelatedGames selectedGames={selectedGames} />
+          </div>
+          <div className="flex space-x-2 mx-4 text-xs md:text-lg mt-1">
             <ShowSelectedCategories selectedCategories={selectedCategories} />
           </div>
         </div>

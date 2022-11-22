@@ -81,7 +81,7 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
       
       <BlogReactionIsland />
 
-      <div className="mt-16 mx-1 md:mx-0 rounded-md flex justify-center font-semibold text-gray-300 flex-col border-x-2 border-[#DC143C] bg-[#121212] border-y-2">
+      <div className="mt-20 mx-1 md:mx-0 rounded-md flex justify-center font-semibold text-gray-300 flex-col border-x-2 border-[#DC143C] bg-[#121212] border-y-2">
         {
           coverImage !== '' && <Image
             className="cursor-pointer rounded-md"
@@ -129,9 +129,10 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
         
         {/* Related games and categoris */}
         <div className={`mb-2 flex sapce-x-1 items-center mt-4 flex-wrap`}>
-          <ShowRelatedGames selectedGames={selectedGames} />
-          <span className="text-4xl font-bold text-[#DC143C] mb-1 title"> + </span>
-          <div className="flex space-x-2 mx-4 my-1 md:my-0 text-xs md:text-lg mt-2">
+          <div className="mx-4 mt-1">
+            <ShowRelatedGames selectedGames={selectedGames} />
+          </div>
+          <div className="flex space-x-2 mx-4 my-1 md:my-0 text-xs md:text-lg mt-1">
             <ShowSelectedCategories selectedCategories={selectedCategories} />
           </div>
         </div>
