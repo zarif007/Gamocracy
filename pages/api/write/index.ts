@@ -14,8 +14,10 @@ export default async (
     await axios.get(apiEndpoints.post)
         .then(res => props.push(...res.data))
 
-    // await axios.get(apiEndpoints.blog)
-    //     .then(res => props.push(...res.data))
+    await axios.get(apiEndpoints.blog)
+        .then(res => props.push(...res.data))
+
+    console.log(props)
 
     res.status(200).json({ success: true, data: await shuffleArray(props) })
 }
