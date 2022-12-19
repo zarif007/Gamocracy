@@ -27,6 +27,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
 const Home: NextPage = ({ props }: any) => {
   const { data: session } = useSession();
 
+  console.log(props);
+
   const [isSidebarOpen] = useRecoilState<boolean>(sidebarOpen);
 
   const styles = {

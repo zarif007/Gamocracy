@@ -5,7 +5,7 @@ const ShowSelectedCategories: React.FC<{ selectedCategories: string[] }> = ({
 }) => {
   return (
     <>
-      {selectedCategories.map((sc: string) => {
+      {selectedCategories?.length > 0 && selectedCategories.map((sc: string) => {
         return (
           <p
             key={sc}
