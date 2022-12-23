@@ -4,26 +4,16 @@ import TextareaAutosize from 'react-textarea-autosize';
 import { BiImageAdd } from "react-icons/bi";
 import { BsEmojiSunglassesFill } from "react-icons/bs";
 import { FaGgCircle } from "react-icons/fa";
-import AWS from "aws-sdk";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import { apiEndpoints } from "../../domain";
 import { showNotification } from "../../pages/_app";
-import postReactionInterface from './../../Interfaces/PostReactionInterface';
 import s3ImageUploder from './../../s3ImageUploder';
 
-const s3 = new AWS.S3({
-  credentials: {
-    accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEYID || "",
-    secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEYID || "",
-  },
-});
 
 const PostCreation = () => {
   const { data: session } = useSession();
-
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false)
 
   const [post, setPost] = useState<postInterface>({
     type: "post",
@@ -87,6 +77,7 @@ const PostCreation = () => {
 
       const up = post;
       const img = await s3ImageUploder(imageName, image);
+
       up.images = [ ...up.images, img ];
       setPost(up);
     }))

@@ -10,8 +10,9 @@ const s3 = new AWS.S3({
 
 const s3ImageUploder = async (imageName: string, image: string) => {
 
+    
     const params = {
-        Bucket: "gc-s3images",
+        Bucket: "gc-s3contents",
         Key: imageName,
         Body: image,
     };
