@@ -122,8 +122,6 @@ const PostCreation = () => {
 
     await uploadImageOnS3();
 
-    console.log(post)
-
     try {
       await axios.post(apiEndpoints.post, post).then((res) => {
         if (res.status === 201) {
