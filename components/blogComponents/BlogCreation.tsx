@@ -14,6 +14,7 @@ import gameForOptionInterface from "../../Interfaces/GameForOptionInterface";
 import blogInterface from "../../Interfaces/BlogInterface";
 const CustomTextEditor = dynamic(() => import('./../reusable/CustomTextEditor'));
 import s3ImageUploder from './../../s3ImageUploder';
+import useIdGenerator from "../../hooks/useIdGenerator";
 
 // Category
 const category: string[] = [
@@ -41,7 +42,7 @@ const BlogCreation = () => {
 
   const [blog, setBlog] = useState<blogInterface>({
     type: "blog",
-    blogId: uuidv4(),
+    blogId: "",
     coverImage: "",
     title: "",
     content: "",
@@ -163,33 +164,6 @@ const BlogCreation = () => {
     ]);
   };
 
-  // Updating blog title that will be used as imageName and id
-  useEffect(() => {
-    resetErrors();
-
-    if (blog.title === "") return;
-
-    let updatedTitle2 = "";
-
-    for (let i = 0; i < blog.title.length; i++) {
-      if (/\d/.test(blog.title[i]) || /[a-zA-Z]/.test(blog.title[i])) {
-        updatedTitle2 = updatedTitle2 + blog.title[i];
-      }
-    }
-
-    if (updatedTitle2 === "") {
-      setErrors({ ...errors, title: "Title must contain a-z or A-Z or 0-9" });
-      return;
-    }
-
-    setBlog({
-      ...blog,
-      blogId: `${updatedTitle2
-        .replaceAll(" ", "-")
-        .toLowerCase()}-${Date.now()}`,
-    });
-  }, [blog.title]);
-
   // Getting author email from session
   useEffect(() => {
     const updated = blog;
@@ -254,7 +228,7 @@ const BlogCreation = () => {
   }
 
   // Upload coverImage on s3 and upload the entire blog part on dynamoDB
-  const handleSubmit = async () => {
+  const handleSubmit = async () => { 
     if (isLoading) return;
 
     resetErrors();
@@ -265,9 +239,18 @@ const BlogCreation = () => {
 
     setIsLoading(true);
 
+    const id = await useIdGenerator(blog.title) || '';
+
+    if(id === '') {
+      setErrors({ ...errors, title: 'Title must contain A-Z or a-z or 0-9' })
+      return;
+    }
+
     let uploadingTime: string = new Date(Date.now()).toISOString();
 
+
     const updated = blog;
+    updated.blogId = id;
     updated.createdAt = uploadingTime;
     updated.updatedAt = uploadingTime;
     setBlog(updated);
@@ -343,7 +326,7 @@ const BlogCreation = () => {
             placeholder="A Killing Title"
             defaultValue={`${blog.title}`}
             onChange={(e: any) => {
-              setBlog({ ...blog, title: e.target.value });
+              setBlog({ ...blog, title: e.target.value.trim() });
             }}
           />
           <div className="mb-6 text-xl font-semibold text-red-500">{errors.title}</div>
