@@ -237,8 +237,6 @@ const BlogCreation = () => {
       return;
     }
 
-    setIsLoading(true);
-
     const id = await useIdGenerator(blog.title) || '';
 
     if(id === '') {
@@ -246,8 +244,9 @@ const BlogCreation = () => {
       return;
     }
 
+    setIsLoading(true);
+    
     let uploadingTime: string = new Date(Date.now()).toISOString();
-
 
     const updated = blog;
     updated.blogId = id;

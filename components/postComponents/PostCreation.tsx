@@ -102,14 +102,14 @@ const PostCreation = () => {
   const handleSubmit = async () => {
     if(isLoading) return;
 
-    setIsLoading(true);
-
     const id = await useIdGenerator(post.title) || '';
 
     if(id === '') {
       setError('Title must contain A-Z or a-z or 0-9')
       return;
     }
+
+    setIsLoading(true);
 
     let uploadingTime: string = new Date(Date.now()).toISOString();
 
