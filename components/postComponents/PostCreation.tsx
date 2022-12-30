@@ -100,7 +100,6 @@ const PostCreation = () => {
   }
 
   const handleSubmit = async () => {
-
     if(isLoading) return;
 
     setIsLoading(true);
