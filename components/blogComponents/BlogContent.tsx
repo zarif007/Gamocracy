@@ -140,7 +140,6 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
         <div className="flex justify-center mt-6">
           <SummaryAudio blog={blog} />
         </div>
-        
         {/* Title */}
         <div className="mx-4 mb-4">
           <h1 
@@ -150,7 +149,7 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
             }}>
               {title}
           </h1>
-          
+
           {/* Content */}
           <div
             id={`content-${coverImage}`}
