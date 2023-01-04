@@ -150,7 +150,6 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
             }}>
               {title}
           </h1>
-
           {/* Content */}
           <div
             id={`content-${coverImage}`}
