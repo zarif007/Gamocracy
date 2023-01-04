@@ -4,6 +4,7 @@ import { GcDaoContext } from '../../context/context'
 const DaoLogin = () => {
   const { connectWithMetamask, currentUserAddress, disconnectWallet, delegateToken, isDelegated } = useContext(GcDaoContext)
 
+  
   return (
     <div className='text-white flex'>
       {
