@@ -44,7 +44,6 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
     // 1 / 3 => 1 / 3 of the total reading time
     const reuiredTimeToCountAView = Math.trunc(1000 * 60 * (wordCount / 100 + 1) * (1 / 3))
 
-    console.log(reuiredTimeToCountAView)
     setTimeout(() => {
       saveToDB()
     }, reuiredTimeToCountAView);
