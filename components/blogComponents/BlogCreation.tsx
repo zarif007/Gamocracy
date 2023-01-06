@@ -14,7 +14,7 @@ import gameForOptionInterface from "../../Interfaces/GameForOptionInterface";
 import blogInterface from "../../Interfaces/BlogInterface";
 const CustomTextEditor = dynamic(() => import('./../reusable/CustomTextEditor'));
 import s3ImageUploder from './../../s3ImageUploder';
-import useIdGenerator from "../../hooks/useIdGenerator";
+import UseIdGenerator from "../../hooks/useIdGenerator";
 
 // Category
 const category: string[] = [
@@ -237,7 +237,7 @@ const BlogCreation = () => {
       return;
     }
 
-    const id = await useIdGenerator(blog.title) || '';
+    const id = await UseIdGenerator(blog.title) || '';
 
     if(id === '') {
       setErrors({ ...errors, title: 'Title must contain A-Z or a-z or 0-9' })

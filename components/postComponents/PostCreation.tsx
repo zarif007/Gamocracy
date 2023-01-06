@@ -10,7 +10,7 @@ import axios from "axios";
 import { apiEndpoints } from "../../domain";
 import { showNotification } from "../../pages/_app";
 import s3ImageUploder from './../../s3ImageUploder';
-import useIdGenerator from "../../hooks/useIdGenerator";
+import UseIdGenerator from "../../hooks/useIdGenerator";
 
 
 const PostCreation = () => {
@@ -102,7 +102,7 @@ const PostCreation = () => {
   const handleSubmit = async () => {
     if(isLoading) return;
 
-    const id = await useIdGenerator(post.title) || '';
+    const id = await UseIdGenerator(post.title) || '';
 
     if(id === '') {
       setError('Title must contain A-Z or a-z or 0-9')

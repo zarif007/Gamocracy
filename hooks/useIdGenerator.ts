@@ -1,4 +1,4 @@
-const useIdGenerator = async (title: string) => {
+const UseIdGenerator = async (title: string) => {
   if (title === "") return;
 
   let updatedTitle = "";
@@ -16,4 +16,4 @@ const useIdGenerator = async (title: string) => {
   return `${updatedTitle.toLowerCase()}-${Date.now()}`
 };
 
-export default useIdGenerator
+export default UseIdGenerator
