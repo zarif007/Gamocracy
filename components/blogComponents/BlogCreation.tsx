@@ -208,7 +208,7 @@ const BlogCreation = () => {
       return 1;
     }
     if(blog.coverImage === "") {
-      setErrors({ ...errors, coverImage: 'Add cover image' })
+      setErrors( { ...errors, coverImage: 'Add cover image' })
       return 1;
     }
     if(blog.content === "") {
