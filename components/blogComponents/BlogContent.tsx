@@ -49,7 +49,6 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
     }, reuiredTimeToCountAView);
   }
 
-
   useEffect(() => {
     axios.get(`${apiEndpoints.user}/?email=${author}`)
       .then(res => setAuthorInfo(res.data))
