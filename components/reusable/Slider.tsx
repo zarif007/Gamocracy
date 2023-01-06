@@ -11,7 +11,7 @@ const Slider: React.FC<{ images: string[] }> = ({ images }) => {
           spaceBetween={50}
           slidesPerView={1}
           onSlideChange={() => {}}
-          onSwiper={(swiper) => {}}
+          onSwiper={(swiper) => console.log(swiper)}
         >
           {
             images.map((image: string, index: number) => {
