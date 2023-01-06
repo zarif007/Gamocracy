@@ -14,7 +14,7 @@ import gameForOptionInterface from "../../Interfaces/GameForOptionInterface";
 import blogInterface from "../../Interfaces/BlogInterface";
 const CustomTextEditor = dynamic(() => import('./../reusable/CustomTextEditor'));
 import s3ImageUploder from './../../s3ImageUploder';
-import UseIdGenerator from "../../hooks/useIdGenerator";
+import UseIdGenerator from "../../hooks/UseIdGenerator"
 
 // Category
 const category: string[] = [

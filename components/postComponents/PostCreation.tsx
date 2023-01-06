@@ -10,7 +10,7 @@ import axios from "axios";
 import { apiEndpoints } from "../../domain";
 import { showNotification } from "../../pages/_app";
 import s3ImageUploder from './../../s3ImageUploder';
-import UseIdGenerator from "../../hooks/useIdGenerator";
+import UseIdGenerator from "../../hooks/UseIdGenerator";
 
 
 const PostCreation = () => {
