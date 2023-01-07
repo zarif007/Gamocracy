@@ -10,7 +10,6 @@ import axios from "axios";
 import { apiEndpoints } from "../../domain";
 import { showNotification } from "../../pages/_app";
 import s3ImageUploder from './../../s3ImageUploder';
-import UseIdGenerator from "../../hooks/UseIdGenerator";
 
 
 const PostCreation = () => {
@@ -37,7 +36,32 @@ const PostCreation = () => {
 
   const router = useRouter();
 
+  // Updating post title that will be used as imageName and id
+  useEffect(() => {
+    setError("");
 
+    if (post.title === "") return;
+
+    let updatedTitle2 = "";
+
+    for (let i = 0; i < post.title.length; i++) {
+      if (/\d/.test(post.title[i]) || /[a-zA-Z]/.test(post.title[i])) {
+        updatedTitle2 = updatedTitle2 + post.title[i];
+      }
+    }
+
+    if (updatedTitle2 === "") {
+      setError("Title must contain a-z or A-Z or 0-9");
+      return;
+    }
+
+    setPost({
+      ...post,
+      postId: `${updatedTitle2
+        .replaceAll(" ", "-")
+        .toLowerCase()}-${Date.now()}`,
+    });
+  }, [post.title]);
 
   // Getting author email from session
   useEffect(() => {
@@ -100,26 +124,21 @@ const PostCreation = () => {
   }
 
   const handleSubmit = async () => {
+
     if(isLoading) return;
-
-    const id = await UseIdGenerator(post.title) || '';
-
-    if(id === '') {
-      setError('Title must contain A-Z or a-z or 0-9')
-      return;
-    }
 
     setIsLoading(true);
 
     let uploadingTime: string = new Date(Date.now()).toISOString();
 
     const updated = post;
-    updated.postId = id;
     updated.createdAt = uploadingTime;
     updated.updatedAt = uploadingTime;
     setPost(updated);
 
     await uploadImageOnS3();
+
+    console.log(post)
 
     try {
       await axios.post(apiEndpoints.post, post).then((res) => {

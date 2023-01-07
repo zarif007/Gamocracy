@@ -26,6 +26,22 @@ const handler = (req: any) => {
             backgroundColor: "black",
           }}
         >
+          <img
+            src={coverImage}
+            alt="cv"
+            tw="w-full rounded-md h-65"
+          />
+          <h1 tw="text-[#DC143C] font-extrabold text-4xl my-2">
+            {title}
+          </h1>
+          <div tw="flex justify-center items-center mt-4">
+            <img
+              src={authorImage}
+              alt="cv"
+              tw="w-8 rounded-md h-8 mx-2 "
+            />
+            <p tw="text-gray-300 font-bold text-xl">{authorName}</p>
+          </div>
         </div>
       ),
 

@@ -89,7 +89,7 @@ const PostReactions: React.FC<{ post: postInterface, forTimeline: boolean }> = (
         ...post,
         reactions: updatedReactions,
       })
-      .then((res) => {});
+      .then((res) => console.log(res));
   };
 
   return (

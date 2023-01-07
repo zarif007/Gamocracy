@@ -34,7 +34,7 @@ const Post: React.FC<{ post: postInterface }> = ({ post }) => {
   return (
     <div className="">
       <NavBar />
-      <div className="mt-4 mb-20 md:mb-12  max-w-6xl mx-auto">
+      <div className="mt-4 mb-20 md:mb-12  max-w-5xl mx-auto">
 
         {
           post.author !== '' && <PostContent post={post} />
