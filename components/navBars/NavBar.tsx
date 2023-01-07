@@ -69,7 +69,7 @@ const NavBar = () => {
           router.push('/', undefined, { scroll: false });
         }}>
           <div className="">
-            <Image src={logo} objectFit="contain" />
+            <Image src={logo} objectFit="contain" alt="logo" />
           </div>
         </div>
 

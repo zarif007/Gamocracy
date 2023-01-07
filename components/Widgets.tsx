@@ -30,6 +30,7 @@ const Widgets = () => {
               height={135}
               width={400}
               className="rounded-md"
+              alt="content image"
             />
           )}
           <h1 className="text-xl text-[#DC143C] my-1">{currentBlog.title}</h1>
