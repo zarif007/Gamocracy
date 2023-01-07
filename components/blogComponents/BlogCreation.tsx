@@ -338,9 +338,11 @@ const BlogCreation = () => {
               <div className="mb-6 text-xl font-semibold text-red-500">{errors.coverImage}</div>
             </div>
           </div>
+
+          {/* Title */}
           <p className="mt-6 text-xl font-bold text-gray-300">Title</p>
           <input
-            className={`border-2 border-white w-full py-3 bg-black text-3xl font-bold mb-4 mt-1 px-1`}
+            className={`border-2 border-white w-full py-3 bg-black text-3xl font-bold mb-4 mt-1 px-1 focus:outline-0 focus:border-[#DC143C] rounded-md`}
             placeholder="A Killing Title"
             defaultValue={`${blog.title}`}
             onChange={(e: any) => {
@@ -362,12 +364,12 @@ const BlogCreation = () => {
           <p className="my-2 text-xl font-bold text-gray-300">
             Select related Games (Max. 3)
           </p>
-          <div className="flex items-center space-x-4 my-2">
+          <div className="flex items-center space-x-1 my-2 flex-wrap">
             {blog.selectedGames.length > 0 &&
               blog.selectedGames.map((game: gameForOptionInterface) => {
                 return (
                   <div
-                    className="flex items-center space-x-2 bg-black border py-1 px-2 rounded-md cursor-pointer"
+                    className="flex items-center space-x-2 bg-black border py-1 px-2 rounded-md cursor-pointer mt-1"
                     key={game.name}
                     onClick={() => {
                       setBlog({

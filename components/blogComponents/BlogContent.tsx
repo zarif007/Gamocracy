@@ -127,12 +127,12 @@ const BlogContent: React.FC<{ blog: blogInterface }> = ({ blog }) => {
           <button className="px-4 py-2 text-md font-semibold border-2 hover:bg-[#DC143C] border-[#DC143C] rounded-md">Subscribe</button>
         </div>
         
-        {/* Related games and categoris */}
-        <div className={`mb-2 flex sapce-x-1 items-center mt-4 flex-wrap`}>
+        {/* Related Games and categories */}
+        <div className={`mb-2 flex sapce-x-1 items-center flex-wrap mt-1`}>
           <div className="mx-4 mt-1">
             <ShowRelatedGames selectedGames={selectedGames} />
           </div>
-          <div className="flex space-x-2 mx-4 my-1 md:my-0 text-xs md:text-lg mt-1">
+          <div className="flex space-x-2 mx-4 text-xs md:text-lg mt-1">
             <ShowSelectedCategories selectedCategories={selectedCategories} />
           </div>
         </div>

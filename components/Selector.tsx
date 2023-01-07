@@ -25,7 +25,7 @@ const Selector = ({
       <Combobox value={currentlySelected} onChange={setCurrentlySelected}>
         <Combobox.Input
           onChange={(event: any) => fetchFunction(event.target.value)}
-          className={`bg-black border-2 border-gray-300 w-full mb-4 py-3`}
+          className={`bg-black border-2 border-gray-300 w-full mb-4 py-3 focus:outline-0 focus:border-[#DC143C] rounded-md`}
         />
         <Combobox.Options className={`max-h-48 overflow-y-auto mb-12`}>
           {options.length > 0 ? (

@@ -160,7 +160,7 @@ const PostCreation = () => {
       <h1 className="text-4xl my-2 font-bold text-[#DC143C]">Post Creation</h1>
       <p className="mt-6 text-xl font-bold text-gray-300">Title</p>
       <input
-        className={`border-2 border-white w-full py-3 bg-black text-3xl font-bold mb-4 mt-1 px-1`}
+        className={`border-2 border-white w-full py-3 bg-black text-3xl font-bold mb-4 mt-1 px-1 focus:outline-0 focus:border-[#DC143C] rounded-md`}
         placeholder="A Killing Title"
         defaultValue={`${post.title}`}
         onChange={(e: any) => {
@@ -169,8 +169,8 @@ const PostCreation = () => {
       />
       <p className="mt-6 text-xl font-bold text-gray-300">Content</p>
       <TextareaAutosize
-        className={`border-2 border-white w-full py-3 bg-black text-3xl font-bold mb-4 mt-1 px-1`}
-        minRows={1}
+        className={`border-2 border-white w-full py-3 bg-black text-3xl font-bold mb-4 mt-1 px-1 focus:outline-0 focus:border-[#DC143C] rounded-md`}
+        minRows={2}
         placeholder="An Awesome Content"
         defaultValue={`${post.content}`}
         onChange={(e: any) => {

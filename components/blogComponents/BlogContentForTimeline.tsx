@@ -56,10 +56,9 @@ const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => 
           alt="Current Image"
           width={900}
           height={300}
-          blurDataURL="URL"
+          blurDataURL={coverImage}
           placeholder='blur'
-          objectFit='cover'
-          className="rounded-md cursor-pointer"
+          className="rounded-md cursor-pointer object-fill"
           onClick={() => {
             router.push(`/blog/${blogId}`);
           }}
