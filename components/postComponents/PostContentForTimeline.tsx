@@ -57,7 +57,7 @@ const PostContentForTimeline: React.FC<{ post: postInterface }> = ({ post }) => 
                       src={authorInfo.image}
                       height={40}
                       width={40}
-                      objectFit="cover"
+                      style={{objectFit:"cover", height: 40, width: 40}}
                       blurDataURL={authorInfo.image}
                       placeholder="blur"
                       alt="user DP"

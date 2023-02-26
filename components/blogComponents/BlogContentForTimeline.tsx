@@ -59,6 +59,7 @@ const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => 
           blurDataURL={coverImage}
           placeholder='blur'
           className="rounded-md cursor-pointer object-fill"
+          style={{objectFit:"cover", height: 300, width: 900}}
           onClick={() => {
             router.push(`/blog/${blogId}`);
           }}
@@ -75,10 +76,10 @@ const BlogContentForTimeline: React.FC<{ blog: blogInterface }> = ({ blog }) => 
                     src={authorInfo.image}
                     height={40}
                     width={40}
-                    objectFit="cover"
                     blurDataURL={authorInfo.image}
                     placeholder="blur"
                     alt="user DP"
+                    // style={{objectFit:"cover"}}
                   />
                 }
                 <div className="flex flex-col">
